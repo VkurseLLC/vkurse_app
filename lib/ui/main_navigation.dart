@@ -12,6 +12,7 @@ class MainNavigation {
   String initialRoute(bool isAuth) => isAuth ?
   MainNavigationRoutNames.map :
   MainNavigationRoutNames.auth;
+  
   final routes = <String, Widget Function(BuildContext)> {
     '/auth': (context) => const AuthProvider(),
     '/map' : (context) => const Map(),

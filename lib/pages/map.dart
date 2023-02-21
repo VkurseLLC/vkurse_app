@@ -17,9 +17,10 @@ class MapState extends State<Map>{
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 146, 6, 228),
       ),
+
       body: const Center(
         child: Text('Тут будет карта', style: TextStyle(color: Colors.white),),
-      )
+      ),
     );
   }
 }

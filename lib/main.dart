@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vkurse_app/pages/authorization.dart';
-import 'package:vkurse_app/pages/map.dart';
 import 'package:vkurse_app/ui/main_navigation.dart';
 
 
