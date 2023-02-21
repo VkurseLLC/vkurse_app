@@ -11,11 +11,11 @@ class AuthProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
+      // backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        title: const Text('Авторизация', ),
+        title: Text(LocaleKeys.Authorisation.tr(), ),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 146, 6, 228),
+        // backgroundColor: Color.fromARGB(255, 146, 6, 228),
         leading: IconButton(
           icon: Icon(Icons.language), 
           onPressed: () {
@@ -33,7 +33,7 @@ class AuthProvider extends StatelessWidget {
         child:
           Text(
             LocaleKeys.Authorisation.tr(),
-            style: TextStyle(color: Colors.white),
+            // style: TextStyle(color: Colors.white),
           ),
       ),
     );
