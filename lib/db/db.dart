@@ -1,24 +1,24 @@
-import 'dart:async';
-
-import 'package:mysql1/mysql1.dart';
+import 'package:mysql_client/mysql_client.dart';
 
 Future main() async {
-  var settings = new ConnectionSettings(
-      host: '95.163.241.100',
+  print("Connection to mySql server...");
+
+  //connection
+  final conn = await MySQLConnection.createConnection(
+      host: "95.163.241.100",
       port: 3306,
-      user: 'super_user',
-      password: '****9963AAdd',
-      db: 'vkurse_database');
+      userName: "super_user",
+      password: "****9963AAdd",
+      databaseName: "vkurse_database");
 
-  var conn = await MySqlConnection.connect(settings);
+  await conn.connect();
+  print("Connected");
 
-  var user_phone = 1;
-  var result = await conn.query(
-      'select phone_number, code from phone_number_verification_codes where id = ?',
-      [user_phone]);
+  var result = await conn.execute(
+      "SELECT phone_number, verification_code FROM phone_number_verification_codes");
 
-  for (var number in result) {
-    print('Phone: ${number[0]},code: ${number[1]}');
+  for (final row in result.rows) {
+    print(row.assoc());
   }
 
   await conn.close();
