@@ -17,11 +17,6 @@ Future main() async {
   var result = await conn.execute(
       "SELECT phone_number, verification_code FROM phone_number_verification_codes");
 
-  print(result.numOfColumns);
-  print(result.numOfRows);
-  print(result.lastInsertID);
-  print(result.affectedRows);
-
   for (final row in result.rows) {
     print(row.assoc());
   }
