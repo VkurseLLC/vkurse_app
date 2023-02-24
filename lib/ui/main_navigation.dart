@@ -6,6 +6,7 @@ import 'package:vkurse_app/pages/map.dart';
 abstract class MainNavigationRoutNames {
   static const auth = '/auth';
   static const map = '/map';
+  static const bot = '/bot';
 }
 
 class MainNavigation {
@@ -16,5 +17,6 @@ class MainNavigation {
     //'/auth': (context) => const AuthProvider(),
     '/auth': (context) => const LoadingPage(),
     '/map': (context) => const Map(),
+    '/bot': (context) => const Map(),
   };
 }
