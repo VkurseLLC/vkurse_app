@@ -19,6 +19,5 @@ class MainNavigation {
     '/auth': (context) => const AuthProvider(),
     '/map' : (context) => const Map(),
     '/bot': (context) => const ToBot(),
-    '/bot': (context) => const ToBot(),
   };
 }
