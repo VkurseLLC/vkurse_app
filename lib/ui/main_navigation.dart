@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vkurse_app/pages/authorization.dart';
+import 'package:vkurse_app/pages/welcome.dart';
 import 'package:vkurse_app/pages/bot.dart';
 import 'package:vkurse_app/pages/loading.dart';
 import 'package:vkurse_app/pages/map.dart';
