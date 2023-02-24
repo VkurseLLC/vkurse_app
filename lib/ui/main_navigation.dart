@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:vkurse_app/pages/authorization.dart';
+import 'package:vkurse_app/pages/loading.dart';
 import 'package:vkurse_app/pages/map.dart';
 
 abstract class MainNavigationRoutNames {
@@ -9,12 +9,12 @@ abstract class MainNavigationRoutNames {
 }
 
 class MainNavigation {
-  String initialRoute(bool isAuth) => isAuth ?
-  MainNavigationRoutNames.map :
-  MainNavigationRoutNames.auth;
-  
-  final routes = <String, Widget Function(BuildContext)> {
-    '/auth': (context) => const AuthProvider(),
-    '/map' : (context) => const Map(),
+  String initialRoute(bool isAuth) =>
+      isAuth ? MainNavigationRoutNames.map : MainNavigationRoutNames.auth;
+
+  final routes = <String, Widget Function(BuildContext)>{
+    //'/auth': (context) => const AuthProvider(),
+    '/auth': (context) => const LoadingPage(),
+    '/map': (context) => const Map(),
   };
 }
