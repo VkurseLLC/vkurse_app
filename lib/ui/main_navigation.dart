@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vkurse_app/pages/authorization.dart';
+import 'package:vkurse_app/pages/bot.dart';
 import 'package:vkurse_app/pages/loading.dart';
 import 'package:vkurse_app/pages/map.dart';
 
@@ -15,8 +16,8 @@ class MainNavigation {
 
   final routes = <String, Widget Function(BuildContext)>{
     //'/auth': (context) => const AuthProvider(),
-    '/auth': (context) => const LoadingPage(),
+    '/auth': (context) => const AuthProvider(),
     '/map': (context) => const Map(),
-    '/bot': (context) => const Map(),
+    '/bot': (context) => const ToBot(),
   };
 }
