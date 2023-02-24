@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../generated/locale_keys.g.dart';
 
-
 // Основной класс для отображения страницы авторизации - ввод номера
 class AuthProvider extends StatelessWidget {
   const AuthProvider({Key? key}) : super(key: key);
@@ -13,11 +12,13 @@ class AuthProvider extends StatelessWidget {
     return Scaffold(
       // backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        title: Text(LocaleKeys.Authorisation.tr(), ),
+        title: Text(
+          LocaleKeys.Authorisation.tr(),
+        ),
         centerTitle: true,
         // backgroundColor: Color.fromARGB(255, 146, 6, 228),
         leading: IconButton(
-          icon: Icon(Icons.language), 
+          icon: Icon(Icons.language),
           onPressed: () {
             if (context.locale == Locale('ru')) {
               context.setLocale(Locale('en'));
@@ -30,11 +31,10 @@ class AuthProvider extends StatelessWidget {
       ),
 
       body: Center(
-        child:
-          Text(
-            LocaleKeys.Authorisation.tr(),
-            // style: TextStyle(color: Colors.white),
-          ),
+        child: Text(
+          LocaleKeys.Authorisation.tr(),
+          // style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
