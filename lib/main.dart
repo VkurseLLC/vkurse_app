@@ -4,7 +4,6 @@ import 'package:vkurse_app/ui/main_navigation.dart';
 import 'package:vkurse_app/utils/theme.dart';
 import 'generated/codegen_loader.g.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -12,12 +11,12 @@ Future<void> main() async {
   // runApp(const MyApp());
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('ru')],
-      path: 'assets/translations', // <-- change the path of the translation files 
-      fallbackLocale: Locale('ru'),
-      assetLoader: CodegenLoader(),
-      child: MyApp()
-    ),
+        supportedLocales: [Locale('en'), Locale('ru')],
+        path:
+            'assets/translations', // <-- change the path of the translation files
+        fallbackLocale: Locale('ru'),
+        assetLoader: CodegenLoader(),
+        child: MyApp()),
   );
 }
 
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'VKURSE',
+      title: 'VKURSEg',
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
