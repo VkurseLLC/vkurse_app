@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:vkurse_app/pages/bot.dart';
+import 'package:vkurse_app/pages/auth_get_verification_code.dart';
 import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
