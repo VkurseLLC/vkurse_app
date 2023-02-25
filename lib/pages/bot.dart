@@ -1,15 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 // Класс для отображения страницы перехода к боту
+final _url = Uri.parse("https://t.me/VkurseAppBot");
 
-void _launchUrl(url)async {
-  if (!await launchUrl(Uri.parse(url))) {
-    throw Exception('Could not launch $url');
+void _launchUrl(_url)async {
+  if (await launchUrl(_url)) {
+    throw Exception('Could not launch $_url');
   }
 }
 
@@ -22,7 +24,7 @@ class ToBot extends StatefulWidget {
 }
 
 class _ToBot extends State<ToBot> {
-  bool isButtonActive = false;
+  // bool isButtonActive = false;
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +157,6 @@ class _ToBot extends State<ToBot> {
                   Column(
                     children: [
                       Container(
-                        // color: Colors.amber,
                         width: widthText,
                         height: heightText,
                         child: AutoSizeText(
@@ -171,6 +172,7 @@ class _ToBot extends State<ToBot> {
                         ),),
 
                       Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 20)),
+                      
 
                       Container(
                         width: buttonWidth,
@@ -187,32 +189,28 @@ class _ToBot extends State<ToBot> {
 
                         child: Opacity(
                           opacity: 0.9,
-                          child: ElevatedButton(            
-                            onPressed: () {
-                              var url = "https://t.me/VkurseAppBot";
-                              _launchUrl(url);
-                              setState(() => isButtonActive = true);
-                            }, 
-
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
+                            child: Link(
+                              target: LinkTarget.blank,
+                              uri: Uri.parse("https://t.me/VkurseAppBot"),
+                              builder: (context, followLink) => ElevatedButton(            
+                                onPressed: followLink,
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                  ),
+                                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF350068)),
+                                ),
+                                child: AutoSizeText(
+                                  'Телеграм-бот',
+                                  style: TextStyle(
+                                    fontSize: fontSizeButton,
+                                    fontFamily: "assets/fonts/Inter-Regular.ttf",
+                                    fontWeight: FontWeight.bold),
                                 ),
                               ),
-
-                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF350068)),
                             ),
-
-                            child:
-                            AutoSizeText(
-                                'Телеграм-бот',
-                                style: TextStyle(
-                                  fontSize: fontSizeButton,
-                                  fontFamily: "assets/fonts/Inter-Regular.ttf",
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ),
                         ),
                       ),
                     ],
@@ -252,23 +250,16 @@ class _ToBot extends State<ToBot> {
                         child: Opacity(
                           opacity: 0.9,
                           child: ElevatedButton(
-
-                          onPressed: isButtonActive ? (){
+                          onPressed:(){
                           
-                          } 
-                          : null,
-
+                          },
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16),
                                 ),
                               ),
-
-                            backgroundColor: isButtonActive ? 
-                            MaterialStateProperty.all<Color>(Color(0xFF6F2EAE)) 
-                            : MaterialStateProperty.all<Color>(Color(0xFF808080))
-
+                            backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF6F2EAE))
                             ),
 
                             child:
