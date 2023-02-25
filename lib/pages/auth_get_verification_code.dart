@@ -75,14 +75,14 @@ class _ToBot extends State<ToBot> {
 
              ///\\\ (НАЧАЛО) ///\\\ ИКОНКА "НАЗАД" ///\\\
             
-            Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+            Padding(padding: EdgeInsets.fromLTRB(0, width * 0.05, 0, 0)),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
 
-                Padding(padding: EdgeInsets.fromLTRB(20, 0, 0, 0)),
+                Padding(padding: EdgeInsets.fromLTRB(width * 0.05, 0, 0, 0)),
 
                 Column(
                   children: [
@@ -114,21 +114,21 @@ class _ToBot extends State<ToBot> {
                 Expanded(
                   child: Column(
                     children: [
-                      Container(
+                        Container(
                         height: width * 0.35,
                         width: width * 0.35,
                         decoration: BoxDecoration(
                             image: const DecorationImage(
                               image: AssetImage("assets/images/logo_pic.png"),
-                              opacity: 0.4,
+                            opacity: 0.4,
                             )
-                        ),
-                      )
+                          ),
+                        )
                     ],
                   )
                 ),
                 
-                Padding(padding: EdgeInsets.fromLTRB(0, 0, (60 + width * 0.1), 0)),
+                Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.2 + width * 0.05, 0)),
                 
               ],
             ),
@@ -192,7 +192,7 @@ class _ToBot extends State<ToBot> {
                           maxLines: 5,
                         ),),
 
-                      Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 20)),
+                      Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, width * 0.05)),
                       
 
                       Container(
