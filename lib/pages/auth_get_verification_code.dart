@@ -30,7 +30,6 @@ class _ToBot extends State<ToBot> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     var width = mediaQuery.size.width;
-    // var height = mediaQuery.size.height;
     var buttonWidth = width * 0.65;
     var buttonHeight = buttonWidth * 0.20;
 
@@ -88,12 +87,12 @@ class _ToBot extends State<ToBot> {
                 Column(
                   children: [
                     Container(
-                      width: width * 0.1,
-                      height: width * 0.1,
+                      width: width * 0.2,
+                      height: width * 0.2,
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                            color: Color.fromARGB(25, 0, 0, 0),
+                            color: Color(0x26A0A0A0),
                             blurRadius: 20,
                           )
                         ]
@@ -104,28 +103,16 @@ class _ToBot extends State<ToBot> {
                                 context, 
                                 "/auth");
                         }, 
-                        icon: const Icon(Icons.arrow_back),
-                        iconSize: width * 0.05,
-                        color: Color(0xFF000000),
+                        icon: const Icon(Icons.arrow_back_ios_new),
+                        iconSize: width * 0.1,
+                        color: Color(0xFFA8A8A8),
                       )
                     )
                   ],
-                )
-              ],
-            ),
+                ),
 
-             //!\\\ (КОНЕЦ) ///\\\ ИКОНКА "НАЗАД" ///\\\
-            
-            //---------------------------------------------------------------------------------------------------------------------------------------\\
-
-            ///\\\ (НАЧАЛО) ///\\\ ЛОГО ///\\\
-
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
+                Expanded(
+                  child: Column(
                     children: [
                       Container(
                         height: width * 0.35,
@@ -139,8 +126,42 @@ class _ToBot extends State<ToBot> {
                       )
                     ],
                   )
-                ],
-              )
+                ),
+                
+                Padding(padding: EdgeInsets.fromLTRB(0, 0, (60 + width * 0.1), 0)),
+                
+              ],
+            ),
+
+             //!\\\ (КОНЕЦ) ///\\\ ИКОНКА "НАЗАД" ///\\\
+            
+            //---------------------------------------------------------------------------------------------------------------------------------------\\
+
+            ///\\\ (НАЧАЛО) ///\\\ ЛОГО ///\\\
+
+            SizedBox(
+              width: width * 0.2,
+              height: width * 0.2,
+              // child: Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   children: [
+              //     Column(
+              //       children: [
+              //         Container(
+              //           height: width * 0.35,
+              //           width: width * 0.35,
+              //           decoration: BoxDecoration(
+              //               image: const DecorationImage(
+              //                 image: AssetImage("assets/images/logo_pic.png"),
+              //                 opacity: 0.4,
+              //               )
+              //           ),
+              //         )
+              //       ],
+              //     )
+              //   ],
+              // )
             ),
 
             //!\\\ (КОНЕЦ) ///\\\ ЛОГО ///\\\
