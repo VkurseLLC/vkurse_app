@@ -18,6 +18,7 @@ void _launchUrl(_url)async {
   }
 }
 
+
 class GetPhoneNumber extends StatefulWidget {
 
   const GetPhoneNumber({Key? key}) : super(key: key);
@@ -31,8 +32,6 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
   bool isButtonActive = false;
   late TextEditingController controller;
 
-  late String field_phone_number;
-
   @override
   void initState() {
     super.initState();
@@ -41,11 +40,6 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
     controller.addListener(() {
       
     });
-  }
-
-  @override
-  void dispose() {
-    
   }
 
   @override
@@ -90,8 +84,8 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
         buttonHeight = buttonWidth * 0.15;
     }
 
-    print('width: $width');
-    print('height: $height');
+    // print('width: $width');
+    // print('height: $height');
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -210,12 +204,12 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                           ),
                           textAlign: TextAlign.center,
 
-                          inputFormatters: [MaskTextInputFormatter(mask: "+7(###)###-##-##")],
+                          inputFormatters: [MaskTextInputFormatter(mask: "+7 (###) ###-##-##")],
 
                           keyboardType: TextInputType.phone,
 
                           decoration: InputDecoration(
-                            hintText: "+7(___) ___-__-__",
+                            hintText: "+7 (___) ___-__-__",
                             hintStyle: TextStyle(
                               color: Colors.blueGrey
                             ),
@@ -235,13 +229,13 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                             ),
 
                           ),
-                          maxLength: 16,
+                          maxLength: 18,
                         ),
                       )
                     ],
                   )
                 ],
-              )
+              ),
             ),
 
             //!\\\ (КОНЕЦ) ///\\\ ПОЛЕ ДЛЯ ВВОДА НОМЕРА + ТЕКСТ ///\\\

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vkurse_app/pages/auth_phone_number.dart';
 import 'package:vkurse_app/pages/auth_verification_code.dart';
 import 'package:vkurse_app/pages/welcome.dart';
+import 'package:vkurse_app/pages/auth_phone_number.dart';
 import 'package:vkurse_app/pages/auth_get_verification_code.dart';
 import 'package:vkurse_app/pages/loading.dart';
 import 'package:vkurse_app/pages/map.dart';
