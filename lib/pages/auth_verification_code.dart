@@ -3,8 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vkurse_app/data/api_auth.dart';
+import 'package:vkurse_app/pages/auth_phone_number.dart';
 import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Класс для отображения страницы перехода к боту
 final _url = Uri.parse("https://t.me/VkurseAppBot");
@@ -15,15 +18,22 @@ void _launchUrl(_url) async {
   }
 }
 
-class Pincode extends StatefulWidget {
-  const Pincode({Key? key}) : super(key: key);
+class AuthVerificationCode extends StatefulWidget {
+  const AuthVerificationCode({Key? key}) : super(key: key);
 
   @override
-  State<Pincode> createState() => _Pincode();
+  State<AuthVerificationCode> createState() => _AuthVerificationCodeState();
 }
 
-class _Pincode extends State<Pincode> {
+class _AuthVerificationCodeState extends State<AuthVerificationCode> {
   // bool isButtonActive = false;
+
+  late String field_1_verification_code;
+  late String field_2_verification_code;
+  late String field_3_verification_code;
+  late String field_4_verification_code;
+  late String field_5_verification_code;
+
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +93,8 @@ class _Pincode extends State<Pincode> {
                         )
                       ]),
                       child: IconButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/auth");
+                        onPressed: () async {
+                          await Navigator.pushNamed(context, '/auth_get_verification_code');
                         },
                         icon: const Icon(Icons.arrow_back_ios_new),
                         iconSize: width * 0.1,
@@ -177,6 +187,9 @@ class _Pincode extends State<Pincode> {
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.phone,
                                   maxLength: 1,
+                                  onChanged: (value) {
+                                    field_1_verification_code = value;
+                                  },
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 20.0),
                                   decoration: InputDecoration(
@@ -216,6 +229,9 @@ class _Pincode extends State<Pincode> {
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.phone,
                                   maxLength: 1,
+                                  onChanged: (value) {
+                                    field_2_verification_code = value;
+                                  },
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 20.0),
                                   decoration: InputDecoration(
@@ -255,6 +271,9 @@ class _Pincode extends State<Pincode> {
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.phone,
                                   maxLength: 1,
+                                  onChanged: (value) {
+                                    field_3_verification_code = value;
+                                  },
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 20.0),
                                   decoration: InputDecoration(
@@ -294,6 +313,9 @@ class _Pincode extends State<Pincode> {
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.phone,
                                   maxLength: 1,
+                                  onChanged: (value) {
+                                    field_4_verification_code = value;
+                                  },
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 20.0),
                                   decoration: InputDecoration(
@@ -333,6 +355,9 @@ class _Pincode extends State<Pincode> {
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.phone,
                                   maxLength: 1,
+                                  onChanged: (value) {
+                                    field_5_verification_code = value;
+                                  },
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 20.0),
                                   decoration: InputDecoration(
@@ -402,7 +427,18 @@ class _Pincode extends State<Pincode> {
                     child: Opacity(
                       opacity: 0.9,
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            var prefs = await SharedPreferences.getInstance();
+                            var phone_number = prefs.getString('phone_number');
+                            var verification_code = "$field_1_verification_code$field_2_verification_code$field_3_verification_code$field_4_verification_code$field_5_verification_code";
+                            
+                            print('phone_number:');
+                            print(phone_number);
+                            print("verification_code:");
+                            print(verification_code);
+
+                            await AuthApi.user_authorisation(phone_number, verification_code, context);
+                          },
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<
                                   RoundedRectangleBorder>(

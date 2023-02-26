@@ -3,9 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vkurse_app/pages/auth_get_verification_code.dart';
 import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Класс для отображения страницы перехода к боту
 final _url = Uri.parse("https://t.me/VkurseAppBot");
@@ -17,6 +19,7 @@ void _launchUrl(_url)async {
 }
 
 class GetPhoneNumber extends StatefulWidget {
+
   const GetPhoneNumber({Key? key}) : super(key: key);
   
   @override
@@ -27,6 +30,8 @@ class GetPhoneNumber extends StatefulWidget {
 class _GetPhoneNumber extends State<GetPhoneNumber> {
   bool isButtonActive = false;
   late TextEditingController controller;
+
+  late String field_phone_number;
 
   @override
   void initState() {
@@ -121,10 +126,8 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                       ),
 
                       child: IconButton(
-                        onPressed: (){
-                          Navigator.pushNamed(
-                                context, 
-                                "/auth");
+                        onPressed: () async {
+                          await Navigator.pushNamed(context, '/auth');
                         }, 
                         icon: const Icon(Icons.arrow_back_ios_new),
                         iconSize: width * 0.1,
@@ -197,9 +200,13 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                         width: width * 0.7,
                         height: (width * 0.7) * 0.3,
                         child: TextField(
+                          onChanged: (value) {
+                            field_phone_number = value;
+                          },
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: fontSizeButton
+                            
                           ),
                           textAlign: TextAlign.center,
 
@@ -268,9 +275,15 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                         child: Opacity(
                           opacity: 0.9,
                           child: ElevatedButton(
-                          onPressed:(){
-                          
-                          },
+                          onPressed:() async {
+
+                            // В переменной > field_phone_number < хранится то, что ввел пользователь
+
+                            var prefs = await SharedPreferences.getInstance();
+                            prefs.setString('phone_number', field_phone_number);
+
+                            await Navigator.pushNamed(context, '/auth_get_verification_code');
+                          }, 
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(

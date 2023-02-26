@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vkurse_app/pages/auth_get_verification_code.dart';
+import 'package:vkurse_app/pages/auth_phone_number.dart';
 import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -161,9 +162,7 @@ class _AuthProviderState extends State<AuthProvider> {
                           opacity: 0.9,
                           child: ElevatedButton(            
                             onPressed: () {
-                              Navigator.pushNamed(
-                                context, 
-                                "/bot");
+                              Navigator.pushNamed(context, '/auth_get_phone_number');
                             }, 
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(

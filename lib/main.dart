@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vkurse_app/ui/main_navigation.dart';
 import 'package:vkurse_app/utils/theme.dart';
 import 'generated/codegen_loader.g.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
       theme: BasicLightTheme(),
       routes: mainNavigation.routes,
       initialRoute: mainNavigation.initialRoute(false),
+      builder: EasyLoading.init(),
     );
   }
 }

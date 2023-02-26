@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vkurse_app/pages/auth_verification_code.dart';
 import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -15,15 +16,15 @@ void _launchUrl(_url)async {
   }
 }
 
-class ToBot extends StatefulWidget {
-  const ToBot({Key? key}) : super(key: key);
+class AuthGetVerificationCode extends StatefulWidget {
+  const AuthGetVerificationCode({Key? key}) : super(key: key);
   
   @override
-  State<ToBot> createState() => _ToBot();
+  State<AuthGetVerificationCode> createState() => _AuthGetVerificationCodeState();
 
 }
 
-class _ToBot extends State<ToBot> {
+class _AuthGetVerificationCodeState extends State<AuthGetVerificationCode> {
   // bool isButtonActive = false;
 
   @override
@@ -98,10 +99,8 @@ class _ToBot extends State<ToBot> {
                         ]
                       ),
                       child: IconButton(
-                        onPressed: (){
-                          Navigator.pushNamed(
-                                context, 
-                                "/auth");
+                        onPressed: () async {
+                          await Navigator.pushNamed(context, '/auth_get_phone_number');
                         }, 
                         icon: const Icon(Icons.arrow_back_ios_new),
                         iconSize: width * 0.1,
@@ -212,7 +211,7 @@ class _ToBot extends State<ToBot> {
                           opacity: 0.9,
                             child: Link(
                               target: LinkTarget.blank,
-                              uri: Uri.parse("https://t.me/VkurseAppBot"),
+                              uri: Uri.parse("http://t.me/VkurseAppBot"),
                               builder: (context, followLink) => ElevatedButton(            
                                 onPressed: followLink,
                                 style: ButtonStyle(
@@ -271,8 +270,8 @@ class _ToBot extends State<ToBot> {
                         child: Opacity(
                           opacity: 0.9,
                           child: ElevatedButton(
-                          onPressed:(){
-                          
+                          onPressed:() async {
+                            await Navigator.pushNamed(context, '/auth_post_verification_code');
                           },
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
