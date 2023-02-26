@@ -7,14 +7,6 @@ import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 // Класс для отображения страницы перехода к боту
-final _url = Uri.parse("https://t.me/VkurseAppBot");
-
-void _launchUrl(_url) async {
-  if (await launchUrl(_url)) {
-    throw Exception('Could not launch $_url');
-  }
-}
-
 class Pincode extends StatefulWidget {
   const Pincode({Key? key}) : super(key: key);
 
@@ -121,26 +113,6 @@ class _Pincode extends State<Pincode> {
           SizedBox(
             width: width * 0.2,
             height: width * 0.2,
-            // child: Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   crossAxisAlignment: CrossAxisAlignment.center,
-            //   children: [
-            //     Column(
-            //       children: [
-            //         Container(
-            //           height: width * 0.35,
-            //           width: width * 0.35,
-            //           decoration: BoxDecoration(
-            //               image: const DecorationImage(
-            //                 image: AssetImage("assets/images/logo_pic.png"),
-            //                 opacity: 0.4,
-            //               )
-            //           ),
-            //         )
-            //       ],
-            //     )
-            //   ],
-            // )
           ),
 
           //!\\\ (КОНЕЦ) ///\\\ ЛОГО ///\\\
