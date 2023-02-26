@@ -32,6 +32,8 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
   bool isButtonActive = false;
   late TextEditingController controller;
 
+  late String field_phone_number;
+
   @override
   void initState() {
     super.initState();

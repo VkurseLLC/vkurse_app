@@ -10,8 +10,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Класс для отображения страницы перехода к боту
-class Pincode extends StatefulWidget {
-  const Pincode({Key? key}) : super(key: key);
+class AuthVerificationCode extends StatefulWidget {
+  const AuthVerificationCode({Key? key}) : super(key: key);
 
   @override
   State<AuthVerificationCode> createState() => _AuthVerificationCodeState();
