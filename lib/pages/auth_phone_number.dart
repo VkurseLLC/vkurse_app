@@ -16,6 +16,7 @@ void _launchUrl(_url)async {
   }
 }
 
+
 class GetPhoneNumber extends StatefulWidget {
   const GetPhoneNumber({Key? key}) : super(key: key);
   
@@ -25,23 +26,14 @@ class GetPhoneNumber extends StatefulWidget {
 }
 
 class _GetPhoneNumber extends State<GetPhoneNumber> {
-  bool isButtonActive = false;
-  late TextEditingController controller;
+  // bool isButtonActive = false;
 
-  @override
-  void initState() {
-    super.initState();
-
-    controller = TextEditingController();
-    controller.addListener(() {
-      
-    });
-  }
-
-  @override
-  void dispose() {
-    
-  }
+  // void validate(value) {
+  //   if (value != null && value.length == 18){
+  //     setState(() => isButtonActive = true);
+  //     print(isButtonActive);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +77,8 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
         buttonHeight = buttonWidth * 0.15;
     }
 
-    print('width: $width');
-    print('height: $height');
+    // print('width: $width');
+    // print('height: $height');
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -196,19 +188,23 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                       Container(
                         width: width * 0.7,
                         height: (width * 0.7) * 0.3,
-                        child: TextField(
+                        child: TextFormField(
+                          // autovalidateMode: AutovalidateMode.onUserInteraction,
+                          // validator: (value){
+                          //   validate(value);
+                          // },
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: fontSizeButton
                           ),
                           textAlign: TextAlign.center,
 
-                          inputFormatters: [MaskTextInputFormatter(mask: "+7(###)###-##-##")],
+                          inputFormatters: [MaskTextInputFormatter(mask: "+7 (###) ###-##-##")],
 
                           keyboardType: TextInputType.phone,
 
                           decoration: InputDecoration(
-                            hintText: "+7(___) ___-__-__",
+                            hintText: "+7 (___) ___-__-__",
                             hintStyle: TextStyle(
                               color: Colors.blueGrey
                             ),
@@ -228,13 +224,13 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                             ),
 
                           ),
-                          maxLength: 16,
+                          maxLength: 18,
                         ),
                       )
                     ],
                   )
                 ],
-              )
+              ),
             ),
 
             //!\\\ (КОНЕЦ) ///\\\ ПОЛЕ ДЛЯ ВВОДА НОМЕРА + ТЕКСТ ///\\\
@@ -268,9 +264,10 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                         child: Opacity(
                           opacity: 0.9,
                           child: ElevatedButton(
-                          onPressed:(){
-                          
-                          },
+                          // onPressed: isButtonActive ? () {
+                          //   setState(() => isButtonActive = false);
+                          // }: null,
+                          onPressed: (){},
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(

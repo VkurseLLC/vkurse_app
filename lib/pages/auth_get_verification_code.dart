@@ -30,6 +30,7 @@ class _ToBot extends State<ToBot> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     var width = mediaQuery.size.width;
+    var height = mediaQuery.size.height;
     var buttonWidth = width * 0.65;
     var buttonHeight = buttonWidth * 0.20;
 
@@ -67,13 +68,16 @@ class _ToBot extends State<ToBot> {
         buttonHeight = buttonWidth * 0.15;
     }
 
+    print('width: $width');
+    print('height: $height');
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
 
-             ///\\\ (НАЧАЛО) ///\\\ ИКОНКА "НАЗАД" ///\\\
+             ///\\\ (НАЧАЛО) ///\\\ ИКОНКА "НАЗАД" + ЛОГО ///\\\
             
             Padding(padding: EdgeInsets.fromLTRB(0, width * 0.05, 0, 0)),
 
@@ -133,7 +137,7 @@ class _ToBot extends State<ToBot> {
               ],
             ),
 
-             //!\\\ (КОНЕЦ) ///\\\ ИКОНКА "НАЗАД" ///\\\
+             //!\\\ (КОНЕЦ) ///\\\ ИКОНКА "НАЗАД" + ЛОГО ///\\\
             
             //---------------------------------------------------------------------------------------------------------------------------------------\\
 
@@ -142,26 +146,6 @@ class _ToBot extends State<ToBot> {
             SizedBox(
               width: width * 0.2,
               height: width * 0.2,
-              // child: Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   children: [
-              //     Column(
-              //       children: [
-              //         Container(
-              //           height: width * 0.35,
-              //           width: width * 0.35,
-              //           decoration: BoxDecoration(
-              //               image: const DecorationImage(
-              //                 image: AssetImage("assets/images/logo_pic.png"),
-              //                 opacity: 0.4,
-              //               )
-              //           ),
-              //         )
-              //       ],
-              //     )
-              //   ],
-              // )
             ),
 
             //!\\\ (КОНЕЦ) ///\\\ ЛОГО ///\\\
