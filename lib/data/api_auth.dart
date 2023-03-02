@@ -9,7 +9,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 class AuthApi {
   static final _client = http.Client();
 
-  static var api_authorisation = Uri.parse('http://topjumpup.ru/authorisation');
+  static var api_authorisation = Uri.parse('http://80.78.240.205:5000/authorisation');
 
   static user_authorisation(phone_number, verification_code, context) async {
     http.Response response = await _client.post(api_authorisation, body: {
