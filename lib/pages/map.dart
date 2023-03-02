@@ -18,9 +18,14 @@ class MapState extends State<Map>{
         backgroundColor: Color.fromARGB(255, 146, 6, 228),
       ),
 
-      body: const Center(
-        child: Text('Тут будет карта', style: TextStyle(color: Colors.white),),
-      ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/map_test.jpg"),
+            fit: BoxFit.cover
+          )
+        ),
+      )
     );
   }
 }

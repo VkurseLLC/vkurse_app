@@ -73,6 +73,8 @@ flutter:
     - assets/images/loading.gif
     - assets/images/logo_pic.png
     - assets/images/logo_text.png
+    - assets/images/map_test.jpg
+    - assets/images/check.jpg
 
     # - images/a_dot_burr.jpeg
     # - images/a_dot_ham.jpeg
