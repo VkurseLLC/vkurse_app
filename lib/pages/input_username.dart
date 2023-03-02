@@ -8,6 +8,7 @@ import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:validators/validators.dart';
 
 // Класс для отображения страницы перехода к боту
 
@@ -24,7 +25,7 @@ class _InputUsername extends State<InputUsername> {
   List nicknames = ["Dima", "Danil", "Semyon", "Nikita", "Maxim"];
   late TextEditingController controller;
   bool isButtonActive = false;
-  bool isNicknameFree = true;
+  bool isNicknameUniq = false;
 
   @override
   void initState(){
@@ -35,12 +36,6 @@ class _InputUsername extends State<InputUsername> {
       final isButtonActive = controller.text.isNotEmpty;
 
       setState(() => this.isButtonActive = isButtonActive);
-
-      if(nicknames.contains(controller.text)){
-
-        setState(() => isNicknameFree = false);
-
-      }
     });
   }
 
@@ -92,7 +87,7 @@ class _InputUsername extends State<InputUsername> {
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     );
             
-      var borderFocusStyle = OutlineInputBorder(
+      var borderErrorStyle = OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.redAccent,
                         width: 2),
@@ -184,6 +179,18 @@ class _InputUsername extends State<InputUsername> {
                         width: width * 0.74,
                         child: TextField(
                           controller: controller,
+                          onChanged: (val){
+                            if (nicknames.contains(val)){
+                              setState(() {
+                                isNicknameUniq = true; 
+                              });
+                            }
+                            else{
+                              setState(() {
+                                isNicknameUniq = false; 
+                              });
+                            }
+                          },
                           textAlign: TextAlign.start,
                           textAlignVertical: TextAlignVertical.center,
                           style: TextStyle(
@@ -191,27 +198,25 @@ class _InputUsername extends State<InputUsername> {
                             fontSize: fontSizeText + 4
                           ),
                           decoration: InputDecoration(
-                            errorText: isNicknameFree? null : "Этот никнейм уже занят",
+
+                            errorText: isNicknameUniq? "Этот никнейм уже занят" : null,
+                            errorBorder: borderErrorStyle,
+                            focusedErrorBorder: borderErrorStyle,
+
                             labelText: "Имя пользователя",
                             labelStyle: TextStyle(
                               color: Colors.grey,
                               fontSize: fontSizeText + 4,
                               fontWeight: FontWeight.bold,
                             ),
+
                             hintText: "",
                             hintStyle: TextStyle(
                               color: Colors.grey,
                               fontSize: fontSizeText
                             ),
-                            // prefixIcon: 
-                            // Icon(Icons.person, 
-                            // color: Colors.grey,
-                            // ),
-                            suffixIcon: 
-                              Icon(Icons.close_sharp,
-                              color: Colors.redAccent,
-                              ),
-                            focusedBorder: borderFocusStyle,
+
+                            focusedBorder: borderStyle,
                             enabledBorder: borderStyle,
                             filled: true,
                             fillColor: Color(0xFFF9F9F9)
@@ -220,17 +225,22 @@ class _InputUsername extends State<InputUsername> {
                       ),  
                                       
                       // Padding(padding: EdgeInsets.only(left: width * 0.13)),
-                      
-                      SizedBox(
-                        width: width * 0.52,
-                        height: width * 0.065,
-                        // padding: EdgeInsets.fromLTRB(width * 0.13, 0, 0, 0),
-                        child: AutoSizeText(
-                            "*Его будут видеть Ваши друзья",
-                            style: textMarkStyle,
-                            // textAlign: TextAlign.center,
-                            maxLines: 1,
-                        ), 
+
+                      Visibility(
+                        child: SizedBox(
+                          width: width * 0.52,
+                          height: width * 0.065,
+                          child: AutoSizeText(
+                              "*Его будут видеть Ваши друзья",
+                              style: textMarkStyle,
+                              // textAlign: TextAlign.center,
+                              maxLines: 1,
+                          ), 
+                        ),
+                         maintainSize: true, 
+                         maintainAnimation: true,
+                         maintainState: true,
+                         visible: isNicknameUniq? false : true, 
                       )
                       
                     ],
@@ -267,7 +277,7 @@ class _InputUsername extends State<InputUsername> {
                         child: Opacity(
                           opacity: 0.9,
                           child: ElevatedButton(
-                          onPressed: isButtonActive ? (){
+                          onPressed: (isNicknameUniq)? (){
 
                           } 
                           : null,
