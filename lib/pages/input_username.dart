@@ -63,7 +63,7 @@ class _InputUsername extends State<InputUsername> {
     if(width <= 300)
     {
         fontSizeText = 14.0;
-        fontSizeErrorText = 12.0;
+        fontSizeErrorText = 10.0;
         fontSizeButton = 16.0;
     }
     else if (width > 300 && width <= 700) 
@@ -75,7 +75,7 @@ class _InputUsername extends State<InputUsername> {
     else if (width > 700 && width <= 1000) 
     {
         fontSizeText = 25.0;
-        fontSizeErrorText = 20.0;
+        fontSizeErrorText = 23.0;
         fontSizeButton = 30.0;
     }
     else if (width > 1000) 
@@ -118,7 +118,7 @@ class _InputUsername extends State<InputUsername> {
 
       var textMarkStyle = TextStyle(
                             color: Color.fromARGB(100, 0, 0, 0),
-                            fontSize: 15,
+                            fontSize: fontSizeErrorText,
                             fontWeight: FontWeight.bold
                           );
 
