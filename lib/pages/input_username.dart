@@ -58,25 +58,30 @@ class _InputUsername extends State<InputUsername> {
 
     double fontSizeButton = 16.0;
     double fontSizeText = 20.0;
+    double fontSizeErrorText = 20.0;
 
     if(width <= 300)
     {
         fontSizeText = 14.0;
+        fontSizeErrorText = 12.0;
         fontSizeButton = 16.0;
     }
     else if (width > 300 && width <= 700) 
     {
         fontSizeText = 16.0;
+        fontSizeErrorText = 15.0;
         fontSizeButton = 20.0;
     }
     else if (width > 700 && width <= 1000) 
     {
         fontSizeText = 25.0;
+        fontSizeErrorText = 20.0;
         fontSizeButton = 30.0;
     }
     else if (width > 1000) 
     {
         fontSizeText = 35.0;
+        fontSizeErrorText = 25.0;
         fontSizeButton = 35.0;
     }
 
@@ -91,8 +96,13 @@ class _InputUsername extends State<InputUsername> {
                       borderSide: BorderSide(
                         color: Colors.redAccent,
                         width: 2),
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                     );
+
+      var textErrorStyle = TextStyle(
+                            fontSize: fontSizeErrorText,
+                            fontWeight: FontWeight.bold
+                          );
 
       var textRegStyle = TextStyle(
                             color: Color(0xFF6F2EAE),
@@ -108,7 +118,7 @@ class _InputUsername extends State<InputUsername> {
 
       var textMarkStyle = TextStyle(
                             color: Color.fromARGB(100, 0, 0, 0),
-                            fontSize: 30,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold
                           );
 
@@ -118,6 +128,14 @@ class _InputUsername extends State<InputUsername> {
       body: SafeArea(
         child: Column(
           children: [
+
+            //!\\\ (КОНЕЦ) ///\\\ ЛОГО ///\\\
+            
+            //---------------------------------------------------------------------------------------------------------------------------------------\\
+
+            ///\\\ (НАЧАЛО) ///\\\ ПЕРЕХОД К БОТУ (ТЕКСТ + КНОПКА) ///\\\
+            
+
             Expanded(
               flex: 2,
               child: Row(
@@ -151,8 +169,6 @@ class _InputUsername extends State<InputUsername> {
                 )
               ],
             ),
-
-            // Padding(padding: EdgeInsets.only(bottom: width * 0.08)),
 
             Expanded(
               flex: 2,
@@ -192,9 +208,10 @@ class _InputUsername extends State<InputUsername> {
                           ),
                           decoration: InputDecoration(
 
-                            errorText: isNicknameUniq? "Этот никнейм уже занят" : null,
-                            errorBorder: borderErrorStyle,
-                            focusedErrorBorder: borderErrorStyle,
+                            errorText: isNicknameUniq? "*Этот никнейм уже занят" : "*Его будут видеть Ваши друзья",
+                            errorStyle: isNicknameUniq? textErrorStyle : textMarkStyle,
+                            errorBorder: isNicknameUniq? borderErrorStyle : borderStyle,
+                            focusedErrorBorder: isNicknameUniq? borderErrorStyle : borderStyle,
 
                             labelText: "Имя пользователя",
                             labelStyle: TextStyle(
@@ -209,8 +226,6 @@ class _InputUsername extends State<InputUsername> {
                               fontSize: fontSizeText
                             ),
 
-                            focusedBorder: borderStyle,
-                            enabledBorder: borderStyle,
                             filled: true,
                             fillColor: Color(0xFFF9F9F9)
                           ),
@@ -219,22 +234,22 @@ class _InputUsername extends State<InputUsername> {
                                       
                       // Padding(padding: EdgeInsets.only(left: width * 0.13)),
 
-                      Visibility(
-                        child: SizedBox(
-                          width: width * 0.52,
-                          height: width * 0.065,
-                          child: AutoSizeText(
-                              "*Его будут видеть Ваши друзья",
-                              style: textMarkStyle,
-                              // textAlign: TextAlign.center,
-                              maxLines: 1,
-                          ), 
-                        ),
-                         maintainSize: true, 
-                         maintainAnimation: true,
-                         maintainState: true,
-                         visible: isNicknameUniq? false : true, 
-                      )
+                      // Visibility(
+                      //   child: SizedBox(
+                      //     width: width * 0.6,
+                      //     height: width * 0.065,
+                      //     child: AutoSizeText(
+                      //         "*Его будут видеть Ваши друзья",
+                      //         style: textMarkStyle,
+                      //         // textAlign: TextAlign.center,
+                      //         maxLines: 1,
+                      //     ), 
+                      //   ),
+                      //    maintainSize: isNicknameUniq? false : true, 
+                      //    maintainAnimation: true,
+                      //    maintainState: true,
+                      //    visible: isNicknameUniq? false : true, 
+                      // )
                       
                     ],
                   )
