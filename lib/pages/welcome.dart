@@ -246,9 +246,9 @@ class _AuthProviderState extends State<AuthProvider> {
                       Container(
                         width: widthText,
                         height: heightText,
-                        child: RichText(
+                        child: AutoSizeText.rich(
                           textAlign: TextAlign.center,
-                          text: TextSpan(
+                          TextSpan(
                             children: [
                               TextSpan(
                                 style: textStyle,
