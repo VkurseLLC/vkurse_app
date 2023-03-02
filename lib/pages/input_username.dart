@@ -277,7 +277,7 @@ class _InputUsername extends State<InputUsername> {
                         child: Opacity(
                           opacity: 0.9,
                           child: ElevatedButton(
-                          onPressed: (isNicknameUniq)? (){
+                          onPressed: (isButtonActive && !isNicknameUniq)? (){
 
                           } 
                           : null,
@@ -287,7 +287,7 @@ class _InputUsername extends State<InputUsername> {
                                   borderRadius: BorderRadius.circular(16),
                                 ),
                               ),
-                            backgroundColor: isButtonActive ? MaterialStateProperty.all<Color>(Color(0xFF6F2EAE))
+                            backgroundColor: (isButtonActive && !isNicknameUniq)? MaterialStateProperty.all<Color>(Color(0xFF6F2EAE))
                             : MaterialStateProperty.all<Color>(Color(0xFFA0A0A0))
                             ),
 
