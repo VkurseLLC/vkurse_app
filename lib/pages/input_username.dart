@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vkurse_app/data/api_account_data.dart';
 import 'package:vkurse_app/pages/auth_get_verification_code.dart';
 import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -22,7 +23,6 @@ class InputUsername extends StatefulWidget {
 }
 
 class _InputUsername extends State<InputUsername> {
-  List nicknames = ["Dima", "Danil", "Semyon", "Nikita", "Maxim"];
   late TextEditingController controller;
   bool isButtonActive = false;
   bool isNicknameUniq = false;
@@ -179,18 +179,11 @@ class _InputUsername extends State<InputUsername> {
                         width: width * 0.74,
                         child: TextField(
                           controller: controller,
-                          onChanged: (val){
-                            if (nicknames.contains(val)){
-                              setState(() {
-                                isNicknameUniq = true; 
-                              });
-                            }
-                            else{
-                              setState(() {
-                                isNicknameUniq = false; 
-                              });
-                            }
+                          onChanged: (val) async {
+                            var username = await AccountDataApi.check_username(val, context);
+                              setState(() => isNicknameUniq = username);
                           },
+
                           textAlign: TextAlign.start,
                           textAlignVertical: TextAlignVertical.center,
                           style: TextStyle(

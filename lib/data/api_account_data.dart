@@ -19,9 +19,9 @@ class AccountDataApi {
       var json = jsonDecode(response.body);
       if (json['answer'] == 'successful') {
         if (json['username'] == 'True') {
-          return true;
-        } else {
           return false;
+        } else {
+          return true;
         }
       } else {
         await EasyLoading.showError(json['answer']);
