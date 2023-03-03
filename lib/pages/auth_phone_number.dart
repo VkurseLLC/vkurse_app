@@ -195,6 +195,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                       Container(
                         width: width * 0.7,
                         height: (width * 0.7) * 0.3,
+                        color: Colors.amber,
                         child: TextField(
                           onChanged: (value) {
                             field_phone_number = value;
@@ -211,6 +212,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                           keyboardType: TextInputType.phone,
 
                           decoration: InputDecoration(
+                            counter: Offstage(),
                             hintText: "+7 (___) ___-__-__",
                             hintStyle: TextStyle(
                               color: Colors.blueGrey

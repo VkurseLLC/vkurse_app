@@ -1,17 +1,17 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/link.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:vkurse_app/data/api_account_data.dart';
-import 'package:vkurse_app/pages/auth_get_verification_code.dart';
-import '../generated/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:validators/validators.dart';
+// import 'package:flutter/foundation.dart';
+// import 'package:url_launcher/link.dart';
+// import 'package:url_launcher/url_launcher.dart';
+// import 'package:vkurse_app/pages/auth_get_verification_code.dart';
+// import '../generated/locale_keys.g.dart';
+// import 'package:easy_localization/easy_localization.dart';
+// import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:validators/validators.dart';
 
-// Класс для отображения страницы перехода к боту
+// Класс для отображения страницы ввода username
 
 class InputUsername extends StatefulWidget {
 
@@ -85,14 +85,14 @@ class _InputUsername extends State<InputUsername> {
         fontSizeButton = 35.0;
     }
 
-      var borderStyle = OutlineInputBorder(
+      var borderStyle = const OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.black,
                         width: 2),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     );
             
-      var borderErrorStyle = OutlineInputBorder(
+      var borderErrorStyle = const OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.redAccent,
                         width: 2),
@@ -105,13 +105,13 @@ class _InputUsername extends State<InputUsername> {
                             fontWeight: FontWeight.bold
                           );
 
-      var textRegStyle = TextStyle(
+      var textRegStyle = const TextStyle(
                             color: Color(0xFF6F2EAE),
                             fontSize: 50,
                             fontWeight: FontWeight.bold 
                           );
 
-      var textProfileStyle = TextStyle(
+      var textProfileStyle = const TextStyle(
                                 color: Colors.black,
                                 fontSize: 40,
                                 fontWeight: FontWeight.bold
@@ -130,12 +130,7 @@ class _InputUsername extends State<InputUsername> {
         child: Column(
           children: [
 
-            //!\\\ (КОНЕЦ) ///\\\ ЛОГО ///\\\
-            
-            //---------------------------------------------------------------------------------------------------------------------------------------\\
-
-            ///\\\ (НАЧАЛО) ///\\\ ПЕРЕХОД К БОТУ (ТЕКСТ + КНОПКА) ///\\\
-            
+            ///\\\ (НАЧАЛО) ///\\\ ИКОНКА + ТЕКСТ "Регистрации" ///\\\
 
             Expanded(
               flex: 2,
@@ -170,6 +165,12 @@ class _InputUsername extends State<InputUsername> {
                 )
               ],
             ),
+
+            //!\\\ (КОНЕЦ) ///\\\ ИКОНКА + ТЕКСТ "Регистрации" ///\\\
+            
+            //---------------------------------------------------------------------------------------------------------------------------------------\\
+
+             ///\\\ (НАЧАЛО) ///\\\ ТЕКСТ + ФОРМА ///\\\
 
             Expanded(
               flex: 2,
@@ -221,44 +222,28 @@ class _InputUsername extends State<InputUsername> {
                               fontWeight: FontWeight.bold,
                             ),
 
-                            hintText: "",
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: fontSizeText
-                            ),
+                            // hintText: "",
+                            // hintStyle: TextStyle(
+                            //   color: Colors.grey,
+                            //   fontSize: fontSizeText
+                            // ),
 
                             filled: true,
                             fillColor: Color(0xFFF9F9F9)
                           ),
                         ),
-                      ),  
-                                      
-                      // Padding(padding: EdgeInsets.only(left: width * 0.13)),
-
-                      // Visibility(
-                      //   child: SizedBox(
-                      //     width: width * 0.6,
-                      //     height: width * 0.065,
-                      //     child: AutoSizeText(
-                      //         "*Его будут видеть Ваши друзья",
-                      //         style: textMarkStyle,
-                      //         // textAlign: TextAlign.center,
-                      //         maxLines: 1,
-                      //     ), 
-                      //   ),
-                      //    maintainSize: isNicknameUniq? false : true, 
-                      //    maintainAnimation: true,
-                      //    maintainState: true,
-                      //    visible: isNicknameUniq? false : true, 
-                      // )
-                      
+                      ),                  
                     ],
                   )
                 ],
               )
             ),
 
-            // Padding(padding: EdgeInsets.only(top: 0.08)),
+            //!\\\ (КОНЕЦ) ///\\\ ТЕКСТ + ФОРМА ///\\\
+            
+            //---------------------------------------------------------------------------------------------------------------------------------------\\
+
+            ///\\\ (НАЧАЛО) ///\\\ КНОПКА ///\\\
 
             Expanded(
               flex: 3,
@@ -312,11 +297,13 @@ class _InputUsername extends State<InputUsername> {
                         ),
                       ),
                     ],
-
                   )
                 ],
               )
             )
+
+            //!\\\ (КОНЕЦ) ///\\\ КНОПКА ///\\\
+
           ],
         ),  
       ),

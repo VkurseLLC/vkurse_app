@@ -5,6 +5,10 @@ import 'package:vkurse_app/utils/theme.dart';
 import 'generated/codegen_loader.g.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -29,8 +33,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'VKURSE',
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
+
+      localizationsDelegates: [
+      // ... app-specific localization delegate[s] here
+      GlobalCupertinoLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      DefaultCupertinoLocalizations.delegate,
+    ],
+    
+    supportedLocales: [
+      const Locale('ru', 'RU'), // English
+    ],
+
+      // localizationsDelegates: context.localizationDelegates,
+      // supportedLocales: context.supportedLocales,
       locale: context.locale,
       theme: BasicLightTheme(),
       routes: mainNavigation.routes,
