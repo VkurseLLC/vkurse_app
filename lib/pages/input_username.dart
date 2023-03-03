@@ -100,6 +100,7 @@ class _InputUsername extends State<InputUsername> {
                     );
 
       var textErrorStyle = TextStyle(
+                            color: Colors.redAccent,
                             fontSize: fontSizeErrorText,
                             fontWeight: FontWeight.bold
                           );
