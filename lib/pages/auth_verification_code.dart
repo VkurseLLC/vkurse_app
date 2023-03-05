@@ -26,7 +26,6 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
   late String field_4_verification_code;
   late String field_5_verification_code;
 
-
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -86,7 +85,8 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                       ]),
                       child: IconButton(
                         onPressed: () async {
-                          await Navigator.pushNamed(context, '/auth_get_verification_code');
+                          await Navigator.pushNamed(
+                              context, '/auth_get_verification_code');
                         },
                         icon: const Icon(Icons.arrow_back_ios_new),
                         iconSize: width * 0.1,
@@ -156,6 +156,7 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                           children: [
                             Expanded(
                               child: TextField(
+                                  textInputAction: TextInputAction.next,
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.phone,
                                   maxLength: 1,
@@ -198,6 +199,7 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                           children: [
                             Expanded(
                               child: TextField(
+                                  textInputAction: TextInputAction.next,
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.phone,
                                   maxLength: 1,
@@ -240,6 +242,7 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                           children: [
                             Expanded(
                               child: TextField(
+                                  textInputAction: TextInputAction.next,
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.phone,
                                   maxLength: 1,
@@ -282,6 +285,7 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                           children: [
                             Expanded(
                               child: TextField(
+                                  textInputAction: TextInputAction.next,
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.phone,
                                   maxLength: 1,
@@ -324,6 +328,7 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                           children: [
                             Expanded(
                               child: TextField(
+                                  textInputAction: TextInputAction.next,
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.phone,
                                   maxLength: 1,
@@ -402,14 +407,16 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                           onPressed: () async {
                             var prefs = await SharedPreferences.getInstance();
                             var phone_number = prefs.getString('phone_number');
-                            var verification_code = "$field_1_verification_code$field_2_verification_code$field_3_verification_code$field_4_verification_code$field_5_verification_code";
-                            
+                            var verification_code =
+                                "$field_1_verification_code$field_2_verification_code$field_3_verification_code$field_4_verification_code$field_5_verification_code";
+
                             print('phone_number:');
                             print(phone_number);
                             print("verification_code:");
                             print(verification_code);
 
-                            await AuthApi.user_authorisation(phone_number, verification_code, context);
+                            await AuthApi.user_authorisation(
+                                phone_number, verification_code, context);
                           },
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<
