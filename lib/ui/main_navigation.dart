@@ -5,6 +5,7 @@ import 'package:vkurse_app/pages/profile_filling.dart';
 import 'package:vkurse_app/pages/auth_get_verification_code.dart';
 import 'package:vkurse_app/pages/map.dart';
 import 'package:vkurse_app/pages/test.dart';
+import 'package:vkurse_app/pages/end_profile_filling.dart';
 
 import 'package:vkurse_app/pages/welcome.dart';
 import 'package:vkurse_app/pages/auth_phone_number.dart';
@@ -28,7 +29,7 @@ class MainNavigation {
     '/auth_post_verification_code': (context) => const AuthVerificationCode(),
 
     // Если нужно затестить свой экран, то разкомитьте следующую строку и вместо > AuthProvider < вставьте нужный класс
-    //'/auth': (context) => const AuthVerificationCode(),
+    // '/auth': (context) => ProfileFilling(),
 
     '/map': (context) => const Map(),
   };
