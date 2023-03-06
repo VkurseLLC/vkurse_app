@@ -49,10 +49,11 @@ class MyApp extends StatelessWidget {
       // localizationsDelegates: context.localizationDelegates,
       // supportedLocales: context.supportedLocales,
       locale: context.locale,
-      theme: BasicLightTheme(),
+      theme: ThemeData(),
       routes: mainNavigation.routes,
       initialRoute: mainNavigation.initialRoute(false),
       builder: EasyLoading.init(),
     );
   }
 }
+

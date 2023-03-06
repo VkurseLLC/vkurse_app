@@ -74,9 +74,9 @@ class _EndProfileFilling extends State<EndProfileFilling> {
             width: width * 0.63,
             height: width * 0.63,
             decoration: BoxDecoration(
-                image: const DecorationImage(
-              image: AssetImage("assets/images/logo_pic.png"),
-              opacity: 0.4,
+              image: const DecorationImage(
+                image: AssetImage("assets/images/logo_pic.png"),
+                opacity: 0.4,
             )),
           ),
 
