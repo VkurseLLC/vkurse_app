@@ -36,8 +36,10 @@ class _EndProfileFilling extends State<EndProfileFilling> {
 
     var widthText = width * 0.85;
     var heightText = widthText * 0.2;
+
     double fontSizeButton = 16.0;
     double fontSizeText = 20.0;
+    double fontSizeErrorText = 20.0;
 
     if (width <= 300) {
       fontSizeText = 22.0;
@@ -58,6 +60,44 @@ class _EndProfileFilling extends State<EndProfileFilling> {
       heightText = widthText * 0.2;
       buttonHeight = buttonWidth * 0.15;
     }
+
+    var borderStyle = const OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.black, width: 2),
+      borderRadius: BorderRadius.all(Radius.circular(20)),
+    );
+
+    var borderErrorStyle = const OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.redAccent, width: 2),
+      borderRadius: BorderRadius.all(Radius.circular(20)),
+    );
+
+    var textErrorStyle = TextStyle(
+      color: Colors.redAccent,
+      fontSize: fontSizeErrorText,
+      fontWeight: FontWeight.bold,
+      fontFamily: "assets/fonts/Inter-Regular.ttf",
+    );
+
+    var textRegStyle = const TextStyle(
+      color: Color(0xFF6F2EAE),
+      fontSize: 50,
+      fontWeight: FontWeight.bold,
+      fontFamily: "assets/fonts/Inter-Regular.ttf",
+    );
+
+    var textProfileStyle = const TextStyle(
+      color: Colors.black,
+      fontSize: 40,
+      fontWeight: FontWeight.bold,
+      fontFamily: "assets/fonts/Inter-Regular.ttf",
+    );
+
+    var textMarkStyle = TextStyle(
+      color: Color.fromARGB(100, 0, 0, 0),
+      fontSize: fontSizeErrorText,
+      fontWeight: FontWeight.bold,
+      fontFamily: "assets/fonts/Inter-Regular.ttf",
+    );
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -93,94 +133,98 @@ class _EndProfileFilling extends State<EndProfileFilling> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(children: [
-                    Row(
-                      children: [
-                        Text('Настройка завершена!',
-                            style: TextStyle(
-                                color: Color.fromRGBO(111, 46, 174, 0.9),
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(0, width * 0.043, 0, 0)),
-
-                    Row(
-                      children: [
-                        Text(
-                            'Теперь ты можешь позьзоваться\n всеми функциями приложения',
-                            style: TextStyle(
-                                color: Color.fromRGBO(111, 46, 174, 0.9),
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(0, width * 0.124, 0, 0)),
-
-                    //!\\\ (КОНЕЦ) ///\\\ ТЕКСТ ///\\\
-
-                    //---------------------------------------------------------------------------------------------------------------------------------------\\
-
-                    ///\\\ (НАЧАЛО) ///\\\ КНОПКА "НАЧАТЬ" ///\\\
-
-                    Expanded(
-                        child: Row(
+                  Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        Container(
+                          width: width * 0.580,
+                          height: width * 0.062,
+                          child: AutoSizeText('Настройка завершена!',
+                              style: textRegStyle),
+                        ),
+
+                        Padding(
+                            padding:
+                                EdgeInsets.fromLTRB(0, width * 0.043, 0, 0)),
+
+                        Row(
                           children: [
                             Container(
-                              width: width * 0.524,
-                              height: buttonHeight,
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Color.fromARGB(70, 0, 0, 0),
-                                      blurRadius: 25,
-                                      offset: Offset(0.0, 10.0)),
-                                ],
-                              ),
-                              child: Opacity(
-                                opacity: 0.9,
-                                child: ElevatedButton(
-                                    onPressed: () {},
-                                    style: ButtonStyle(
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                        ),
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                Color(0xFF6F2EAE))),
-                                    child: AutoSizeText(
-                                      'Начать',
-                                      style: TextStyle(
-                                          fontSize: fontSizeButton,
-                                          fontFamily:
-                                              "assets/fonts/Inter-Regular.ttf",
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                              ),
-                            ),
-                            Padding(
-                                padding:
-                                    EdgeInsets.fromLTRB(0, width * 0.25, 0, 0)),
+                              color: Colors.amber,
+                              width: width * 0.8,
+                              height: width * 0.124,
+                              child: AutoSizeText(
+                                  'Теперь ты можешь пользоваться\n  всеми функциями приложения',
+                                  style: textRegStyle),
+                            )
                           ],
-                        )
-                      ],
-                    )),
-                    //!\\\ (КОНЕЦ) ///\\\ КНОПКА "НАЧАТЬ" ///\\\
-                  ]),
+                        ),
+
+                        Padding(
+                            padding:
+                                EdgeInsets.fromLTRB(0, width * 0.124, 0, 0)),
+
+                        //!\\\ (КОНЕЦ) ///\\\ ТЕКСТ ///\\\
+
+                        //---------------------------------------------------------------------------------------------------------------------------------------\\
+
+                        ///\\\ (НАЧАЛО) ///\\\ КНОПКА "НАЧАТЬ" ///\\\
+
+                        Expanded(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: width * 0.524,
+                                  height: buttonHeight,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color.fromARGB(70, 0, 0, 0),
+                                          blurRadius: 25,
+                                          offset: Offset(0.0, 10.0)),
+                                    ],
+                                  ),
+                                  child: Opacity(
+                                    opacity: 0.9,
+                                    child: ElevatedButton(
+                                        onPressed: () {},
+                                        style: ButtonStyle(
+                                            shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                              ),
+                                            ),
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                    Color>(Color(0xFF6F2EAE))),
+                                        child: AutoSizeText(
+                                          'Начать',
+                                          style: TextStyle(
+                                              fontSize: fontSizeButton,
+                                              fontFamily:
+                                                  "assets/fonts/Inter-Regular.ttf",
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: width * 0.25,
+                                ),
+                              ],
+                            )
+                          ],
+                        )),
+                        //!\\\ (КОНЕЦ) ///\\\ КНОПКА "НАЧАТЬ" ///\\\
+                      ]),
                 ]),
           )
         ])));

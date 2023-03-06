@@ -46,6 +46,7 @@ dependencies:
   http: ^0.13.5
   validators: ^3.0.0
   scroll_date_picker: ^3.6.1
+  pin_code_fields: ^7.4.0
   
 
 dev_dependencies:
