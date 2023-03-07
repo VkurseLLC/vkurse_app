@@ -22,15 +22,18 @@ class MainNavigation {
       isAuth ? MainNavigationRoutNames.map : MainNavigationRoutNames.auth;
 
   final routes = <String, Widget Function(BuildContext)>{
+
     // Написанное ниже не трогать !!!
     '/auth': (context) => const AuthProvider(),
     '/auth_get_phone_number': (context) => const GetPhoneNumber(),
     '/auth_get_verification_code': (context) => const AuthGetVerificationCode(),
     '/auth_post_verification_code': (context) => const AuthVerificationCode(),
 
+    '/map': (context) => const Map(),
+
     // Если нужно затестить свой экран, то разкомитьте следующую строку и вместо > AuthProvider < вставьте нужный класс
     // '/auth': (context) => ProfileFilling(),
 
-    '/map': (context) => const Map(),
+    
   };
 }
