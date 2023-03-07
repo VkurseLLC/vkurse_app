@@ -24,13 +24,8 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
   // bool isButtonActive = false;
 
   var textEditingController = TextEditingController();
-  String currentText = "";
-
-  late String field_1_verification_code;
-  late String field_2_verification_code;
-  late String field_3_verification_code;
-  late String field_4_verification_code;
-  late String field_5_verification_code;
+  // String currentText = "";
+  String field_verification_code = "";
 
   @override
   Widget build(BuildContext context) {
@@ -209,6 +204,7 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                                 width: width * 0.765,
                                 height: width * 0.14,
                                 child: PinCodeTextField(
+                                  keyboardType: TextInputType.phone,
                                   textStyle: TextStyle(color: Colors.black),
                                   length: 5,
                                   obscureText: false,
@@ -238,7 +234,8 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                                   onChanged: (value) {
                                     debugPrint(value);
                                     setState(() {
-                                      currentText = value;
+                                      field_verification_code = value;
+                                      print(field_verification_code);
                                     });
                                   },
                                   beforeTextPaste: (text) {
@@ -294,12 +291,9 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                                     opacity: 0.9,
                                     child: ElevatedButton(
                                       onPressed: () async {
-                                        var prefs = await SharedPreferences
-                                            .getInstance();
-                                        var phone_number =
-                                            prefs.getString('phone_number');
-                                        var verification_code =
-                                            "$field_1_verification_code$field_2_verification_code$field_3_verification_code$field_4_verification_code$field_5_verification_code";
+                                        var prefs = await SharedPreferences.getInstance();
+                                        var phone_number = prefs.getString('phone_number');
+                                        var verification_code = "$field_verification_code";
 
                                         print('phone_number:');
                                         print(phone_number);
