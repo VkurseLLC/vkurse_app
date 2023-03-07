@@ -69,9 +69,6 @@ class _AuthGetVerificationCodeState extends State<AuthGetVerificationCode> {
         buttonHeight = buttonWidth * 0.15;
     }
 
-    print('width: $width');
-    print('height: $height');
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
