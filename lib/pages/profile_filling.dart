@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
-import 'package:validators/sanitizers.dart';
+// import 'package:validators/sanitizers.dart';
 import 'package:vkurse_app/data/api_account_data.dart';
 
 // Класс для отображения страницы ввода username
@@ -21,9 +22,10 @@ class _ProfileFilling extends State<ProfileFilling> {
 
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController controllerCity = TextEditingController();
+  TextEditingController controllerName = TextEditingController();
 
-  static const countries_list = [
+  static const countriesList = [
     "Rostov-on-Don",
     "Krasnodar",
     "Есентуки",
@@ -32,19 +34,78 @@ class _ProfileFilling extends State<ProfileFilling> {
   ];
 
   bool isDateSelected = false;
+  bool isNameChoosen = false;
+
+  @override
+  void initState(){
+    super.initState();
+
+    controllerName = TextEditingController();
+    controllerName.addListener(() {
+      isNameChoosen = controllerName.text.isNotEmpty;
+
+      setState(() => this.controllerName = controllerName);
+
+    });
+  }
+
+  @override
+  void dispose(){
+    controllerName.dispose();
+
+    super.dispose();
+  }
 
   DateTime dateTime = DateTime(DateTime.now().year - 20); // ЗДЕСЬ ХРАНИТСЯ ДАТА
 
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
+  
     var width = mediaQuery.size.width;
+    var buttonWidth = width * 0.65;
+    var buttonHeight = buttonWidth * 0.20;
 
+    double fontSizeButton = 16.0;
+    double fontSizeText = 20.0;
+    double fontSizeErrorText = 20.0;
+
+    String nameOfUser = "";
+    var choosenCity = "";
 
     final day = DateFormat('dd').format(dateTime);
     final month = DateFormat('MMMM', 'ru_RU').format(dateTime);
     final year = DateFormat('yyyy').format(dateTime);
 
+    if (width <= 300) 
+    {
+        fontSizeText = 12.0;
+    }
+
+    else if (width > 300 && width <= 400) 
+    {
+        fontSizeText = 16.0;
+        fontSizeErrorText = 10.0;
+        fontSizeButton = 16.0;
+    }
+    else if (width > 400 && width <= 700) 
+    {
+        fontSizeText = 20.0;
+        fontSizeErrorText = 15.0;
+        fontSizeButton = 20.0;
+    }
+    else if (width > 700 && width <= 1000) 
+    {
+        fontSizeText = 30.0;
+        fontSizeErrorText = 23.0;
+        fontSizeButton = 30.0;
+    }
+    else if (width > 1000) 
+    {
+        fontSizeText = 35.0;
+        fontSizeErrorText = 25.0;
+        fontSizeButton = 35.0;
+    }
 
     var borderStyle = const OutlineInputBorder(
                 borderSide: BorderSide(
@@ -54,17 +115,30 @@ class _ProfileFilling extends State<ProfileFilling> {
               );
 
     var buttonStyle = ButtonStyle(
-        side: MaterialStateProperty.all(BorderSide(
-                            color: Color(0x0F000000),
-                            width: 2),
-        ),
-        backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFE0E3E7)),  
+        backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFFE0E3E7)),  
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
                               ),
                             ),
+        side: MaterialStateProperty.all(const BorderSide(
+                            color: Color(0x0F000000),
+                            width: 2),
+        )
       );
+
+      var borderErrorStyle = const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.redAccent,
+                        width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                    );
+
+      var textErrorStyle = TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: fontSizeErrorText,
+                            fontWeight: FontWeight.bold
+                          );
     
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -83,7 +157,6 @@ class _ProfileFilling extends State<ProfileFilling> {
                 children: [
                   Container(
                     width: width,
-                    // width: width * 0.74,
                     height: width * 0.26,
                     decoration: const BoxDecoration(
                       color: Color(0xF06F2EAE),
@@ -124,10 +197,10 @@ class _ProfileFilling extends State<ProfileFilling> {
                               SizedBox(
                                 width: width * 0.52,
                                 height: width * 0.06,
-                                child: const Text("Настройка профиля", 
+                                child: AutoSizeText("Настройка профиля", 
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 20,
+                                    fontSize: 40,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 )
@@ -161,14 +234,14 @@ class _ProfileFilling extends State<ProfileFilling> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Padding(padding: EdgeInsets.only(left: width * 0.13)),
+                              Padding(padding: EdgeInsets.only(left: width * 0.1)),
                               SizedBox(
                                 width: width * 0.25,
                                 height: width * 0.06,
-                                child: const Text("Ваше имя", 
+                                child: const AutoSizeText("Ваше имя", 
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 20,
+                                    fontSize: 30,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 )
@@ -183,14 +256,18 @@ class _ProfileFilling extends State<ProfileFilling> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: width * 0.74,
+                                width: width * 0.8,
                                 height: width * 0.14,
                                 child: TextField(
+                                  controller: controllerName,
+                                  onChanged: (name){
+                                    this.setState(() => nameOfUser = this.controllerName.text);
+                                  },
                                   textAlign: TextAlign.start,
                                   textAlignVertical: TextAlignVertical.center,
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 20,
+                                    fontSize: fontSizeText,
                                     fontWeight: FontWeight.bold
                                   ),
 
@@ -201,7 +278,7 @@ class _ProfileFilling extends State<ProfileFilling> {
                                     hintText: "Введите Ваше имя",
                                     hintStyle: TextStyle(
                                       color: Colors.grey,
-                                      fontSize: 20,
+                                      fontSize: fontSizeText,
                                       fontWeight: FontWeight.bold
                                     ),
 
@@ -237,14 +314,15 @@ class _ProfileFilling extends State<ProfileFilling> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Padding(padding: EdgeInsets.only(left: width * 0.13)),
+                              Padding(padding: EdgeInsets.only(left: width * 0.1)),
                               SizedBox(
                                 width: width * 0.49,
                                 height: width * 0.06,
-                                child: const Text("Город проживания", 
+                                child: const AutoSizeText(
+                                  "Город проживания", 
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 20,
+                                    fontSize: 30,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 )
@@ -257,69 +335,67 @@ class _ProfileFilling extends State<ProfileFilling> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Form(
-                                key: _formKey,
-                                child: Container(
-                                  width: width * 0.74,
+                            children: [   
+                               Container(
+                                  width: width * 0.8,
                                   height: width * 0.14,
-                                  decoration: BoxDecoration(
-                                    // color: Colors.amber,
-                                    color: Color(0xFFE0E3E7),
-                                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                                    border: Border.all(
-                                      color: Color(0x0F000000),
-                                      width: 2),
-                                  ),
-                                  child: Container(
-                                    width: width * 0.6,
-                                    height: width * 0.14,
-                                    // color: Colors.amberAccent,
-                                    child: TypeAheadFormField(
-                                    suggestionsCallback: (pattern) => countries_list.where(
+
+                                  child: Form(
+                                  key: _formKey,
+                                  child: TypeAheadFormField(
+                                    suggestionsCallback: (pattern) => countriesList.where(
                                       (item) => item.toLowerCase().contains(pattern.toLowerCase())
                                     ),
+                                    
                                     itemBuilder: (_, String item) => ListTile(title: Text(item)),
+                                    
                                     onSuggestionSelected: (String val) {
-                                      
-                                      this.controller.text = val;
-                                      print(val);
+                                      this.controllerCity.text = val; // ЗДЕСЬ ХРАНИТСЯ ГОРОД
+                                      setState(() {
+                                        choosenCity = val;
+                                      });
                                     },
+                                                              
                                     getImmediateSuggestions: true,
                                     hideSuggestionsOnKeyboardHide: false,
                                     hideOnEmpty: false,
+                                    
                                     noItemsFoundBuilder: (context) => Padding(
-                                      padding: EdgeInsets.all(1.0),
+                                      padding: EdgeInsets.all(2.0),
                                       child: Text("Город не найден",
-                                      //style:
+                                        style: TextStyle(
+                                          fontSize: fontSizeText,
+                                        )
                                       ),
                                     ),
+                                    
                                     textFieldConfiguration: TextFieldConfiguration(
-                                      textAlign: TextAlign.start,
-                                      textAlignVertical: TextAlignVertical.bottom,
                                       style: TextStyle(
-                                        
-                                        decoration: TextDecoration.none,
                                         color: Colors.black,
-                                        fontSize: 20,
+                                        fontSize: fontSizeText,
                                         fontWeight: FontWeight.bold
                                       ),
                                       decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 15),
-                                        border: InputBorder.none,
-                                        hintText: 'Введите название города',
+                                        enabledBorder: borderStyle,
+                                        focusedBorder: borderStyle,
+                                        errorBorder: borderErrorStyle,
+                                        errorStyle: textErrorStyle,
+
+                                        hintText: "Введите название города",
                                         hintStyle: TextStyle(
                                           color: Colors.grey,
-                                          fontSize: 20,
+                                          fontSize: fontSizeText,
                                           fontWeight: FontWeight.bold
-                                        )
+                                        ),
+
+                                        filled: true,
+                                        fillColor: Color(0xFFE0E3E7),
                                       ),
-                                      controller: this.controller,
+                                      controller: this.controllerCity,
                                     ),
-                                    ),
-                                  )
+                                  ),
                                 )
-                              ),
+                              ) 
                             ]
                           )
                         ),
@@ -335,7 +411,7 @@ class _ProfileFilling extends State<ProfileFilling> {
             //---------------------------------------------------------------------------------------------------------------------------------------\\
 
             ///\\\ (НАЧАЛО) ///\\\ ТЕКСТ + ФОРМА (Дата) ///\\\
-
+            
             Expanded(
               flex: 2,
               child: Row(
@@ -349,14 +425,15 @@ class _ProfileFilling extends State<ProfileFilling> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Padding(padding: EdgeInsets.only(left: width * 0.13)),
+                              Padding(padding: EdgeInsets.only(left: width * 0.1)),
                               SizedBox(
                                 width: width * 0.4,
                                 height: width * 0.06,
-                                child: const Text("Дата рождения", 
+                                child: const AutoSizeText(
+                                  "Дата рождения", 
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 20,
+                                    fontSize: 30,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 )
@@ -370,22 +447,20 @@ class _ProfileFilling extends State<ProfileFilling> {
                           child: Row(
                             children: [
                               Expanded(
+                                flex: 4,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    // Padding(padding: EdgeInsets.only(left: width * 0.02)),
-                                        
-                                      Container(
-                                        padding: EdgeInsets.only(right: width * 0.02),
-                                        width: width * 0.20,
-                                        height: width * 0.14,
+                                      SizedBox(
+                                        width: width * 0.17,
+                                        height: width * 0.13,
                                         child: OutlinedButton(
                                           style: buttonStyle,
                                         onPressed: () {
                                           Utils.showSheet(
                                             context,
-                                            child: buildDatePicker(),
+                                            child: buildDatePicker(width),
                                             onClicked: () {
                                               Navigator.pop(context);
                                             }
@@ -393,11 +468,10 @@ class _ProfileFilling extends State<ProfileFilling> {
                                         },
 
                                           child: Row(
-                                            mainAxisSize: MainAxisSize.min,
                                             children: [
                                               Text(isDateSelected? day : '01',
                                                 style: TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: fontSizeText,
                                                   fontWeight: FontWeight.bold,
                                                   color: isDateSelected? Colors.black : Colors.grey,
                                                 )
@@ -411,33 +485,30 @@ class _ProfileFilling extends State<ProfileFilling> {
                               ),
 
                               Expanded(
+                                flex: 6,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      width: width * 0.35,
-                                      height: width * 0.14,
-                                      padding: EdgeInsets.only(right: width * 0.02),
+                                    SizedBox(
+                                      width: width * 0.4,
+                                      height: width * 0.13,
                                       child: OutlinedButton(
                                           style: buttonStyle,
                                         onPressed: () {
                                           Utils.showSheet(
                                             context,
-                                            child: buildDatePicker(),
+                                            child: buildDatePicker(width),
                                             onClicked: () {
-                                              setState(() => isDateSelected = true);
                                               Navigator.pop(context);
-                                              print(isDateSelected);
                                             }
                                           );
                                         },
                                           child: Row(
-                                            mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Text(isDateSelected?  month : 'Январь',
+                                              Text(isDateSelected? month : 'Январь',
                                                 style: TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: fontSizeText,
                                                   fontWeight: FontWeight.bold,
                                                   color: isDateSelected? Colors.black : Colors.grey,
                                                 )
@@ -452,39 +523,38 @@ class _ProfileFilling extends State<ProfileFilling> {
                               ),
 
                               Expanded(
+                                flex: 5,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      width: width * 0.25,
-                                      height: width * 0.14,
-                                      padding: EdgeInsets.only(right: width * 0.05),
+                                    SizedBox(
+                                      width: width * 0.23,
+                                      height: width * 0.13,
                                       child: OutlinedButton(
-                                          style: buttonStyle,
+                                        style: buttonStyle,
                                         onPressed: () {
                                           Utils.showSheet(
                                             context,
-                                            child: buildDatePicker(),
+                                            child: buildDatePicker(width),
                                             onClicked: () {
-                                              setState(() => isDateSelected = true);
                                               Navigator.pop(context);
                                             }
                                           );
                                         },
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text(isDateSelected? year : '1999',
-                                                style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: isDateSelected? Colors.black : Colors.grey,
-                                                )
-                                              ),
-                                            ],
-                                          ),
-                                        )
+                                        child: Row(
+                                          children: [
+                                            Text(isDateSelected? year : '1999',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: fontSizeText,
+                                                fontWeight: FontWeight.bold,
+                                                color: isDateSelected? Colors.black : Colors.grey,
+                                              )
+                                            ),
+                                          ],
+                                        ),
+                                      )
                                     )
                                   ],
                                 ),
@@ -500,10 +570,7 @@ class _ProfileFilling extends State<ProfileFilling> {
             ),
 
             //!\\\ (КОНЕЦ) ///\\\ ТЕКСТ + ФОРМА (Дата) ///\\\
-            
-            //---------------------------------------------------------------------------------------------------------------------------------------\\
-
-            
+                 
             //---------------------------------------------------------------------------------------------------------------------------------------\\
 
             ///\\\ (НАЧАЛО) ///\\\ КНОПКА ///\\\
@@ -520,10 +587,9 @@ class _ProfileFilling extends State<ProfileFilling> {
                     children: [
                       Padding(padding: EdgeInsets.only(top: width * 0.1)),
                       Container(
-                        width: width * 0.65,
-                        height: width * 0.13,
-
-                        decoration: BoxDecoration(
+                        width: buttonWidth,
+                        height: buttonHeight,
+                        decoration: const BoxDecoration(
                           boxShadow: [
                             BoxShadow(
                               color: Color.fromARGB(70, 0, 0, 0),
@@ -535,21 +601,23 @@ class _ProfileFilling extends State<ProfileFilling> {
                         child: Opacity(
                           opacity: 0.9,
                           child: ElevatedButton(
-                          onPressed: (){},
+                          onPressed: isNameChoosen && (_formKey.currentState!.validate()) && isDateSelected? (){
+
+                          } : null,
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16),
                                 ),
                               ),
-                            backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF6F2EAE))
+                            backgroundColor: isNameChoosen && (_formKey.currentState!.validate()) && isDateSelected? 
+                            MaterialStateProperty.all<Color>(Color(0xFF6F2EAE)) : MaterialStateProperty.all<Color>(Color(0xFFA0A0A0))
                             ),
 
-                            child:
-                            AutoSizeText(
+                            child: AutoSizeText(
                                 'Продолжить',
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: fontSizeButton,
                                   fontFamily: "assets/fonts/Inter-Regular.ttf",
                                   fontWeight: FontWeight.bold),
                             )
@@ -566,12 +634,12 @@ class _ProfileFilling extends State<ProfileFilling> {
 
           ],
         ),
-      ),   
-    ); 
+      ),
+    );
   }
 
-  Widget buildDatePicker() => SizedBox(
-        height: 180,
+  Widget buildDatePicker(width) => SizedBox(
+        height: width * 0.46,
         child: CupertinoDatePicker(
           minimumYear: 1970,
           maximumYear: DateTime.now().year - 14,
@@ -583,37 +651,6 @@ class _ProfileFilling extends State<ProfileFilling> {
           }
         ),
       );
-
-    Widget buildCountryPicker() => Form(
-      key: _formKey,
-      child: Container(
-        // color: Colors.amber,
-        height: 600,
-        child: TypeAheadFormField(
-          suggestionsCallback: (pattern) => countries_list.where(
-            (item) => item.toLowerCase().contains(pattern.toLowerCase())
-          ),
-          itemBuilder: (_, String item) => ListTile(title: Text(item)),
-          onSuggestionSelected: (String val) {
-            this.controller.text = val;
-            print(val);
-          },
-          getImmediateSuggestions: true,
-          hideSuggestionsOnKeyboardHide: false,
-          hideOnEmpty: false,
-          noItemsFoundBuilder: (context) => Padding(
-            padding: EdgeInsets.all(1.0),
-            child: Text("Город не найден"),
-          ),
-          textFieldConfiguration: TextFieldConfiguration(
-            decoration: InputDecoration(
-              hintText: 'Введите название Вашего города',
-            ),
-            controller: this.controller,
-          ),
-        ),
-      )
-    );
 }
 
 class Utils {
