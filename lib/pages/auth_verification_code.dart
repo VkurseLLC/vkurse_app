@@ -1,14 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import 'package:vkurse_app/data/api_auth.dart';
 import 'package:vkurse_app/pages/auth_phone_number.dart';
+
 import '../generated/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 
 // Класс для отображения страницы перехода к боту
 class AuthVerificationCode extends StatefulWidget {
@@ -22,13 +24,8 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
   // bool isButtonActive = false;
 
   var textEditingController = TextEditingController();
-  String currentText = "";
-
-  late String field_1_verification_code;
-  late String field_2_verification_code;
-  late String field_3_verification_code;
-  late String field_4_verification_code;
-  late String field_5_verification_code;
+  // String currentText = "";
+  String field_verification_code = "";
 
   @override
   Widget build(BuildContext context) {
@@ -207,10 +204,14 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                                 width: width * 0.765,
                                 height: width * 0.14,
                                 child: PinCodeTextField(
-                                  textStyle: TextStyle(color: Colors.black),
+                                  keyboardType: TextInputType.phone,
+                                  textStyle: TextStyle(
+                                    color: Colors.black,
+                                  ),
                                   length: 5,
                                   obscureText: false,
                                   animationType: AnimationType.fade,
+                                  cursorColor: Colors.grey.shade800,
                                   pinTheme: PinTheme(
                                     shape: PinCodeFieldShape.box,
                                     borderRadius:
@@ -236,7 +237,8 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                                   onChanged: (value) {
                                     debugPrint(value);
                                     setState(() {
-                                      currentText = value;
+                                      field_verification_code = value;
+                                      print(field_verification_code);
                                     });
                                   },
                                   beforeTextPaste: (text) {
@@ -297,7 +299,7 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                                         var phone_number =
                                             prefs.getString('phone_number');
                                         var verification_code =
-                                            "$field_1_verification_code$field_2_verification_code$field_3_verification_code$field_4_verification_code$field_5_verification_code";
+                                            "$field_verification_code";
 
                                         print('phone_number:');
                                         print(phone_number);

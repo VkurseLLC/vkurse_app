@@ -31,17 +31,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   flutter_localizations:
     sdk: flutter
   intl: any
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   easy_localization: ^3.0.1
-  mysql1: ^0.20.0
-  mysql_client: ^0.0.27
   auto_size_text: ^3.0.0
   url_launcher: ^6.1.10
   mask_text_input_formatter: ^2.4.0
@@ -51,7 +49,7 @@ dependencies:
   flutter_form_builder: ^7.8.0
   # scroll_date_picker: ^3.6.1
   pin_code_fields: ^7.4.0
-  flutter_typeahead: ^4.3.7
+
   
 
 dev_dependencies:

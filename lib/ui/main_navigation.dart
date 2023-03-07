@@ -28,9 +28,9 @@ class MainNavigation {
     '/auth_get_verification_code': (context) => const AuthGetVerificationCode(),
     '/auth_post_verification_code': (context) => const AuthVerificationCode(),
 
-    // Если нужно затестить свой экран, то разкомитьте следующую строку и вместо > AuthProvider < вставьте нужный класс
-    '/auth': (context) => ProfileFilling(),
-
     '/map': (context) => const Map(),
+
+    // Если нужно затестить свой экран, то разкомитьте следующую строку и вместо > AuthProvider < вставьте нужный класс
+    '/auth': (context) => AuthVerificationCode(),
   };
 }
