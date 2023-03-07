@@ -205,10 +205,13 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                                 height: width * 0.14,
                                 child: PinCodeTextField(
                                   keyboardType: TextInputType.phone,
-                                  textStyle: TextStyle(color: Colors.black),
+                                  textStyle: TextStyle(
+                                    color: Colors.black,
+                                  ),
                                   length: 5,
                                   obscureText: false,
                                   animationType: AnimationType.fade,
+                                  cursorColor: Colors.grey.shade800,
                                   pinTheme: PinTheme(
                                     shape: PinCodeFieldShape.box,
                                     borderRadius:
@@ -291,9 +294,12 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                                     opacity: 0.9,
                                     child: ElevatedButton(
                                       onPressed: () async {
-                                        var prefs = await SharedPreferences.getInstance();
-                                        var phone_number = prefs.getString('phone_number');
-                                        var verification_code = "$field_verification_code";
+                                        var prefs = await SharedPreferences
+                                            .getInstance();
+                                        var phone_number =
+                                            prefs.getString('phone_number');
+                                        var verification_code =
+                                            "$field_verification_code";
 
                                         print('phone_number:');
                                         print(phone_number);
