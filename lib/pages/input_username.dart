@@ -141,9 +141,9 @@ class _InputUsername extends State<InputUsername> {
                   Container(
                     width: width * 0.35,
                     height: width * 0.35,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: const AssetImage("assets/images/check.jpg"))
+                        image: AssetImage("assets/images/check.jpg"))
                     ),
                   )
                 ],
@@ -259,7 +259,7 @@ class _InputUsername extends State<InputUsername> {
                         width: buttonWidth,
                         height: buttonHeight,
 
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           boxShadow: [
                             BoxShadow(
                               color: Color.fromARGB(70, 0, 0, 0),
