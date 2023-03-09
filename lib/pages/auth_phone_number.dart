@@ -224,7 +224,9 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                           child: Stack(
                             children: [
                               InternationalPhoneNumberInput(
-                               
+                                textAlign: TextAlign.start,
+                                textAlignVertical: TextAlignVertical.center,
+                                textStyle: TextStyle(fontSize: fontSizeText,),                               
                                 onInputChanged: (PhoneNumber number) {
                                   print(number.phoneNumber);
                                   field_phone_number = "${number.phoneNumber}";
@@ -237,6 +239,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                                 selectorConfig: SelectorConfig(
                                   selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
                                 ),
+
                                 locale: "ru",
                                 countries: ["RU", "UA", "KZ"],
                                 initialValue: number,
@@ -249,7 +252,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                                 keyboardType:TextInputType.numberWithOptions(signed: true, decimal: true),
                                 cursorColor: Colors.black,
 
-                                inputDecoration: InputDecoration(
+                                inputDecoration: InputDecoration(                                
                                   contentPadding: EdgeInsets.only(bottom: 15, left: 0),
                                   border: InputBorder.none,
                                   hintText: '(999) 999-99-99',
