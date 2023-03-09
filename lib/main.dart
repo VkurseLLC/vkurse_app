@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
     ],
     
     supportedLocales: [
-      const Locale('ru', 'RU'), // English
+      const Locale('ru', 'RU'), // Russian
     ],
 
       // localizationsDelegates: context.localizationDelegates,

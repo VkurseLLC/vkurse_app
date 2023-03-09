@@ -56,7 +56,7 @@ class _ProfileFilling extends State<ProfileFilling> {
     super.dispose();
   }
 
-  DateTime dateTime = DateTime(DateTime.now().year - 20); // ЗДЕСЬ ХРАНИТСЯ ДАТА
+  DateTime dateTime = DateTime(DateTime.now().year - 20); // ЗДЕСЬ ХРАНИТСЯ ДАТА (dateTime)
 
   @override
   Widget build(BuildContext context) {
@@ -350,7 +350,7 @@ class _ProfileFilling extends State<ProfileFilling> {
                                     itemBuilder: (_, String item) => ListTile(title: Text(item)),
                                     
                                     onSuggestionSelected: (String val) {
-                                      this.controllerCity.text = val; // ЗДЕСЬ ХРАНИТСЯ ГОРОД
+                                      this.controllerCity.text = val; // ЗДЕСЬ ХРАНИТСЯ ГОРОД (val)
                                       setState(() {
                                         choosenCity = val;
                                       });
