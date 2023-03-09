@@ -1,15 +1,21 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:vkurse_app/pages/auth_get_verification_code.dart';
 import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+// import '../custom_package/intl_phone_number_input.dart';
+
+// import './src/utils/phone_number.dart';
+// import './src/utils/selector_config.dart';
+// import './src/widgets/input_widget.dart';
+
+import '../custom_package/src/utils/phone_number.dart';
+import '../custom_package/src/utils/selector_config.dart';
+import '../custom_package/src/widgets/input_widget.dart';
+
 // Класс для отображения страницы перехода к боту
 
 class GetPhoneNumber extends StatefulWidget {
@@ -177,6 +183,8 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         child: AutoSizeText(
@@ -193,12 +201,14 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                       
                       ////////// ПОЛЕ ВВОДА НОМЕРА ТЕЛЕФОНА ////////// 
                       Container(
+
                         width: width * 0.75,
                         // height: (width * 0.7) * 0.3,
                         height: (width * 0.7) * 0.23,
                         // color: Colors.amber,
 
                         child: Container(
+                          
                           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
 
                           decoration: BoxDecoration(
@@ -233,7 +243,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                                   selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
                                 ),
                                 locale: "ru",
-                                // countries: ["RU", "US"],
+                                countries: ["RU", "UA", "KZ"],
                                 initialValue: number,
                                 ignoreBlank: false,
                                 autoValidateMode: AutovalidateMode.disabled,
@@ -248,7 +258,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                                   contentPadding: EdgeInsets.only(bottom: 15, left: 0),
                                   border: InputBorder.none,
                                   hintText: '(999) 999-99-99',
-                                  hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
+                                  hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: fontSizeText),
                                 ),
 
                                 // onSaved: (PhoneNumber number) {
