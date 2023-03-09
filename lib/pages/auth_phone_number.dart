@@ -1,16 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
-// import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:vkurse_app/pages/auth_get_verification_code.dart';
 import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import '../custom_package/intl_phone_number_input.dart';
-
-// import './src/utils/phone_number.dart';
-// import './src/utils/selector_config.dart';
-// import './src/widgets/input_widget.dart';
 
 import '../custom_package/src/utils/phone_number.dart';
 import '../custom_package/src/utils/selector_config.dart';
