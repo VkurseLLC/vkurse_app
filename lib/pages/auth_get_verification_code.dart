@@ -8,7 +8,6 @@ import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 // Класс для отображения страницы перехода к боту
-final _url = Uri.parse("https://t.me/VkurseAppBot");
 
 void _launchUrl(_url)async {
   if (await launchUrl(_url)) {
