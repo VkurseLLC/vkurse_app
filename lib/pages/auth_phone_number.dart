@@ -3,8 +3,7 @@ import 'dart:ffi';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-// import 'package:url_launcher/link.dart';
-// import 'package:url_launcher/url_launcher.dart';
+
 import 'package:vkurse_app/pages/auth_get_verification_code.dart';
 import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -13,13 +12,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 // Класс для отображения страницы перехода к боту
-// final _url = Uri.parse("https://t.me/VkurseAppBot");
-
-// void _launchUrl(_url)async {
-//   if (await launchUrl(_url)) {
-//     throw Exception('Could not launch $_url');
-//   }
-// }
 
 class GetPhoneNumber extends StatefulWidget {
 
@@ -50,6 +42,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
       
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -240,7 +233,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                                 selectorConfig: SelectorConfig(
                                   selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
                                 ),
-                                // locale: "RU",
+                                locale: "ru",
                                 // countries: ["RU", "US"],
                                 initialValue: number,
                                 ignoreBlank: false,
