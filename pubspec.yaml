@@ -53,8 +53,9 @@ flutter:
     - assets/images/logo_pic.png
     - assets/images/logo_text.png
     - assets/images/map_test.jpg
-    - assets/images/check.jpg
+    # - assets/images/check.jpg
     - assets/flags/
+    - assets/images/
 
   fonts:
     - family: Inter

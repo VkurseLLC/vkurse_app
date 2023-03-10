@@ -181,7 +181,7 @@ class _ProfileFilling extends State<ProfileFilling> {
                                 height: width * 0.23,
                                 child: CircleAvatar(
                                   radius: width * 0.23,
-                                  backgroundImage: AssetImage("assets/images/check.jpg"),
+                                  backgroundImage: AssetImage("assets/images/user_prof_pic.jpg"),
                                 ),
                               )
                             ],
