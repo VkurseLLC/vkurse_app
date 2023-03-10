@@ -145,7 +145,7 @@ class _InputUsername extends State<InputUsername> {
                     height: width * 0.35,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("assets/images/user_prof_pic.jpg"))
+                        image: AssetImage("assets/images/check.png"))
                     ),
                   )
                 ],
