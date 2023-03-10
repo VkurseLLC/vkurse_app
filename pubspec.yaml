@@ -28,8 +28,8 @@ dependencies:
 
   intl_phone_field: ^3.1.0
   
-  flutter_map: ^3.1.0
-  flutter_latlong: ^1.0.3
+  # flutter_map: ^3.1.0
+  # flutter_latlong: ^1.0.3
   
   # intl_phone_number_input: ^0.7.2
   flutter_typeahead: ^4.3.1
