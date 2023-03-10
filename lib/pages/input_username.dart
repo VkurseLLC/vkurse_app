@@ -27,6 +27,8 @@ class _InputUsername extends State<InputUsername> {
   bool isButtonActive = false;
   bool isNicknameUniq = false;
 
+  late String username_value = "" ;
+
   @override
   void initState(){
     super.initState();
@@ -141,9 +143,9 @@ class _InputUsername extends State<InputUsername> {
                   Container(
                     width: width * 0.35,
                     height: width * 0.35,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: const AssetImage("assets/images/check.jpg"))
+                        image: AssetImage("assets/images/user_prof_pic.jpg"))
                     ),
                   )
                 ],
@@ -198,6 +200,7 @@ class _InputUsername extends State<InputUsername> {
                         child: TextField(
                           controller: controller,
                           onChanged: (val) async {
+                            username_value = val;
                             var username = await AccountDataApi.check_username(val, context);
                               setState(() => isNicknameUniq = username);
                           },
@@ -259,7 +262,7 @@ class _InputUsername extends State<InputUsername> {
                         width: buttonWidth,
                         height: buttonHeight,
 
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           boxShadow: [
                             BoxShadow(
                               color: Color.fromARGB(70, 0, 0, 0),
@@ -271,8 +274,11 @@ class _InputUsername extends State<InputUsername> {
                         child: Opacity(
                           opacity: 0.9,
                           child: ElevatedButton(
-                          onPressed: (isButtonActive && !isNicknameUniq)? (){
+                          onPressed: (isButtonActive && !isNicknameUniq)? () async {
+                            var prefs = await SharedPreferences.getInstance();
+                            prefs.setString('username', username_value);
 
+                            await Navigator.pushNamed(context, '/initial_setting_accaunt_data');
                           } 
                           : null,
                             style: ButtonStyle(

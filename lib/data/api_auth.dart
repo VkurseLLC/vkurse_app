@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -18,15 +17,24 @@ class AuthApi {
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
+
       if (json['answer'] == 'successful') {
         await EasyLoading.showSuccess("user_id: ${json['user_id'].toString()}");
-      } else {
-        await EasyLoading.showError(json['answer']);
+
+        if (json['user_account_status'] == 'new_user') {
+          await Navigator.pushNamed(context, '/initial_setting_username');
+        }
+        else if (json['user_account_status'] == 'old_user') {
 
         }
-    } else {
-      await EasyLoading.showError(
-          "Error Code : ${response.statusCode.toString()}");
+
+      } 
+      else {
+        await EasyLoading.showError(json['answer']);
+      }
+    } 
+    else {
+      await EasyLoading.showError("Error Code : ${response.statusCode.toString()}");
       }
   }
 }

@@ -28,9 +28,12 @@ class MainNavigation {
     '/auth_get_verification_code': (context) => const AuthGetVerificationCode(),
     '/auth_post_verification_code': (context) => const AuthVerificationCode(),
 
+    '/initial_setting_username': (context) => const InputUsername(),
+    '/initial_setting_accaunt_data': (context) => const ProfileFilling(),
+
     '/map': (context) => const Map(),
 
     // Если нужно затестить свой экран, то разкомитьте следующую строку и вместо > AuthProvider < вставьте нужный класс
-    //'/auth': (context) => Profile(),
+    '/auth': (context) => AuthVerificationCode(),
   };
 }
