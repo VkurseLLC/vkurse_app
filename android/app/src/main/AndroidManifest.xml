@@ -39,12 +39,12 @@
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
         </intent>
-
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="tg" />
-        </intent>
-    </queries>
+    </intent>
+
+</queries>
 
 </manifest>
 
