@@ -192,7 +192,7 @@ class _AuthGetVerificationCodeState extends State<AuthGetVerificationCode> {
                           opacity: 0.9,
                             child: Link(
                               target: LinkTarget.blank,
-                              uri: Uri.parse("http://t.me/VkurseAppBot"),
+                              uri: Uri.parse("https://t.me/VkurseAppBot"),
                               builder: (context, followLink) => ElevatedButton(            
                                 onPressed: followLink,
                                 style: ButtonStyle(
