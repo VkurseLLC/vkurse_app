@@ -35,16 +35,16 @@ class MyApp extends StatelessWidget {
       title: 'VKURSE',
 
       localizationsDelegates: [
-      // ... app-specific localization delegate[s] here
-      GlobalCupertinoLocalizations.delegate,
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      DefaultCupertinoLocalizations.delegate,
-    ],
-    
-    supportedLocales: [
-      const Locale('ru', 'RU'), // English
-    ],
+        // ... app-specific localization delegate[s] here
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        DefaultCupertinoLocalizations.delegate,
+      ],
+
+      supportedLocales: [
+        const Locale('ru', 'RU'), // English
+      ],
 
       // localizationsDelegates: context.localizationDelegates,
       // supportedLocales: context.supportedLocales,
@@ -56,4 +56,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
