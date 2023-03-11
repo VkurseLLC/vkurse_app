@@ -153,7 +153,7 @@ class _AuthProviderState extends State<AuthProvider> {
                               shape: MaterialStateProperty.all<
                                   RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(width * 0.039),
                                 ),
                               ),
                               backgroundColor: MaterialStateProperty.all<Color>(
@@ -208,7 +208,7 @@ class _AuthProviderState extends State<AuthProvider> {
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(width * 0.039),
                               ),
                             ),
                             backgroundColor: MaterialStateProperty.all<Color>(

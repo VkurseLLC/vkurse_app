@@ -21,10 +21,8 @@ class AuthVerificationCode extends StatefulWidget {
 }
 
 class _AuthVerificationCodeState extends State<AuthVerificationCode> {
-  // bool isButtonActive = false;
 
   var textEditingController = TextEditingController();
-  // String currentText = "";
   String field_verification_code = "";
 
   @override
@@ -46,22 +44,30 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
       fontSizeMiniText = 15.0;
       fontSizeText = 18.0;
       fontSizeButton = 16.0;
-    } else if (width > 300 && width <= 700) {
+    } 
+    else if (width > 300 && width <= 700) 
+    {
       fontSizeMiniText = 16.0;
       fontSizeText = 22.0;
       fontSizeButton = 20.0;
-    } else if (width < 300) {
+    } 
+    else if (width < 300) 
+    {
       fontSizeMiniText = 12.0;
       fontSizeText = 14.0;
       fontSizeButton = 20.0;
-    } else if (width > 700 && width <= 1000) {
+    } 
+    else if (width > 700 && width <= 1000) 
+    {
       fontSizeMiniText = 27.0;
       fontSizeText = 35.0;
       fontSizeButton = 30.0;
       widthText = width * 0.65;
       heightText = widthText * 0.2;
       buttonHeight = buttonWidth * 0.15;
-    } else if (width > 1000) {
+    } 
+    else if (width > 1000) 
+    {
       fontSizeMiniText = 30.0;
       fontSizeText = 40.0;
       fontSizeButton = 30.0;
@@ -70,14 +76,14 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
       buttonHeight = buttonWidth * 0.15;
     }
 
-    var borderStyle = const OutlineInputBorder(
+    var borderStyle = OutlineInputBorder(
       borderSide: BorderSide(color: Colors.black, width: 2),
-      borderRadius: BorderRadius.all(Radius.circular(20)),
+      borderRadius: BorderRadius.all(Radius.circular(width * 0.0488)),
     );
 
-    var borderErrorStyle = const OutlineInputBorder(
+    var borderErrorStyle = OutlineInputBorder(
       borderSide: BorderSide(color: Colors.redAccent, width: 2),
-      borderRadius: BorderRadius.all(Radius.circular(20)),
+      borderRadius: BorderRadius.all(Radius.circular(width * 0.0488)),
     );
 
     var textErrorStyle = TextStyle(
@@ -215,7 +221,7 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                                   pinTheme: PinTheme(
                                     shape: PinCodeFieldShape.box,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(12)),
+                                        BorderRadius.all(Radius.circular(width * 0.0293)),
                                     inactiveFillColor: Colors.grey.shade100,
                                     selectedFillColor: Colors.grey.shade100,
                                     selectedColor: Colors.grey.shade600,
@@ -313,7 +319,7 @@ class _AuthVerificationCodeState extends State<AuthVerificationCode> {
                                               RoundedRectangleBorder>(
                                             RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(16),
+                                                  BorderRadius.circular(width * 0.039),
                                             ),
                                           ),
                                           backgroundColor:

@@ -107,18 +107,18 @@ class _ProfileFilling extends State<ProfileFilling> {
         fontSizeButton = 35.0;
     }
 
-    var borderStyle = const OutlineInputBorder(
+    var borderStyle = OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Color(0x0F000000),
                   width: 2),
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: BorderRadius.all(Radius.circular(width * 0.039)),
               );
 
     var buttonStyle = ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFFE0E3E7)),  
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(width * 0.039),
                               ),
                             ),
         side: MaterialStateProperty.all(const BorderSide(
@@ -127,11 +127,11 @@ class _ProfileFilling extends State<ProfileFilling> {
         )
       );
 
-      var borderErrorStyle = const OutlineInputBorder(
+      var borderErrorStyle = OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.redAccent,
                         width: 2),
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      borderRadius: BorderRadius.all(Radius.circular(width * 0.039)),
                     );
 
       var textErrorStyle = TextStyle(
@@ -607,7 +607,7 @@ class _ProfileFilling extends State<ProfileFilling> {
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(width * 0.039),
                                 ),
                               ),
                             backgroundColor: isNameChoosen && (_formKey.currentState!.validate()) && isDateSelected? 

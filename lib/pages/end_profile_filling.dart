@@ -61,14 +61,14 @@ class _EndProfileFilling extends State<EndProfileFilling> {
       buttonHeight = buttonWidth * 0.15;
     }
 
-    var borderStyle = const OutlineInputBorder(
+    var borderStyle = OutlineInputBorder(
       borderSide: BorderSide(color: Colors.black, width: 2),
-      borderRadius: BorderRadius.all(Radius.circular(20)),
+      borderRadius: BorderRadius.all(Radius.circular(width * 0.0488)),
     );
 
-    var borderErrorStyle = const OutlineInputBorder(
+    var borderErrorStyle = OutlineInputBorder(
       borderSide: BorderSide(color: Colors.redAccent, width: 2),
-      borderRadius: BorderRadius.all(Radius.circular(20)),
+      borderRadius: BorderRadius.all(Radius.circular(width * 0.0488)),
     );
 
     var textErrorStyle = TextStyle(
@@ -200,7 +200,7 @@ class _EndProfileFilling extends State<EndProfileFilling> {
                                                 RoundedRectangleBorder>(
                                               RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(16),
+                                                    BorderRadius.circular(width * 0.039),
                                               ),
                                             ),
                                             backgroundColor:

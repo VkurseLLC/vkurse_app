@@ -63,14 +63,6 @@ class _Profile extends State<Profile> {
     fontFamily: "assets/fonts/Inter-Regular.ttf",
   );
 
-  static const countries_list = [
-    "Rostov-on-Don",
-    "Krasnodar",
-    "Есентуки",
-    "Жирнов",
-    "Батайск"
-  ];
-
   bool isDateSelected = false;
 
   DateTime dateTime = DateTime(DateTime.now().year - 20); // ЗДЕСЬ ХРАНИТСЯ ДАТА
