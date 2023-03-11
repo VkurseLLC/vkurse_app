@@ -30,6 +30,8 @@ dependencies:
   
   flutter_map: ^3.1.0
   flutter_latlong: ^1.0.3
+
+  latlng: ^0.2.0
   
   # intl_phone_number_input: ^0.7.2
   flutter_typeahead: ^4.3.1
@@ -55,6 +57,8 @@ flutter:
     - assets/images/map_test.jpg
     - assets/images/check.jpg
     - assets/flags/
+    - assets/images/logo_up_map.png
+    - assets/images/logo_down_map.png
 
   fonts:
     - family: Inter
