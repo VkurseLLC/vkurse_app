@@ -35,7 +35,7 @@ class MainNavigation {
 
     '/profile': (context) => const Profile(),
 
-    '/map': (context) => const Map(),
+    '/map': (context) => Map(),
 
     // Если нужно затестить свой экран, то разкомитьте следующую строку и вместо > AuthProvider < вставьте нужный класс
     // '/auth': (context) => Profile(),
