@@ -1,3 +1,4 @@
+// ignore_for_file: unnecessary_new
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
@@ -7,6 +8,7 @@ class Map extends StatefulWidget {
   _Map createState() => _Map();
 }
 class _Map extends State<Map> {
+
   final mapController = MapController();
 
   @override
@@ -22,10 +24,11 @@ class _Map extends State<Map> {
               mapController: mapController,
               options: MapOptions(
                 center: latLng.LatLng(47.237319946, 39.712245941),
-                zoom: 13.0,
-                maxZoom: 18.0,
-                minZoom: 3.0,
+                zoom: 10.0,
+                maxZoom: 15.0,
+                minZoom: 10.0,
               ),
+
               children: [
                 TileLayer(
                   urlTemplate:
@@ -34,6 +37,13 @@ class _Map extends State<Map> {
                     'accessToken': 'pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGYyYW8zenkwMWk1M3JudG5jeW01ZHNoIn0.d5HskUsAcPfU479m_UAM0A',
                     'id': 'mapbox.mapbox-streets-v8',
                   },
+                  subdomains: ['a', 'b', 'c'],
+                ),
+
+                new MarkerLayer(
+                  markers: [
+                    
+                  ]
                 ),
               ],
             ),
