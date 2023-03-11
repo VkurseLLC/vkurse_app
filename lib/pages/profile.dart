@@ -79,7 +79,9 @@ class _Profile extends State<Profile> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     var width = mediaQuery.size.width;
-    var height = mediaQuery.size.height;
+    var height = mediaQuery.size.height -
+        mediaQuery.padding.top -
+        mediaQuery.padding.bottom;
 
     final day = DateFormat('dd').format(dateTime);
     final month = DateFormat('MMMM', 'ru_RU').format(dateTime);
@@ -109,12 +111,12 @@ class _Profile extends State<Profile> {
           children: [
             Container(
               width: width,
-              height: height * 0.9647,
+              height: height,
               child: Stack(
                 children: <Widget>[
                   Container(
                     width: width,
-                    height: height * 0.4747,
+                    height: height * 0.5189,
                     decoration: BoxDecoration(
                         image: const DecorationImage(
                       fit: BoxFit.cover,
@@ -157,10 +159,10 @@ class _Profile extends State<Profile> {
                     ]),
                   ),
                   Positioned(
-                    top: height * 0.4087,
+                    top: height * 0.4538,
                     child: Container(
                       width: width,
-                      height: height * 0.556,
+                      height: height * 0.5557,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius:
@@ -177,9 +179,9 @@ class _Profile extends State<Profile> {
 
                               Container(
                                 width: width * 0.756,
-                                height: height * 0.103,
+                                height: height * 0.0995,
                                 margin: EdgeInsets.fromLTRB(
-                                    width * 0.074, height * 0.032, 0, 0),
+                                    width * 0.074, height * 0.031, 0, 0),
                                 child: AutoSizeText(
                                   "Никита\nФомичев",
                                   style: TextStyle(
