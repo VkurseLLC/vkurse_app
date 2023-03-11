@@ -8,10 +8,10 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 class AccountDataApi {
   static final _client = http.Client();
 
-  static var api_authorisation = Uri.parse('http://80.78.240.205:5000/check_username_availability');
+  static var api_check_username_availability = Uri.parse('http://80.78.240.205:5000/check_username_availability');
 
   static check_username(username, context) async {
-    http.Response response = await _client.post(api_authorisation, body: {
+    http.Response response = await _client.post(api_check_username_availability, body: {
       "username": username,
     });
 
