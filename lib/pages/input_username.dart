@@ -87,18 +87,18 @@ class _InputUsername extends State<InputUsername> {
         fontSizeButton = 35.0;
     }
 
-      var borderStyle = const OutlineInputBorder(
+      var borderStyle = OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.black,
                         width: 2),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: BorderRadius.all(Radius.circular(width * 0.0488)),
                     );
             
-      var borderErrorStyle = const OutlineInputBorder(
+      var borderErrorStyle = OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.redAccent,
                         width: 2),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: BorderRadius.all(Radius.circular(width * 0.0488)),
                     );
 
       var textErrorStyle = TextStyle(
@@ -284,7 +284,7 @@ class _InputUsername extends State<InputUsername> {
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(width * 0.039),
                                 ),
                               ),
                             backgroundColor: (isButtonActive && !isNicknameUniq)? MaterialStateProperty.all<Color>(Color(0xFF6F2EAE))

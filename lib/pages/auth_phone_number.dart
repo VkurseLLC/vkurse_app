@@ -199,9 +199,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                       Container(
 
                         width: width * 0.75,
-                        // height: (width * 0.7) * 0.3,
                         height: (width * 0.7) * 0.23,
-                        // color: Colors.amber,
 
                         child: Container(
                           alignment: Alignment.center,
@@ -209,7 +207,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
 
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(width * 0.0488),
                             border: Border.all(color: Colors.black.withOpacity(0.13)),
 
                             boxShadow: [
@@ -367,7 +365,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(width * 0.039),
                                 ),
                               ),
                             backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF6F2EAE))
