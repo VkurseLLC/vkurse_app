@@ -63,14 +63,6 @@ class _Profile extends State<Profile> {
     fontFamily: "assets/fonts/Inter-Regular.ttf",
   );
 
-  static const countries_list = [
-    "Rostov-on-Don",
-    "Krasnodar",
-    "Есентуки",
-    "Жирнов",
-    "Батайск"
-  ];
-
   bool isDateSelected = false;
 
   DateTime dateTime = DateTime(DateTime.now().year - 20); // ЗДЕСЬ ХРАНИТСЯ ДАТА
@@ -79,7 +71,9 @@ class _Profile extends State<Profile> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     var width = mediaQuery.size.width;
-    var height = mediaQuery.size.height;
+    var height = mediaQuery.size.height -
+        mediaQuery.padding.top -
+        mediaQuery.padding.bottom;
 
     final day = DateFormat('dd').format(dateTime);
     final month = DateFormat('MMMM', 'ru_RU').format(dateTime);

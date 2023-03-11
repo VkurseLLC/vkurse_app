@@ -15,8 +15,6 @@ class _Map extends State<Map> {
     final mediaQuery = MediaQuery.of(context);
     var width = mediaQuery.size.width;
 
-    print("width: $width");
-
     return Scaffold(
       body: Stack(
           children: [
@@ -71,9 +69,8 @@ class _Map extends State<Map> {
                           children: [
                             Container(
                               width: width,
-                              height: 150,
+                              height: width * 0.3659, //150
                               child: Stack(
-                                fit: StackFit.loose,
                                 // ignore: sort_child_properties_last
                                 children: [
                                   Positioned(
@@ -85,18 +82,18 @@ class _Map extends State<Map> {
                                   ),
 
                                   Positioned(
-                                    bottom: 20.0,
-                                    left: 30.0,
+                                    bottom: width * 0.0488, //20.0
+                                    left: width * 0.0732, //30.0
                                     child: Container(
-                                      width: 70,
-                                      height: 70,
+                                      width: width * 0.1703, //70
+                                      height: width * 0.1703, //70
                                       child: ElevatedButton(
                                         onPressed: (){}, 
-                                        child: Icon(Icons.access_alarm),
+                                        child: Image.asset("assets/icons/user_icon.png"),
                                         style: ButtonStyle(
                                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                             RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(20),
+                                              borderRadius: BorderRadius.circular(width * 0.0488),
                                             ),
                                           ),
                                         backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF4A1A78)),
@@ -106,18 +103,18 @@ class _Map extends State<Map> {
                                   ),
 
                                   Positioned(
-                                    bottom: 40.0,
-                                    left: 150.0,
+                                    bottom: width * 0.0976, //40.0
+                                    left: width * 0.3659, //150.0
                                     child: Container(
-                                      width: 110,
-                                      height: 110,
+                                      width: width * 0.2683, //110
+                                      height: width * 0.2683, //110
                                       child: ElevatedButton(
                                         onPressed: (){}, 
-                                        child: Icon(Icons.access_alarm),
+                                        child: Image.asset("assets/icons/event_icon.png"),
                                         style: ButtonStyle(
                                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                             RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(24),
+                                              borderRadius: BorderRadius.circular(width * 0.0585),
                                             ),
                                           ),
                                         backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF4A1A78)),
@@ -127,18 +124,18 @@ class _Map extends State<Map> {
                                   ),
 
                                   Positioned(
-                                    bottom: 20.0,
-                                    right: 30.0,
+                                    bottom: width * 0.0488, //20.0
+                                    right: width * 0.0732, //30.0
                                     child: Container(
-                                      width: 70,
-                                      height: 70,
+                                      width: width * 0.1703, //70
+                                      height: width * 0.1703, //70
                                       child: ElevatedButton(
                                         onPressed: (){}, 
-                                        child: Icon(Icons.access_alarm),
+                                        child: Image.asset("assets/icons/chat_icon.png"),
                                         style: ButtonStyle(
                                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                             RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(20),
+                                              borderRadius: BorderRadius.circular(width * 0.0488),
                                             ),
                                           ),
                                         backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF4A1A78)),

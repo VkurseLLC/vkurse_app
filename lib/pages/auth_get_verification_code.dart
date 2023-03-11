@@ -198,7 +198,7 @@ class _AuthGetVerificationCodeState extends State<AuthGetVerificationCode> {
                                 style: ButtonStyle(
                                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16),
+                                      borderRadius: BorderRadius.circular(width * 0.039),
                                     ),
                                   ),
                                   backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF350068)),
@@ -257,7 +257,7 @@ class _AuthGetVerificationCodeState extends State<AuthGetVerificationCode> {
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(width * 0.039),
                                 ),
                               ),
                             backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF6F2EAE))
