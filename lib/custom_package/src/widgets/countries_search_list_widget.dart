@@ -192,8 +192,10 @@ class _Flag extends StatelessWidget {
                   )
                 : country?.flagUri != null
                     ? CircleAvatar(
+                      radius: 25,
                         backgroundImage: AssetImage(
                           country!.flagUri,
+                          
                           // package: 'intl_phone_number_input',
                         ),
                       )

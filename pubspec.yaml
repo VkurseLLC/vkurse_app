@@ -39,6 +39,11 @@ dependencies:
   libphonenumber_plugin: ^0.2.5
   equatable: ^2.0.5
   collection: ^1.16.0
+  flutter_map: ^3.1.0
+  flutter_latlong: ^1.0.3
+  # latlong: ^0.6.1
+  # latlng: any
+  # latlong: ^0.6.1
 
 dev_dependencies:
   flutter_test:
@@ -51,11 +56,7 @@ flutter:
 
   assets:
     - assets/translations/
-    - assets/images/loading.gif
-    - assets/images/logo_pic.png
-    - assets/images/logo_text.png
-    - assets/images/map_test.jpg
-    - assets/images/check.jpg
+    - assets/images/
     - assets/flags/
     - assets/images/logo_up_map.png
     - assets/images/logo_down_map.png

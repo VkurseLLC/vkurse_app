@@ -27,6 +27,8 @@ class _InputUsername extends State<InputUsername> {
   bool isButtonActive = false;
   bool isNicknameUniq = false;
 
+  late String username_value = "" ;
+
   @override
   void initState(){
     super.initState();
@@ -143,7 +145,7 @@ class _InputUsername extends State<InputUsername> {
                     height: width * 0.35,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("assets/images/check.jpg"))
+                        image: AssetImage("assets/images/check.png"))
                     ),
                   )
                 ],
@@ -198,6 +200,7 @@ class _InputUsername extends State<InputUsername> {
                         child: TextField(
                           controller: controller,
                           onChanged: (val) async {
+                            username_value = val;
                             var username = await AccountDataApi.check_username(val, context);
                               setState(() => isNicknameUniq = username);
                           },
@@ -271,8 +274,11 @@ class _InputUsername extends State<InputUsername> {
                         child: Opacity(
                           opacity: 0.9,
                           child: ElevatedButton(
-                          onPressed: (isButtonActive && !isNicknameUniq)? (){
+                          onPressed: (isButtonActive && !isNicknameUniq)? () async {
+                            var prefs = await SharedPreferences.getInstance();
+                            prefs.setString('username', username_value);
 
+                            await Navigator.pushNamed(context, '/initial_setting_accaunt_data');
                           } 
                           : null,
                             style: ButtonStyle(

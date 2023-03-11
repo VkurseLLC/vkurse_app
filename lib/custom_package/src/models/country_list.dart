@@ -671,6 +671,7 @@ class Countries {
       "nationality": "Belarusian",
       "dial_code": "+375",
       "nameTranslations": {
+        "ru": "Беларусь",
         "sk": "Bielorusko",
         "se": "Vilges-Ruošša",
         "pl": "Białoruś",

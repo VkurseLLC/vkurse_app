@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:flutter/material.dart';
-import 'package:vkurse_app/pages/auth_get_verification_code.dart';
+// import 'package:vkurse_app/pages/auth_get_verification_code.dart';
 import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -46,6 +46,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
 
   @override
   Widget build(BuildContext context) {
+
     final mediaQuery = MediaQuery.of(context);
     var width = mediaQuery.size.width;
     var height = mediaQuery.size.height;
@@ -86,8 +87,8 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
         buttonHeight = buttonWidth * 0.15;
     }
 
-    // print('width: $width');
-    // print('height: $height');
+    print('width: $width');
+    print('height: $height');
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -186,7 +187,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                           "Введите номер телефона",
                           style: TextStyle(
                             color: Color(0xFF000000),
-                            fontSize: fontSizeText,
+                            fontSize: fontSizeText, 
                             fontFamily: "assets/fonts/Inter-Bold.ttf",
                             ),
                           textAlign: TextAlign.center,
@@ -203,8 +204,8 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                         // color: Colors.amber,
 
                         child: Container(
-                          
-                          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(horizontal: 15),
 
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -226,7 +227,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                               InternationalPhoneNumberInput(
                                 textAlign: TextAlign.start,
                                 textAlignVertical: TextAlignVertical.center,
-                                textStyle: TextStyle(fontSize: fontSizeText,),                               
+                                textStyle: TextStyle(fontSize: 18,),                               
                                 onInputChanged: (PhoneNumber number) {
                                   print(number.phoneNumber);
                                   field_phone_number = "${number.phoneNumber}";
@@ -241,7 +242,7 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                                 ),
 
                                 locale: "ru",
-                                countries: ["RU", "UA", "KZ"],
+                                countries: ["RU", "UA", "KZ", "BY"],
                                 initialValue: number,
                                 ignoreBlank: false,
                                 autoValidateMode: AutovalidateMode.disabled,
@@ -251,12 +252,12 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                                 maxLength: _PhoneNumberLength,
                                 keyboardType:TextInputType.numberWithOptions(signed: true, decimal: true),
                                 cursorColor: Colors.black,
-
+                                
                                 inputDecoration: InputDecoration(                                
-                                  contentPadding: EdgeInsets.only(bottom: 15, left: 0),
+                                  // contentPadding: EdgeInsets.only(bottom: 15, left: 0),
                                   border: InputBorder.none,
                                   hintText: '(999) 999-99-99',
-                                  hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: fontSizeText),
+                                  hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 18),
                                 ),
 
                                 // onSaved: (PhoneNumber number) {
