@@ -34,6 +34,6 @@ class MainNavigation {
     '/map': (context) => const Map(),
 
     // Если нужно затестить свой экран, то разкомитьте следующую строку и вместо > AuthProvider < вставьте нужный класс
-    '/auth': (context) => AuthVerificationCode(),
+    '/auth': (context) => Profile(),
   };
 }
