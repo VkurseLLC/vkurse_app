@@ -5,7 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:vkurse_app/ui/main_navigation.dart';
-import 'package:vkurse_app/utils/theme.dart';
+// import 'package:vkurse_app/utils/theme.dart';
 
 import 'generated/codegen_loader.g.dart';
 
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'VKURSE',
 
-      localizationsDelegates: [
+      localizationsDelegates: const [
         // ... app-specific localization delegate[s] here
         GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -42,8 +42,8 @@ class MyApp extends StatelessWidget {
         DefaultCupertinoLocalizations.delegate,
       ],
 
-      supportedLocales: [
-        const Locale('ru', 'RU'), // English
+      supportedLocales: const [
+        Locale('ru', 'RU'), // English
       ],
 
       // localizationsDelegates: context.localizationDelegates,

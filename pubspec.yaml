@@ -33,7 +33,6 @@ dependencies:
 
   latlng: ^0.2.0
   
-  # intl_phone_number_input: ^0.7.2
   flutter_typeahead: ^4.3.1
 
   libphonenumber_plugin: ^0.2.5
@@ -60,7 +59,7 @@ flutter:
   fonts:
     - family: Inter
       fonts:
-        - asset: assets/fonts/Inter-Thin.ttf
-        - asset: assets/fonts/Inter-Regular.ttf
-        - asset: assets/fonts/Inter-Medium.ttf
         - asset: assets/fonts/Inter-Bold.ttf
+        - asset: assets/fonts/Inter-Medium.ttf
+        - asset: assets/fonts/Inter-Regular.ttf
+        - asset: assets/fonts/Inter-Thin.ttf
