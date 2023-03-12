@@ -123,7 +123,10 @@ class _Profile extends State<Profile> {
                             margin: EdgeInsets.fromLTRB(
                                 width * 0.024, height * 0.023, 0, 0),
                             child: IconButton(
-                              onPressed: () {},
+                              
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/map');
+                              },
                               icon: const Icon(Icons.arrow_back_ios_new),
                               iconSize: height * 0.08,
                               color: Color(0xFFffffff),

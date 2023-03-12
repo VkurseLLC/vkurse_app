@@ -20,11 +20,6 @@ class EndProfileFilling extends StatefulWidget {
 class _EndProfileFilling extends State<EndProfileFilling> {
   // bool isButtonActive = false;
 
-  late String field_1_verification_code;
-  late String field_2_verification_code;
-  late String field_3_verification_code;
-  late String field_4_verification_code;
-  late String field_5_verification_code;
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +146,7 @@ class _EndProfileFilling extends State<EndProfileFilling> {
                         Row(
                           children: [
                             Container(
-                              color: Colors.amber,
+                              // color: Colors.amber,
                               width: width * 0.8,
                               height: width * 0.124,
                               child: AutoSizeText(
@@ -194,7 +189,9 @@ class _EndProfileFilling extends State<EndProfileFilling> {
                                   child: Opacity(
                                     opacity: 0.9,
                                     child: ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.pushNamed(context, '/map');
+                                        },
                                         style: ButtonStyle(
                                             shape: MaterialStateProperty.all<
                                                 RoundedRectangleBorder>(

@@ -1,3 +1,4 @@
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,8 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 // import 'package:validators/sanitizers.dart';
 import 'package:vkurse_app/data/api_account_data.dart';
+import 'package:vkurse_app/data/api_city_selection.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Класс для отображения страницы ввода username
 
@@ -24,13 +27,14 @@ class _ProfileFilling extends State<ProfileFilling> {
 
   final TextEditingController controllerCity = TextEditingController();
   TextEditingController controllerName = TextEditingController();
-
+  
   static const countriesList = [
-    "Rostov-on-Don",
-    "Krasnodar",
-    "Есентуки",
-    "Жирнов",
-    "Батайск"
+    "Азов",
+    "Ростов-на-Дону",
+    "Батайск",
+    "Новошахтинск",
+    "Шахты",
+    "Краснодар",
   ];
 
   bool isDateSelected = false;
@@ -261,6 +265,7 @@ class _ProfileFilling extends State<ProfileFilling> {
                                 child: TextField(
                                   controller: controllerName,
                                   onChanged: (name){
+
                                     this.setState(() => nameOfUser = this.controllerName.text);
                                   },
                                   textAlign: TextAlign.start,
@@ -343,12 +348,26 @@ class _ProfileFilling extends State<ProfileFilling> {
                                   child: Form(
                                   key: _formKey,
                                   child: TypeAheadFormField(
+
+                                    // suggestionsCallback: (pattern) async {
+                                    //   Completer<List> completer = new Completer();
+                                    //   completer.complete(await CitySelectionApi.get_names_city());
+                                    //   return completer.future;
+                                    // },
+
                                     suggestionsCallback: (pattern) => countriesList.where(
                                       (item) => item.toLowerCase().contains(pattern.toLowerCase())
                                     ),
-                                    
+
                                     itemBuilder: (_, String item) => ListTile(title: Text(item)),
-                                    
+
+
+                                    // itemBuilder: (context, suggestion){
+                                    //   return ListTile(
+                                    //     title: Text(suggestion)
+                                    //   );
+                                    // },
+
                                     onSuggestionSelected: (String val) {
                                       this.controllerCity.text = val; // ЗДЕСЬ ХРАНИТСЯ ГОРОД (val)
                                       setState(() {
@@ -601,9 +620,17 @@ class _ProfileFilling extends State<ProfileFilling> {
                         child: Opacity(
                           opacity: 0.9,
                           child: ElevatedButton(
-                          onPressed: isNameChoosen && (_formKey.currentState!.validate()) && isDateSelected? (){
+                          onPressed: isNameChoosen && (_formKey.currentState!.validate()) && isDateSelected? () async {
+                            var prefs = await SharedPreferences.getInstance();
+                            var user_id = prefs.getString('user_id');
+                            var username = prefs.getString('username');
+                            var first_name = nameOfUser;
+                            var city = this.controllerCity.text;
+                            var d_birth = "$dateTime";
 
+                            AccountDataApi.save_filling_profile(context, user_id, username, first_name, city, d_birth);
                           } : null,
+
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(

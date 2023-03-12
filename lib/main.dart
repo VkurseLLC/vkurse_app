@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:vkurse_app/ui/main_navigation.dart';
 // import 'package:vkurse_app/utils/theme.dart';
 
@@ -24,6 +26,7 @@ Future<void> main() async {
         child: MyApp()),
   );
 }
+
 
 class MyApp extends StatelessWidget {
   static final mainNavigation = MainNavigation();

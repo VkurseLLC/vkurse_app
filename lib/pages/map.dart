@@ -26,15 +26,15 @@ class _Map extends State<Map> {
               mapController: mapController,
               options: MapOptions(
                 center: latLng.LatLng(47.237319946, 39.712245941),
-                zoom: 10.0,
-                maxZoom: 12.0,
+                zoom: 12.0,
+                maxZoom: 18.0,
                 minZoom: 5.0,
               ),
 
               children: [
                 TileLayer(
                   urlTemplate:
-                      'https://api.mapbox.com/styles/v1/olardaniil/clf2cbkz3002g01q603c36r1k/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGYyYW8zenkwMWk1M3JudG5jeW01ZHNoIn0.d5HskUsAcPfU479m_UAM0A',
+                      'https://api.mapbox.com/styles/v1/olardaniil/clf5o14q2000s01mrhe1byyg8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGYyYW8zenkwMWk1M3JudG5jeW01ZHNoIn0.d5HskUsAcPfU479m_UAM0A',
                   additionalOptions: {
                     'accessToken': 'pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGYyYW8zenkwMWk1M3JudG5jeW01ZHNoIn0.d5HskUsAcPfU479m_UAM0A',
                     'id': 'mapbox.mapbox-streets-v8',
@@ -112,7 +112,9 @@ class _Map extends State<Map> {
                                       width: width * 0.1703, //70
                                       height: width * 0.1703, //70
                                       child: ElevatedButton(
-                                        onPressed: (){}, 
+                                        onPressed: (){
+                                          Navigator.pushNamed(context, '/profile');
+                                        }, 
                                         child: Image.asset("assets/icons/user_icon.png"),
                                         style: ButtonStyle(
                                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
