@@ -141,7 +141,336 @@ class _Profile extends State<Profile> {
                                 )
                               ]),
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  /////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////НАЧАЛО\\\\\
+
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(15.0))),
+                                          contentPadding:
+                                              EdgeInsets.all(width * 0.0564),
+                                          insetPadding: EdgeInsets.fromLTRB(
+                                              width * 0.2358,
+                                              height * 0.1338,
+                                              width * 0.0564,
+                                              height * 0.2738),
+                                          content: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(90),
+                                              color: Colors.white,
+                                            ),
+                                            width: width * 0.7077,
+                                            height: width * 0.7523,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                /////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НАСТРОЙКИ\\\\////НАЧАЛО\\\\
+
+                                                Container(
+                                                  height: width * 0.146,
+                                                  width: width * 0.7077,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {},
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      backgroundColor:
+                                                          Color.fromRGBO(
+                                                              255, 255, 255, 1),
+                                                      foregroundColor:
+                                                          Colors.black54,
+                                                      shadowColor:
+                                                          Colors.transparent,
+                                                      elevation: 0.0,
+                                                    ),
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Image.asset(
+                                                          'assets/icons/settings.png',
+                                                          height: width * 0.064,
+                                                          width: width * 0.064,
+                                                        ),
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: width *
+                                                                        0.031)),
+                                                        Container(
+                                                          width: width * 0.2462,
+                                                          height:
+                                                              width * 0.0564,
+                                                          child: AutoSizeText(
+                                                            "Настройки",
+                                                            style: TextStyle(
+                                                                fontSize: 100,
+                                                                fontFamily:
+                                                                    "assets/fonts/Inter-Regular.ttf",
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                /////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НАСТРОЙКИ\\\\////КОНЕЦ\\\\
+
+                                                Container(
+                                                  height: width * 0.002,
+                                                  width: width * 0.7177,
+                                                  color: Colors.grey.shade400,
+                                                ),
+
+                                                ////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ВАШИ ДЕЙСТВИЯ\\\\////НАЧАЛО\\\\
+
+                                                Container(
+                                                  height: width * 0.146,
+                                                  width: width * 0.7077,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {},
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      backgroundColor:
+                                                          Color.fromRGBO(
+                                                              255, 255, 255, 1),
+                                                      foregroundColor:
+                                                          Colors.black54,
+                                                      shadowColor:
+                                                          Colors.transparent,
+                                                      elevation: 0.0,
+                                                    ),
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Image.asset(
+                                                          'assets/icons/last-moove.png',
+                                                          height: width * 0.064,
+                                                          width: width * 0.064,
+                                                        ),
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: width *
+                                                                        0.031)),
+                                                        Container(
+                                                          width: width * 0.3462,
+                                                          height:
+                                                              width * 0.0564,
+                                                          child: AutoSizeText(
+                                                            "Ваши действия",
+                                                            style: TextStyle(
+                                                                fontSize: 100,
+                                                                fontFamily:
+                                                                    "assets/fonts/Inter-Regular.ttf",
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                ////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ВАШИ ДЕЙСТВИЯ\\\\////КОНЕЦ\\\\
+
+                                                Container(
+                                                  height: width * 0.002,
+                                                  width: width * 0.7177,
+                                                  color: Colors.grey.shade400,
+                                                ),
+
+                                                ///////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///QR-КОД\\\\////НАЧАЛО\\\\
+
+                                                Container(
+                                                  height: width * 0.146,
+                                                  width: width * 0.7077,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {},
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      backgroundColor:
+                                                          Color.fromRGBO(
+                                                              255, 255, 255, 1),
+                                                      foregroundColor:
+                                                          Colors.black54,
+                                                      shadowColor:
+                                                          Colors.transparent,
+                                                      elevation: 0.0,
+                                                    ),
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Image.asset(
+                                                          'assets/icons/qr-code.png',
+                                                          height: width * 0.064,
+                                                          width: width * 0.064,
+                                                        ),
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: width *
+                                                                        0.031)),
+                                                        Container(
+                                                          width: width * 0.2462,
+                                                          height:
+                                                              width * 0.0564,
+                                                          child: AutoSizeText(
+                                                            "QR-код",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "assets/fonts/Inter-Regular.ttf",
+                                                                fontSize: 100,
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                ///////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///QR-КОД\\\\////КОНЕЦ\\\\
+
+                                                Container(
+                                                  height: width * 0.002,
+                                                  width: width * 0.7177,
+                                                  color: Colors.grey.shade400,
+                                                ),
+
+                                                //////////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ИЗБРАННОЕ\\\\////НАЧАЛО\\\\
+
+                                                Container(
+                                                  height: width * 0.146,
+                                                  width: width * 0.7077,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {},
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      backgroundColor:
+                                                          Color.fromRGBO(
+                                                              255, 255, 255, 1),
+                                                      foregroundColor:
+                                                          Colors.black54,
+                                                      shadowColor:
+                                                          Colors.transparent,
+                                                      elevation: 0.0,
+                                                    ),
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Image.asset(
+                                                          'assets/icons/favorite.png',
+                                                          height: width * 0.064,
+                                                          width: width * 0.064,
+                                                        ),
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: width *
+                                                                        0.031)),
+                                                        Container(
+                                                          width: width * 0.2462,
+                                                          height:
+                                                              width * 0.0564,
+                                                          child: AutoSizeText(
+                                                            "Избранное",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "assets/fonts/Inter-Regular.ttf",
+                                                                fontSize: 100,
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                Container(
+                                                  height: width * 0.002,
+                                                  width: width * 0.7177,
+                                                  color: Colors.grey.shade400,
+                                                ),
+
+                                                ///////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ИЗБРАННОЕ\\\\////КОНЕЦ\\\\
+
+                                                //////////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НЕВИДИМКА\\\\////НАЧАЛО\\\\
+
+                                                Container(
+                                                  height: width * 0.146,
+                                                  width: width * 0.7077,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {},
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      backgroundColor:
+                                                          Color.fromRGBO(
+                                                              255, 255, 255, 1),
+                                                      foregroundColor:
+                                                          Colors.black54,
+                                                      shadowColor:
+                                                          Colors.transparent,
+                                                      elevation: 0.0,
+                                                    ),
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Image.asset(
+                                                          'assets/icons/incognito.png',
+                                                          height: width * 0.064,
+                                                          width: width * 0.064,
+                                                        ),
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: width *
+                                                                        0.031)),
+                                                        Container(
+                                                          width: width * 0.2462,
+                                                          height:
+                                                              width * 0.0564,
+                                                          child: AutoSizeText(
+                                                            "Невидимка",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "assets/fonts/Inter-Regular.ttf",
+                                                                fontSize: 100,
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                ///////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НЕВИДИМКА\\\\////КОНЕЦ\\\\
+
+                                                ////////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КОНЕЦ\\\\
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      });
+                                },
                                 icon: const Icon(Icons.menu),
                                 iconSize: height * 0.095,
                                 color: Color(0xFFffffff),
