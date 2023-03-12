@@ -1,4 +1,6 @@
 // ignore_for_file: unnecessary_new
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
@@ -25,8 +27,8 @@ class _Map extends State<Map> {
               options: MapOptions(
                 center: latLng.LatLng(47.237319946, 39.712245941),
                 zoom: 10.0,
-                maxZoom: 15.0,
-                minZoom: 10.0,
+                maxZoom: 12.0,
+                minZoom: 5.0,
               ),
 
               children: [
@@ -42,14 +44,26 @@ class _Map extends State<Map> {
 
                 new MarkerLayer(
                   markers: [
-                    
+                    Marker(
+                      width: 45.0,
+                      height: 45.0,
+                      point: new latLng.LatLng(47.237319946, 39.712245941), 
+                      builder: (context) => new Container(
+                        child: IconButton(
+                          icon: Icon(Icons.location_on),
+                          color: Colors.red,
+                          iconSize: 45.0,
+                          onPressed: (){
+                          },
+                        ),
+                      )
+                    )
                   ]
                 ),
               ],
             ),
 
-            Expanded(
-              child: Column(
+             Column(
                 children: [
                   Expanded(
                     child: Row(
@@ -164,7 +178,7 @@ class _Map extends State<Map> {
                   ),
                 ],
               )
-            )
+            // )
           ],
         )
     );
