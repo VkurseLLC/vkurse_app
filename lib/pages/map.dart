@@ -113,7 +113,9 @@ class _Map extends State<Map> {
                                       width: width * 0.1703, //70
                                       height: width * 0.1703, //70
                                       child: ElevatedButton(
-                                        onPressed: (){}, 
+                                        onPressed: (){
+                                          Navigator.pushNamed(context, '/profile');
+                                        }, 
                                         child: Image.asset("assets/icons/user_icon.png"),
                                         style: ButtonStyle(
                                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

@@ -12,16 +12,26 @@ import 'package:vkurse_app/pages/profile.dart';
 import 'package:vkurse_app/pages/profile_filling.dart';
 import 'package:vkurse_app/pages/welcome.dart';
 
+
 import 'package:vkurse_app/pages/test.dart';
 
-abstract class MainNavigationRoutNames {
+
+abstract class MainNavigationRoutNames  {
   static const auth = '/auth';
   static const map = '/map';
+  
 }
 
+
 class MainNavigation {
+  
+
   String initialRoute(bool isAuth) =>
       isAuth ? MainNavigationRoutNames.map : MainNavigationRoutNames.auth;
+
+  // String initialRoute(bool isAuth) =>
+  //       isAuth ? MainNavigationRoutNames.map : MainNavigationRoutNames.auth;
+
 
   final routes = <String, Widget Function(BuildContext)>{
     // Написанное ниже не трогать !!!
@@ -32,12 +42,13 @@ class MainNavigation {
 
     '/initial_setting_username': (context) => const InputUsername(),
     '/initial_setting_accaunt_data': (context) => const ProfileFilling(),
+    '/initial_setting_accaunt_completed': (context) => const EndProfileFilling(),
 
     '/profile': (context) => const Profile(),
 
     '/map': (context) => Map(),
 
     // Если нужно затестить свой экран, то разкомитьте следующую строку и вместо > AuthProvider < вставьте нужный класс
-    '/auth': (context) => MapScreen(),
+    // '/auth': (context) => ProfileFilling(),
   };
 }
