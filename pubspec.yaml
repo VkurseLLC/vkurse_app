@@ -40,6 +40,9 @@ dependencies:
   collection: ^1.16.0
   flutter_map_location_marker: ^5.2.1
 
+  yandex_mapkit: ^3.2.0
+  geolocator: ^9.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

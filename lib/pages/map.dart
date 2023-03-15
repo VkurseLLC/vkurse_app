@@ -77,8 +77,8 @@ class _Map extends State<Map> {
             FlutterMap(
               mapController: mapController,
               options: MapOptions(
-                center: latLng.LatLng(47.27319946, 39.712245941),
-                zoom: 12.0,
+                center: latLng.LatLng(47.237319946, 39.712245941),
+                zoom: 14.0,
                 maxZoom: 18.0,
                 minZoom: 5.0,
               ),

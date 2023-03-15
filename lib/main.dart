@@ -49,8 +49,6 @@ class MyApp extends StatelessWidget {
         Locale('ru', 'RU'), // English
       ],
 
-      // localizationsDelegates: context.localizationDelegates,
-      // supportedLocales: context.supportedLocales,
       locale: context.locale,
       theme: ThemeData(),
       routes: mainNavigation.routes,
