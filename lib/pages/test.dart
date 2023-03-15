@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:vkurse_app/pages/app_location.dart';
-import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 
+import 'package:vkurse_app/pages/app_location.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
