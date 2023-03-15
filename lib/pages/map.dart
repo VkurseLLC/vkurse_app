@@ -4,14 +4,66 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
+import 'package:geolocator/geolocator.dart';
 
 class Map extends StatefulWidget {
   @override
   _Map createState() => _Map();
 }
+
+
 class _Map extends State<Map> {
 
   final mapController = MapController();
+
+  List<Marker> list_markers = [];
+
+  void create_marker(x, y) {
+  list_markers.add(Marker(
+      width: 45.0,
+      height: 45.0,
+      point: new latLng.LatLng(x, y), 
+      builder: (context) => new Container(
+        child: IconButton(
+          icon: Icon(Icons.location_on),
+          color: Colors.red,
+          iconSize: 45.0,
+          onPressed: () {
+            print("$x $y");
+            // mapPlacesToMarkers_1();
+            setState(() {
+              Set<Marker>.from(places_1);
+            });
+          },
+        ),
+      )
+    ));
+  }
+
+  List places = [[47.247319446, 39.722245951,], [47.237319446, 39.712345951], [47.237319446, 39.722745951]];
+
+  List places_1 = [[47.257319446, 39.722245951]];
+
+  void mapPlacesToMarkers() async {
+    for (var plasce in places) {
+      create_marker(plasce[0], plasce[1]);
+    }
+  }
+
+  void mapPlacesToMarkers_1() async {
+    for (var plasce in places_1) {
+      create_marker(plasce[0], plasce[1]);
+    }
+  }
+
+  @override
+  initState() {
+    super.initState();
+    mapPlacesToMarkers();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +77,7 @@ class _Map extends State<Map> {
             FlutterMap(
               mapController: mapController,
               options: MapOptions(
-                center: latLng.LatLng(47.237319946, 39.712245941),
+                center: latLng.LatLng(47.27319946, 39.712245941),
                 zoom: 12.0,
                 maxZoom: 18.0,
                 minZoom: 5.0,
@@ -42,23 +94,21 @@ class _Map extends State<Map> {
                   subdomains: ['a', 'b', 'c'],
                 ),
 
+          //       CurrentLocationLayer(
+          //   positionStream: const LocationMarkerDataStreamFactory()
+          //       .fromGeolocatorPositionStream(
+          //     stream: Geolocator.getPositionStream(
+          //       locationSettings: const LocationSettings(
+          //         accuracy: LocationAccuracy.medium,
+          //         distanceFilter: 50,
+          //         timeLimit: Duration(minutes: 1),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+
                 new MarkerLayer(
-                  markers: [
-                    Marker(
-                      width: 45.0,
-                      height: 45.0,
-                      point: new latLng.LatLng(47.237319946, 39.712245941), 
-                      builder: (context) => new Container(
-                        child: IconButton(
-                          icon: Icon(Icons.location_on),
-                          color: Colors.red,
-                          iconSize: 45.0,
-                          onPressed: (){
-                          },
-                        ),
-                      )
-                    )
-                  ]
+                  markers: list_markers,
                 ),
               ],
             ),
