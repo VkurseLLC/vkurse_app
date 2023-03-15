@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:vkurse_app/pages/app_location.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
+import 'package:geolocator/geolocator.dart';
 
 
 class MapScreen extends StatefulWidget {
@@ -18,15 +19,28 @@ class _MapScreenState extends State<MapScreen> {
 
   final List<MapObject> mapObjects = [];
 
-  void createMarker (){
+  Future<List> getCurrentLocation() async {
+    List listGeo = [];
+    await Geolocator.getCurrentPosition().then((value) {
+      setState(() {
+        listGeo = [value.latitude, value.longitude];
+      });
+    });
+    return listGeo;
+  }
+
+  void createMarker () async {
     final MapObjectId mapObjectId = MapObjectId('normal_icon_placemark');
+
+    var list = await getCurrentLocation();
+
     if (mapObjects.any((el) => el.mapId == mapObjectId)) {
       return;
     }
 
     final mapObject = PlacemarkMapObject(
       mapId: mapObjectId,
-      point: Point(latitude: 47.237319946, longitude: 39.712245941),
+      point: Point(latitude: list[0], longitude: list[1]),
       onTap: (PlacemarkMapObject self, Point point) => print('Tapped me at $point'),
       direction: 90,
       isDraggable: true,
@@ -58,12 +72,26 @@ class _MapScreenState extends State<MapScreen> {
       appBar: AppBar(
         title: const Text('Текущее местоположение'),
       ),
-      body: YandexMap(
-        nightModeEnabled: true,
-        onMapCreated: (controller) {
-          mapControllerCompleter.complete(controller);
-        },
-        mapObjects: mapObjects,
+      body: Stack(
+        children: [
+          YandexMap(
+            nightModeEnabled: true,
+            onMapCreated: (controller) {
+              mapControllerCompleter.complete(controller);
+            },
+            mapObjects: mapObjects,
+          ),
+          
+          ElevatedButton(
+            onPressed: () async {
+              var listGeo = await Geolocator.getCurrentPosition().then((value) {
+                print("${value.latitude} ||| ${value.longitude}");
+              });
+              // print(listGeo);
+            }, 
+            child: Text("Test")
+          )
+        ],
       ),
     );
   }
