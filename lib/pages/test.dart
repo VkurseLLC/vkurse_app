@@ -1,169 +1,124 @@
-import 'dart:developer';
-import 'dart:typed_data';
-import 'dart:ui';
-import 'package:dgis_flutter/dgis_flutter.dart';
-import 'package:flutter/material.dart';
-
-class AssetPath {
-  AssetPath._();
-  static const iconsPointGrey = "assets/check.png";
-}
+import 'package:flutter/material.dart' hide Theme;
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:vector_map_tiles/vector_map_tiles.dart';
+import 'package:vector_tile_renderer/vector_tile_renderer.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: GisScreen(),
+    return MaterialApp(
+      title: 'vector_map_tiles Example',
+      theme: ThemeData.light(),
+      home: const MyHomePage(title: 'vector_map_tiles Example'),
     );
   }
 }
 
-class GisScreen extends StatefulWidget {
-  const GisScreen({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
 
   @override
-  State<GisScreen> createState() => _GisScreenState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _GisScreenState extends State<GisScreen> {
-  final GisMapController controller = GisMapController();
-
-  late final Future<List<GisMapMarker>> icons;
-  List<GisMapMarker> list = [];
+class _MyHomePageState extends State<MyHomePage> {
+  final MapController _controller = MapController();
+  Style? _style;
+  Object? _error;
 
   @override
   void initState() {
-    icons = Future.wait([getPngFromAsset(context, AssetPath.iconsPointGrey, 60)]).then(
-        (value) => [GisMapMarker(icon: value[0], latitude: 52.29778, longitude: 104.29639, zIndex: 0, id: "123456")]);
     super.initState();
+    _initStyle();
   }
 
-  Future<Uint8List> getPngFromAsset(
-    BuildContext context,
-    String path,
-    int width,
-  ) async {
-    ByteData data = await DefaultAssetBundle.of(context).load(path);
-    Codec codec = await instantiateImageCodec(
-      data.buffer.asUint8List(),
-      targetWidth: width,
-    );
-    FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ImageByteFormat.png))!.buffer.asUint8List();
+  void _initStyle() async {
+    try {
+      _style = await _readStyle();
+    } catch (e, stack) {
+      // ignore: avoid_print
+      print(e);
+      // ignore: avoid_print
+      print(stack);
+      _error = e;
+    }
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    final children = <Widget>[];
+    if (_error != null) {
+      children.add(Expanded(child: Text(_error!.toString())));
+    } else if (_style == null) {
+      children.add(const Center(child: CircularProgressIndicator()));
+    } else {
+      children.add(Flexible(child: _map()));
+      children.add(Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [_statusText()]));
+    }
     return Scaffold(
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: ButtonMapWidget(
-          controller: controller,
-          child: FutureBuilder<List<GisMapMarker>>(
-            future: icons,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) return const SizedBox();
-              list = snapshot.data!;
-              return GisMap(
-                directoryKey: 'rubyqf9316',
-                mapKey: 'b7272230-6bc3-47e9-b24b-0eba73b12fe1',
-                useHybridComposition: true,
-                controller: controller,
-                onTapMarker: (marker) {
-                  // ignore: avoid_print
-                  print(marker.id);
-                },
-                startCameraPosition: const GisCameraPosition(
-                  latitude: 52.29778,
-                  longitude: 104.29639,
-                  bearing: 85.0,
-                  tilt: 25.0,
-                  zoom: 14.0,
-                ),
-              );
-            },
-          ),
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-      ),
-    );
+        body: SafeArea(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: children)));
   }
-}
 
-class ButtonMapWidget extends StatelessWidget {
-  final Widget child;
-  final GisMapController controller;
+// alternates:
+//   Mapbox - mapbox://styles/mapbox/streets-v12?access_token={key}
+//   Maptiler - https://api.maptiler.com/maps/outdoor/style.json?key={key}
+//   Stadia Maps - https://tiles.stadiamaps.com/styles/outdoors.json?api_key={key}
+  Future<Style> _readStyle() => StyleReader(
+          uri: 'https://api.maptiler.com/maps/8a919157-c0ff-4f80-bdf6-97e98ef13586/style.json?key=5dsMdhqG82EpmzOB6PSL',
+          // ignore: undefined_identifier
+          apiKey: "5dsMdhqG82EpmzOB6PSL",
+          logger: const Logger.console())
+      .read();
 
-  const ButtonMapWidget({Key? key, required this.child, required this.controller}) : super(key: key);
+  Widget _map() => FlutterMap(
+        mapController: _controller,
+        options: MapOptions(
+            center: _style!.center ?? LatLng(49.246292, -123.116226),
+            zoom: _style!.zoom ?? 10,
+            maxZoom: 22,
+            interactiveFlags: InteractiveFlag.drag |
+                InteractiveFlag.flingAnimation |
+                InteractiveFlag.pinchMove |
+                InteractiveFlag.pinchZoom |
+                InteractiveFlag.doubleTapZoom),
+        children: [
+          // normally you would see TileLayer which provides raster tiles
+          // instead this vector tile layer replaces the standard tile layer
+          VectorTileLayer(
+              theme: _style!.theme,
+              backgroundTheme: _style!.theme.copyWith(
+                  types: {ThemeLayerType.background, ThemeLayerType.fill}),
+              // tileOffset: TileOffset.mapbox, enable with mapbox
+              tileProviders: _style!.providers),
+        ],
+      );
 
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        child,
-        Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                FloatingActionButton(
-                  child: const Icon(Icons.gps_fixed),
-                  onPressed: () async {
-                    final status = await controller.setCameraPosition(latitude: 55.752425, longitude: 37.613983);
-                    log(status);
-                  },
-                ),
-                FloatingActionButton(
-                  child: const Icon(Icons.zoom_in_outlined),
-                  onPressed: () async {
-                    final status = await controller.increaseZoom(duration: 200);
-                    log(status);
-                  },
-                ),
-                FloatingActionButton(
-                  child: const Icon(Icons.zoom_out_outlined),
-                  onPressed: () async {
-                    final status = await controller.reduceZoom(duration: 200);
-                    log(status);
-                  },
-                ),
-                FloatingActionButton(
-                  child: const Icon(Icons.add),
-                  onPressed: () async {
-                    final status = await controller.setRoute(RoutePosition(
-                        finishLatitude: 55.752425,
-                        finishLongitude: 37.613983,
-                        startLatitude: 55.759909,
-                        startLongitude: 37.618806));
-                    log(status);
-                  },
-                ),
-                FloatingActionButton(
-                  child: const Icon(Icons.remove),
-                  onPressed: () async {
-                    final status = await controller.removeRoute();
-                    log(status);
-                  },
-                ),
-              ],
-            )),
-      ],
-    );
-  }
+  Widget _statusText() => Padding(
+      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      child: StreamBuilder(
+          stream: _controller.mapEventStream,
+          builder: (context, snapshot) {
+            return Text(
+                'Zoom: ${_controller.zoom.toStringAsFixed(2)} Center: ${_controller.center.latitude.toStringAsFixed(4)},${_controller.center.longitude.toStringAsFixed(4)}');
+          }));
 }

@@ -8,6 +8,15 @@ import 'package:vkurse_app/data/api_location.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import 'package:vkurse_app/pages/app_location.dart';
+import 'dart:developer';
+import 'dart:typed_data';
+import 'dart:ui';
+import 'package:dgis_flutter/dgis_flutter.dart';
+
+class AssetPath {
+  AssetPath._();
+  static const iconsPointGrey = "assets/images/check.png";
+}
 
 void locationHandler () {
   final cron = Cron();
@@ -27,53 +36,72 @@ class Map extends StatefulWidget {
 
 class _Map extends State<Map> {
 
-  final mapControllerCompleter = Completer<YandexMapController>();
+  final GisMapController controller = GisMapController();
+  // final mapControllerCompleter = Completer<YandexMapController>();
 
-  final List<MapObject> mapObjects = [];
-
-  void createMarker (user_id, x, y) {
-    final MapObjectId mapObjectId = MapObjectId('id_${user_id}');
-
-    final mapObject = PlacemarkMapObject(
-      mapId: mapObjectId,
-      point: Point(latitude: x, longitude: y),
-      onTap: (PlacemarkMapObject self, Point point) => print(mapObjectId),
-      opacity: 1,
-      icon: PlacemarkIcon.single(PlacemarkIconStyle(
-        image: BitmapDescriptor.fromAssetImage('assets/icons/user_icon.png'),
-        scale: 0.2
-      ))
-    );
-    
-    setState(() {
-      mapObjects.add(mapObject);
-    });
-  }
-
-  void placeMarker () async {
-
-    final cron = Cron();
-    cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
-      var userLocation = await LocationApi.users_location_stream("2");
-
-      var data_item = null;
-
-      for (data_item in userLocation) {
-        if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
-          createMarker(data_item["user_id"], data_item["latitude"], data_item["longitude"]);
-        }
-      }
-    });    
-  }
+  late final Future<List<GisMapMarker>> icons;
+  List<GisMapMarker> list = [];
 
   @override
   void initState() {
+    icons = Future.wait([getPngFromAsset(context, AssetPath.iconsPointGrey, 60)]).then(
+        (value) => [GisMapMarker(icon: value[0], latitude: 47.237319946, longitude: 39.712245941, zIndex: 0, id: "123456")]);
     super.initState();
     _initPermission().ignore();
     locationHandler();
-    placeMarker();
-    
+    // placeMarker();
   }
+
+  Future<Uint8List> getPngFromAsset(
+    BuildContext context,
+    String path,
+    int width,
+  ) async {
+    ByteData data = await DefaultAssetBundle.of(context).load(path);
+    Codec codec = await instantiateImageCodec(
+      data.buffer.asUint8List(),
+      targetWidth: width,
+    );
+    FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ImageByteFormat.png))!.buffer.asUint8List();
+  }
+
+  // final List<MapObject> mapObjects = [];
+
+  // void createMarker (user_id, x, y) {
+  //   final MapObjectId mapObjectId = MapObjectId('id_${user_id}');
+
+  //   final mapObject = PlacemarkMapObject(
+  //     mapId: mapObjectId,
+  //     point: Point(latitude: x, longitude: y),
+  //     onTap: (PlacemarkMapObject self, Point point) => print(mapObjectId),
+  //     opacity: 1,
+  //     icon: PlacemarkIcon.single(PlacemarkIconStyle(
+  //       image: BitmapDescriptor.fromAssetImage('assets/icons/user_icon.png'),
+  //       scale: 0.2
+  //     ))
+  //   );
+    
+  //   setState(() {
+  //     mapObjects.add(mapObject);
+  //   });
+  // }
+
+  // void placeMarker () async {
+
+  //   final cron = Cron();
+  //   cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
+  //     var userLocation = await LocationApi.users_location_stream("2");
+
+  //     var data_item = null;
+
+  //     for (data_item in userLocation) {
+  //       if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
+  //         createMarker(data_item["user_id"], data_item["latitude"], data_item["longitude"]);
+  //       }
+  //     }
+  //   });    
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -81,16 +109,26 @@ class _Map extends State<Map> {
     final mediaQuery = MediaQuery.of(context);
     var width = mediaQuery.size.width;
 
+
     return Scaffold(
       body: Stack(
           children: [
-            YandexMap(
-            nightModeEnabled: true,
-            onMapCreated: (controller) {
-              mapControllerCompleter.complete(controller);
-            },
-            mapObjects: mapObjects,
-          ),
+            GisMap(
+                directoryKey: 'rubyqf9316',
+                mapKey: 'b7272230-6bc3-47e9-b24b-0eba73b12fe1',
+                useHybridComposition: true,
+                controller: controller,
+                onTapMarker: (marker) {
+                  // ignore: avoid_print
+                  print(marker.id);
+                },
+                startCameraPosition: const GisCameraPosition(
+                  latitude: 47.237319946,
+                  longitude: 39.712245941,
+                  tilt: 25.0,
+                  zoom: 14.0,
+                ),
+              ),
 
              Column(
                 children: [
@@ -217,7 +255,7 @@ class _Map extends State<Map> {
     );
   }
 
-  /// Проверка разрешений на доступ к геопозиции пользователя
+  // / Проверка разрешений на доступ к геопозиции пользователя
   Future<void> _initPermission() async {
     if (!await LocationService().checkPermission()) {
       await LocationService().requestPermission();
@@ -241,17 +279,10 @@ class _Map extends State<Map> {
   Future<void> _moveToCurrentLocation(
     AppLatLong appLatLong,
   ) async {
-    (await mapControllerCompleter.future).moveCamera(
-      animation: const MapAnimation(type: MapAnimationType.linear, duration: 1),
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: Point(
-            latitude: appLatLong.lat,
-            longitude: appLatLong.long,
-          ),
-          zoom: 12,
-        ),
-      ),
-    );
+    (await controller.setCameraPosition(
+      latitude: appLatLong.lat,
+      longitude: appLatLong.long,
+      zoom: 12,
+    ));
   }
 }
