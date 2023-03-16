@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:cron/cron.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
+// import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 import 'package:vkurse_app/data/api_location.dart';
@@ -43,7 +43,6 @@ class _Map extends State<Map> {
         image: BitmapDescriptor.fromAssetImage('assets/icons/user_icon.png'),
         scale: 0.2
       ))
-      // icon: IconButton(onPressed: () {}, icon: Icon(Icons.supervised_user_circle),)
     );
     
     setState(() {

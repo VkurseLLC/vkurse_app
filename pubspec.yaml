@@ -43,6 +43,7 @@ dependencies:
   geolocator: ^9.0.2
   yandex_mapkit: ^3.2.0
   cron: ^0.5.1
+  dgis_flutter: ^0.0.31
 
 dev_dependencies:
   flutter_test:
