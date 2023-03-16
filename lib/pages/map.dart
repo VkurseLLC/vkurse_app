@@ -1,13 +1,22 @@
 import 'dart:async';
-
+import 'package:cron/cron.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_map/flutter_map.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart' as latLng;
+import 'package:vkurse_app/data/api_location.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import 'package:vkurse_app/pages/app_location.dart';
-import 'package:yandex_mapkit/yandex_mapkit.dart';
-import 'package:geolocator/geolocator.dart';
+
+void locationHandler () {
+  final cron = Cron();
+  cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
+    await Geolocator.getCurrentPosition().then((value) {
+      LocationApi.user_location_save("2", "${value.latitude}", "${value.longitude}");
+    });
+  });
+}
 
 class Map extends StatefulWidget {
 
@@ -22,26 +31,19 @@ class _Map extends State<Map> {
 
   final List<MapObject> mapObjects = [];
 
-  Future<List> getCurrentLocation() async {
-    List listGeo = [];
-    await Geolocator.getCurrentPosition().then((value) {
-      setState(() {
-        listGeo = [value.latitude, value.longitude];
-      });
-    });
-    return listGeo;
-  }
-
-  void createMarker () async {
-    final MapObjectId mapObjectId = MapObjectId('normal_icon_placemark');
-
-    var list = await getCurrentLocation();
+  void createMarker (user_id, x, y) {
+    final MapObjectId mapObjectId = MapObjectId('id_${user_id}');
 
     final mapObject = PlacemarkMapObject(
       mapId: mapObjectId,
-      point: Point(latitude: list[0], longitude: list[1]),
+      point: Point(latitude: x, longitude: y),
       onTap: (PlacemarkMapObject self, Point point) => print(mapObjectId),
       opacity: 1,
+      icon: PlacemarkIcon.single(PlacemarkIconStyle(
+        image: BitmapDescriptor.fromAssetImage('assets/icons/user_icon.png'),
+        scale: 0.2
+      ))
+      // icon: IconButton(onPressed: () {}, icon: Icon(Icons.supervised_user_circle),)
     );
     
     setState(() {
@@ -49,11 +51,29 @@ class _Map extends State<Map> {
     });
   }
 
+  void placeMarker () async {
+
+    final cron = Cron();
+    cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
+      var userLocation = await LocationApi.users_location_stream("2");
+
+      var data_item = null;
+
+      for (data_item in userLocation) {
+        if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
+          createMarker(data_item["user_id"], data_item["latitude"], data_item["longitude"]);
+        }
+      }
+    });    
+  }
+
   @override
   void initState() {
     super.initState();
-    createMarker();
     _initPermission().ignore();
+    locationHandler();
+    placeMarker();
+    
   }
 
   @override
@@ -166,7 +186,9 @@ class _Map extends State<Map> {
                                       width: width * 0.1703, //70
                                       height: width * 0.1703, //70
                                       child: ElevatedButton(
-                                        onPressed: (){}, 
+                                        onPressed: () async {
+                                          print(await LocationApi.users_location_stream("2"));
+                                        }, 
                                         child: Image.asset("assets/icons/chat_icon.png"),
                                         style: ButtonStyle(
                                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
