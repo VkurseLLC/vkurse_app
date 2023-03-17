@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:cron/cron.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 import 'package:vkurse_app/data/api_location.dart';
@@ -36,20 +36,19 @@ class Map extends StatefulWidget {
 
 class _Map extends State<Map> {
 
-  final GisMapController controller = GisMapController();
-  // final mapControllerCompleter = Completer<YandexMapController>();
+final GisMapController controller = GisMapController();
 
-  late final Future<List<GisMapMarker>> icons;
+  late Future<List<GisMapMarker>> icons;
   List<GisMapMarker> list = [];
 
-  @override
+   @override
   void initState() {
-    icons = Future.wait([getPngFromAsset(context, AssetPath.iconsPointGrey, 60)]).then(
-        (value) => [GisMapMarker(icon: value[0], latitude: 47.237319946, longitude: 39.712245941, zIndex: 0, id: "123456")]);
+    // icons = Future.wait([getPngFromAsset(context, AssetPath.iconsPointGrey, 60)]).then(
+    //     (value) => [GisMapMarker(icon: value[0], latitude: 52.29778, longitude: 104.29639, zIndex: 0, id: "123456")]);
     super.initState();
-    _initPermission().ignore();
-    locationHandler();
-    // placeMarker();
+    // locationHandler();
+    createMarker();
+    // _initPermission();
   }
 
   Future<Uint8List> getPngFromAsset(
@@ -68,24 +67,31 @@ class _Map extends State<Map> {
 
   // final List<MapObject> mapObjects = [];
 
-  // void createMarker (user_id, x, y) {
-  //   final MapObjectId mapObjectId = MapObjectId('id_${user_id}');
+  void createMarker () {
 
-  //   final mapObject = PlacemarkMapObject(
-  //     mapId: mapObjectId,
-  //     point: Point(latitude: x, longitude: y),
-  //     onTap: (PlacemarkMapObject self, Point point) => print(mapObjectId),
-  //     opacity: 1,
-  //     icon: PlacemarkIcon.single(PlacemarkIconStyle(
-  //       image: BitmapDescriptor.fromAssetImage('assets/icons/user_icon.png'),
-  //       scale: 0.2
-  //     ))
-  //   );
-    
-  //   setState(() {
-  //     mapObjects.add(mapObject);
-  //   });
-  // }
+    const id = "test";
+
+    List geo = [[47.237319946, 39.712245941], [47.237339946, 39.712245941], [47.237359946, 39.712245941], [47.237379946, 39.712245941], [47.237399946, 39.712245941], [47.237419946, 39.712245941], [47.237439946, 39.712245941], [47.237459946, 39.712245941], [47.237479946, 39.712245941], [47.237499946, 39.712245941], [47.238319946, 39.712245941]];
+
+    for(var coord in geo){
+      icons = Future.wait([getPngFromAsset(context, AssetPath.iconsPointGrey, 60)]).then(
+        (value) => [GisMapMarker(icon: value[0], latitude: coord[0], longitude: coord[1], zIndex: 0, id: id)]);
+    }
+
+    controller.updateMarkers(list);
+
+  }
+
+    // final mapObject = PlacemarkMapObject(
+    //   mapId: mapObjectId,
+    //   point: Point(latitude: x, longitude: y),
+    //   onTap: (PlacemarkMapObject self, Point point) => print(mapObjectId),
+    //   opacity: 1,
+    //   icon: PlacemarkIcon.single(PlacemarkIconStyle(
+    //     image: BitmapDescriptor.fromAssetImage('assets/icons/user_icon.png'),
+    //     scale: 0.2
+    //   ))
+    // );
 
   // void placeMarker () async {
 
@@ -113,22 +119,34 @@ class _Map extends State<Map> {
     return Scaffold(
       body: Stack(
           children: [
-            GisMap(
-                directoryKey: 'rubyqf9316',
-                mapKey: 'b7272230-6bc3-47e9-b24b-0eba73b12fe1',
-                useHybridComposition: true,
-                controller: controller,
-                onTapMarker: (marker) {
-                  // ignore: avoid_print
-                  print(marker.id);
-                },
-                startCameraPosition: const GisCameraPosition(
-                  latitude: 47.237319946,
-                  longitude: 39.712245941,
-                  tilt: 25.0,
-                  zoom: 14.0,
-                ),
+            SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: FutureBuilder<List<GisMapMarker>>(
+          future: icons,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) return const SizedBox();
+            list = snapshot.data!;
+            return GisMap(
+              directoryKey: 'rubyqf9316',
+              mapKey: 'b7272230-6bc3-47e9-b24b-0eba73b12fe1',
+              useHybridComposition: true,
+              controller: controller,
+              onTapMarker: (marker) {
+                // ignore: avoid_print
+                print("good");
+              },
+              startCameraPosition: const GisCameraPosition(
+                latitude: 47.237319946,
+                longitude: 39.712245941,
+                // bearing: 85.0,
+                tilt: 25.0,
+                zoom: 14.0,
               ),
+            );
+          },
+        ),
+      ),
 
              Column(
                 children: [
@@ -202,7 +220,9 @@ class _Map extends State<Map> {
                                       width: width * 0.2683, //110
                                       height: width * 0.2683, //110
                                       child: ElevatedButton(
-                                        onPressed: (){}, 
+                                        onPressed: () {
+                                          // await controller.updateMarkers(list);
+                                        }, 
                                         child: Image.asset("assets/icons/event_icon.png"),
                                         style: ButtonStyle(
                                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -255,34 +275,34 @@ class _Map extends State<Map> {
     );
   }
 
-  // / Проверка разрешений на доступ к геопозиции пользователя
-  Future<void> _initPermission() async {
-    if (!await LocationService().checkPermission()) {
-      await LocationService().requestPermission();
-    }
-    await _fetchCurrentLocation();
-  }
+  // // / Проверка разрешений на доступ к геопозиции пользователя
+  // Future<void> _initPermission() async {
+  //   if (!await LocationService().checkPermission()) {
+  //     await LocationService().requestPermission();
+  //   }
+  //   await _fetchCurrentLocation();
+  // }
 
-  /// Получение текущей геопозиции пользователя
-  Future<void> _fetchCurrentLocation() async {
-    AppLatLong location;
-    const defLocation = MoscowLocation();
-    try {
-      location = await LocationService().getCurrentLocation();
-    } catch (_) {
-      location = defLocation;
-    }
-    _moveToCurrentLocation(location);
-  }
+  // /// Получение текущей геопозиции пользователя
+  // Future<void> _fetchCurrentLocation() async {
+  //   AppLatLong location;
+  //   const defLocation = MoscowLocation();
+  //   try {
+  //     location = await LocationService().getCurrentLocation();
+  //   } catch (_) {
+  //     location = defLocation;
+  //   }
+  //   _moveToCurrentLocation(location);
+  // }
 
-  /// Метод для показа текущей позиции
-  Future<void> _moveToCurrentLocation(
-    AppLatLong appLatLong,
-  ) async {
-    (await controller.setCameraPosition(
-      latitude: appLatLong.lat,
-      longitude: appLatLong.long,
-      zoom: 12,
-    ));
-  }
+  // /// Метод для показа текущей позиции
+  // Future<void> _moveToCurrentLocation(
+  //   AppLatLong appLatLong,
+  // ) async {
+  //   (await controller.setCameraPosition(
+  //     latitude: appLatLong.lat,
+  //     longitude: appLatLong.long,
+  //     zoom: 10,
+  //   ));
+  // }
 }
