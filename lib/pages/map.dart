@@ -12,6 +12,16 @@ import 'package:vkurse_app/data/api_location.dart';
 import 'package:vkurse_app/pages/assets_const.dart';
 
 
+void locationHandler () {
+  final cron = Cron();
+  cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
+    await Geolocator.getCurrentPosition().then((value) {
+      LocationApi.user_location_save("2", "${value.latitude}", "${value.longitude}");
+    });
+  });
+}
+
+
 class Map extends StatefulWidget {
 
   @override
@@ -25,24 +35,20 @@ class _Map extends State<Map> {
   late final Future<List<GisMapMarker>> icons;
   List<GisMapMarker> list = [];
   List<GisMapMarker> mapObject = [];
-
+  
   void createMarker(_user_id, _latitude, _longitude, _context) async {
-    
-    var iconMarker = await getPngFromAsset(_context, AssetPath.iconsPointGrey, 60);
-    mapObject.add(GisMapMarker(icon: iconMarker, latitude: _latitude, longitude: _longitude, zIndex: 0, id: _user_id));
-    
-    final status = controller.updateMarkers(mapObject as List<GisMapMarker>);  
+    var iconMarker = await getPngFromAsset(_context, AssetPath.iconsPointGrey, 120);
+    mapObject.add(GisMapMarker(icon: iconMarker, latitude: _latitude, longitude: _longitude, zIndex: 0, id: _user_id.toString()));
+    print("mapObject: $mapObject");
   }
 
   void placeMarker(_context) {
-    var userLocation = [{"type": "user_location", "user_id": "2", "latitude": 47.289020, "longitude": 39.702150}, {"type": "user_location", "user_id": "3", "latitude": 47.289020, "longitude": 39.701150} ];
-    
-    
-    List<GisMapMarker> mapObject = [];
-    
+  
     final cron = Cron();
     cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
-    
+
+    // var userLocation = [{"type": "user_location", "user_id": "2", "latitude": 47.289020, "longitude": 39.702150}, {"type": "user_location", "user_id": "3", "latitude": 47.289020, "longitude": 39.701150} ];
+      var userLocation = await LocationApi.users_location_stream("2");
       var data_item = null;
 
       for (data_item in userLocation) {
@@ -50,6 +56,9 @@ class _Map extends State<Map> {
           createMarker(data_item["user_id"], data_item["latitude"], data_item["longitude"], _context);
         }
       }
+
+      final status = controller.updateMarkers(mapObject as List<GisMapMarker>);
+      mapObject.clear();
     });
   }
 
@@ -57,9 +66,10 @@ class _Map extends State<Map> {
   void initState() {
 
     placeMarker(context);
+    locationHandler();
 
     icons = Future.wait([getPngFromAsset(context, AssetPath.iconsPointGrey, 60)]).then(
-        (value) => [GisMapMarker(icon: value[0], latitude: 47.289020, longitude: 39.701150, zIndex: 0, id: "1")]);
+        (value) => [GisMapMarker(icon: value[0], latitude: 47.289020, longitude: 39.701150, zIndex: 0, id: "test")]);
     super.initState();
   }
 
@@ -88,6 +98,7 @@ class _Map extends State<Map> {
 
     return Scaffold(
       body: Stack(
+          // ignore: sort_child_properties_last
           children: [
             SizedBox(
               width: width,
@@ -99,11 +110,14 @@ class _Map extends State<Map> {
                   list = snapshot.data!;
                   return
                    GisMap(
-                    directoryKey: 'rubyqf9316',
-                    mapKey: 'b7272230-6bc3-47e9-b24b-0eba73b12fe1',
+                    directoryKey: 'runhin9102',
+                    mapKey: '9d6ae96d-d730-42f7-a6a6-2e378f46215a',
+                    // directoryKey: 'rubyqf9316',
+                    // mapKey: 'b7272230-6bc3-47e9-b24b-0eba73b12fe1',
                     useHybridComposition: true,
                     controller: controller,
                     onTapMarker: (marker) {
+                      
                     },
                     startCameraPosition: const GisCameraPosition(
                       latitude: 47.237319946,
@@ -115,160 +129,165 @@ class _Map extends State<Map> {
                 },
               ),
             ),
-      
-            Column(
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Container(
-                              width: width,
-                              child: Image.asset("assets/images/logo_up_map.png")
-                            )
-                          ],
+
+            Positioned(
+              // top: width - width * 0.2683,
+              bottom: width * 0.2683, //110.0
+              // bottom: width * 0.4887, //200.0
+              right: width * 0.0732, //30.0
+              child: Container(
+                width: width * 0.1216, //50
+                height: width * 0.0973, //30
+                child: ElevatedButton(
+                  onPressed: () async {
+                    // Position geo = await Geolocator.getCurrentPosition();
+                    // final status = await controller.setCameraPosition(latitude: geo.latitude, longitude: geo.longitude, zoom: 16);
+                    final status = await controller.setCameraPosition(
+                      latitude: 47.289020, 
+                      longitude: 39.702150,
+                      zoom: 16
+                    );
+                    log(status);
+                  }, 
+                  child: Image.asset("assets/icons/currentPosition.png"),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(width * 0.034),
+                        side: BorderSide(
+                          color: Color(0xFF0a0a0a),
+                          width: 1,
                         )
-                      )
-                    ],
-                  ), 
-                ),
+                      ),
+                    ),
+                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(100, 255, 255, 255)),
+                  )
+                )
+              ),
+            ),
       
-                Positioned(
-                  bottom: width * 0.2683, //110.0
-                  // bottom: width * 0.4887, //200.0
-                  right: width * 0.0732, //30.0
-                  child: Container(
-                    width: width * 0.1216, //50
-                    height: width * 0.0973, //30
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        final status = await controller.setCameraPosition(latitude: 47.289020, longitude: 39.701150);
-                        log(status);
-                      }, 
-                      child: Image.asset("assets/icons/currentPosition.png"),
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(width * 0.034),
-                            side: BorderSide(
-                              color: Color(0xFF0a0a0a),
-                              width: 1,
-                            )
-                          ),
+            // Column(
+            //   children: [
+            //     Expanded(
+            //       child: Row(
+            //         children: [
+            //           Expanded(
+            //             child: Column(
+            //               children: [
+            //                 Container(
+            //                   width: width,
+            //                   child: Image.asset("assets/images/logo_up_map.png")
+            //                 )
+            //               ],
+            //             )
+            //           )
+            //         ],
+            //       ), 
+            //     ),
+        
+            //     Expanded(
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         crossAxisAlignment: CrossAxisAlignment.end,
+            //         children: [
+            //           Column(
+            //             mainAxisAlignment: MainAxisAlignment.end,
+            //             crossAxisAlignment: CrossAxisAlignment.center,
+            //             children: [
+            //               Container(
+            //                 width: width,
+            //                 // height: width * 0.5839, //240
+            //                 height: width * 0.3659, //150
+            //                 child: Stack(
+            //                   // ignore: sort_child_properties_last
+            //                   children: [
+
+              Positioned(
+                top: 0.0,
+                child: Container(
+                  width: width,
+                  child: Image.asset("assets/images/logo_up_map.png")
+                ),
+              ),
+
+              Positioned(
+                bottom: 0.0,
+                child: Container(
+                  width: width,
+                  child: Image.asset("assets/images/logo_down_map1.png")
+                ),
+              ),
+
+              Positioned(
+                bottom: width * 0.0488, //20.0
+                left: width * 0.0732, //30.0
+                child: Container(
+                  width: width * 0.1703, //70
+                  height: width * 0.1703, //70
+                  child: ElevatedButton(
+                    onPressed: (){
+                      Navigator.pushNamed(context, '/profile');
+                    }, 
+                    child: Image.asset("assets/icons/user_icon.png"),
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(width * 0.0488),
                         ),
-                      backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(100, 255, 255, 255)),
-                      )
+                      ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF4A1A78)),
                     )
-                  ),
+                  )
                 ),
-                
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: width,
-                            // height: width * 0.5839, //240
-                            height: width * 0.3659, //150
-                            child: Stack(
-                              // ignore: sort_child_properties_last
-                              children: [
-                                Positioned(
-                                  bottom: 0.0,
-                                  child: Container(
-                                    width: width,
-                                    child: Image.asset("assets/images/logo_down_map.png")
-                                  ),
-                                ),
-      
-                                Positioned(
-                                  bottom: width * 0.0488, //20.0
-                                  left: width * 0.0732, //30.0
-                                  child: Container(
-                                    width: width * 0.1703, //70
-                                    height: width * 0.1703, //70
-                                    child: ElevatedButton(
-                                      onPressed: (){
-                                        Navigator.pushNamed(context, '/profile');
-                                      }, 
-                                      child: Image.asset("assets/icons/user_icon.png"),
-                                      style: ButtonStyle(
-                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(width * 0.0488),
-                                          ),
-                                        ),
-                                      backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF4A1A78)),
-                                      )
-                                    )
-                                  ),
-                                ),
-      
-                                Positioned(
-                                  bottom: width * 0.0976, //40.0
-                                  left: width * 0.3659, //150.0
-                                  child: Container(
-                                    width: width * 0.2683, //110
-                                    height: width * 0.2683, //110
-                                    child: ElevatedButton(
-                                      onPressed: (){
-      
-                                      }, 
-                                      child: Image.asset("assets/icons/event_icon.png"),
-                                      style: ButtonStyle(
-                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(width * 0.0585),
-                                          ),
-                                        ),
-                                      backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF4A1A78)),
-                                      )
-                                    )
-                                  ),
-                                ),
-      
-                                Positioned(
-                                  bottom: width * 0.0488, //20.0
-                                  right: width * 0.0732, //30.0
-                                  child: Container(
-                                    width: width * 0.1703, //70
-                                    height: width * 0.1703, //70
-                                    child: ElevatedButton(
-                                      onPressed: () async {
-                                        print(await LocationApi.users_location_stream("2"));
-                                      }, 
-                                      child: Image.asset("assets/icons/chat_icon.png"),
-                                      style: ButtonStyle(
-                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(width * 0.0488),
-                                          ),
-                                        ),
-                                      backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF4A1A78)),
-                                      )
-                                    )
-                                  ),
-                                 ),
-                                ],
-                              clipBehavior: Clip.none,
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ), 
+              ),
+
+              Positioned(
+                bottom: width * 0.0976, //40.0
+                left: width * 0.3659, //150.0
+                child: Container(
+                  width: width * 0.2683, //110
+                  height: width * 0.2683, //110
+                  child: ElevatedButton(
+                    onPressed: (){
+                    }, 
+                    child: Image.asset("assets/icons/event_icon.png"),
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(width * 0.0585),
+                        ),
+                      ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF4A1A78)),
+                    )
+                  )
                 ),
+              ),
+
+              Positioned(
+                bottom: width * 0.0488, //20.0
+                right: width * 0.0732, //30.0
+                child: Container(
+                  width: width * 0.1703, //70
+                  height: width * 0.1703, //70
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      print(await LocationApi.users_location_stream("2"));
+                    }, 
+                    child: Image.asset("assets/icons/chat_icon.png"),
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(width * 0.0488),
+                        ),
+                      ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF4A1A78)),
+                    )
+                  )
+                ),
+               ),
               ],
+              // clipBehavior: Clip.none,
             )
-          ],
-        ),
     );
   }
 
