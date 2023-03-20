@@ -69,3 +69,7 @@ flutter:
         - asset: assets/fonts/Inter-Medium.ttf
         - asset: assets/fonts/Inter-Regular.ttf
         - asset: assets/fonts/Inter-Thin.ttf
+        
+    - family: Comfortaa
+      fonts:
+        - asset: assets/fonts/Comfortaa-Bold.ttf
