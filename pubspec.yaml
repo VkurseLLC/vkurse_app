@@ -15,6 +15,7 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
+    
   intl: any
   sliding_up_panel: ^2.0.0+1
   cupertino_icons: ^1.0.2
@@ -32,8 +33,10 @@ dependencies:
   
   flutter_map: ^3.1.0
   flutter_latlong: ^1.0.3
+  flutter_map_marker_cluster: ^1.1.0
 
   latlng: ^0.2.0
+  geolocator: ^9.0.2
   
   flutter_typeahead: ^4.3.1
 
@@ -41,10 +44,8 @@ dependencies:
   equatable: ^2.0.5
   collection: ^1.16.0
 
-  geolocator: ^9.0.2
   cron: ^0.5.1
-  dgis_flutter: ^0.0.31
-  flutter_map_marker_cluster: ^1.1.0
+  
 
 dev_dependencies:
   flutter_test:

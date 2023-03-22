@@ -197,11 +197,16 @@ class _Map extends State<Map> {
               children: [
                 TileLayer(
                   urlTemplate:
-                      'https://api.mapbox.com/styles/v1/olardaniil/clf5o14q2000s01mrhe1byyg8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
-                  additionalOptions: {
-                    'accessToken': 'pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
-                    'id': 'mapbox.mapbox-streets-v8',
-                  },
+                    'http://tile2.maps.2gis.com/tiles?x={x}&y={y}&z={z}',
+                  subdomains: 
+                    ['a', 'b', 'c'],
+                    
+                  // urlTemplate:
+                  //     'https://api.mapbox.com/styles/v1/olardaniil/clf5o14q2000s01mrhe1byyg8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
+                  // additionalOptions: {
+                  //   'accessToken': 'pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
+                  //   'id': 'mapbox.mapbox-streets-v8',
+                  // },
                 ),
 
                 MarkerClusterLayerWidget(
