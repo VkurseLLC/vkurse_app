@@ -5,6 +5,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 import 'package:validators/sanitizers.dart';
 import 'package:vkurse_app/data/api_account_data.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 // Класс для отображения страницы ввода username
 
@@ -24,7 +25,15 @@ class _Profile extends State<Profile> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController controller = TextEditingController();
-
+  static const textfield = [
+    "Nikita",
+    "Fomichev",
+    "18лет",
+    "Ростов-на-Дону"
+        "+7-999-999-99-99",
+    "@kratos0506",
+    "Меня зовут Никита))) и я пользвуюсь VKURSE"
+  ];
   var borderStyle = const OutlineInputBorder(
     borderSide: BorderSide(color: Colors.black, width: 2),
     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -75,6 +84,19 @@ class _Profile extends State<Profile> {
         mediaQuery.padding.top -
         mediaQuery.padding.bottom;
 
+    double fontSizeOP = 18;
+    if (width > 700 && width < 900) {
+      fontSizeOP = 32;
+    } else if (width < 300) {
+      fontSizeOP = 16;
+    } else if (width > 900) {
+      fontSizeOP = 28;
+    } else if (width > 300 && width < 500) {
+      fontSizeOP = 18;
+    } else if (width > 700 && width < 700) {
+      fontSizeOP = 22;
+    }
+
     final day = DateFormat('dd').format(dateTime);
     final month = DateFormat('MMMM', 'ru_RU').format(dateTime);
     final year = DateFormat('yyyy').format(dateTime);
@@ -115,608 +137,628 @@ class _Profile extends State<Profile> {
                       image: AssetImage("assets/images/profilephoto.jpg"),
                     )),
                     child: Column(children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: width * 0.0526,
-                            height: height * 0.054,
-                            margin: EdgeInsets.fromLTRB(
-                                width * 0.024, height * 0.023, 0, 0),
-                            child: IconButton(
+                      Padding(padding: EdgeInsets.only(top: height * 0.045)),
+                      Container(
+                        width: width * 0.851,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.arrow_back_ios_new),
-                              iconSize: height * 0.08,
                               color: Color(0xFFffffff),
+                              iconSize: width * 0.115,
                             ),
-                          ),
-                          Container(
-                              width: width * 0.1282,
-                              height: height * 0.0614,
-                              margin: EdgeInsets.fromLTRB(width * 0.7,
-                                  height * 0.023, width * 0.094, 0),
-                              decoration: BoxDecoration(boxShadow: [
-                                BoxShadow(
-                                  color: Color(0x26A0A0A0),
-                                  blurRadius: 20,
-                                )
-                              ]),
-                              child: IconButton(
-                                onPressed: () {
-                                  /////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////НАЧАЛО\\\\\
+                            IconButton(
+                              onPressed: () {
+                                ///----------------------------------////ВСПЛЫВАЮЩЕЕ ОКНО\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
 
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(15.0))),
-                                          contentPadding:
-                                              EdgeInsets.all(width * 0.0564),
-                                          insetPadding: EdgeInsets.fromLTRB(
-                                              width * 0.2358,
-                                              height * 0.1338,
-                                              width * 0.0564,
-                                              height * 0.2738),
-                                          content: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(90),
-                                              color: Colors.white,
-                                            ),
-                                            width: width * 0.7077,
-                                            height: width * 0.7523,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                /////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НАСТРОЙКИ\\\\////НАЧАЛО\\\\
-
-                                                Container(
-                                                  height: width * 0.146,
-                                                  width: width * 0.7077,
-                                                  child: ElevatedButton(
-                                                    onPressed: () {},
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      backgroundColor:
-                                                          Color.fromRGBO(
-                                                              255, 255, 255, 1),
-                                                      foregroundColor:
-                                                          Colors.black54,
-                                                      shadowColor:
-                                                          Colors.transparent,
-                                                      elevation: 0.0,
-                                                    ),
-                                                    child: Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Image.asset(
-                                                          'assets/icons/settings.png',
-                                                          height: width * 0.064,
-                                                          width: width * 0.064,
-                                                        ),
-                                                        Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: width *
-                                                                        0.031)),
-                                                        Container(
-                                                          width: width * 0.2462,
-                                                          height:
-                                                              width * 0.0564,
-                                                          child: AutoSizeText(
-                                                            "Настройки",
-                                                            style: TextStyle(
-                                                                fontSize: 100,
-                                                                fontFamily:
-                                                                    "assets/fonts/Inter-Regular.ttf",
-                                                                color: Colors
-                                                                    .black),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-
-                                                /////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НАСТРОЙКИ\\\\////КОНЕЦ\\\\
-
-                                                Container(
-                                                  height: width * 0.002,
-                                                  width: width * 0.7177,
-                                                  color: Colors.grey.shade400,
-                                                ),
-
-                                                ////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ВАШИ ДЕЙСТВИЯ\\\\////НАЧАЛО\\\\
-
-                                                Container(
-                                                  height: width * 0.146,
-                                                  width: width * 0.7077,
-                                                  child: ElevatedButton(
-                                                    onPressed: () {},
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      backgroundColor:
-                                                          Color.fromRGBO(
-                                                              255, 255, 255, 1),
-                                                      foregroundColor:
-                                                          Colors.black54,
-                                                      shadowColor:
-                                                          Colors.transparent,
-                                                      elevation: 0.0,
-                                                    ),
-                                                    child: Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Image.asset(
-                                                          'assets/icons/last-moove.png',
-                                                          height: width * 0.064,
-                                                          width: width * 0.064,
-                                                        ),
-                                                        Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: width *
-                                                                        0.031)),
-                                                        Container(
-                                                          width: width * 0.3462,
-                                                          height:
-                                                              width * 0.0564,
-                                                          child: AutoSizeText(
-                                                            "Ваши действия",
-                                                            style: TextStyle(
-                                                                fontSize: 100,
-                                                                fontFamily:
-                                                                    "assets/fonts/Inter-Regular.ttf",
-                                                                color: Colors
-                                                                    .black),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-
-                                                ////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ВАШИ ДЕЙСТВИЯ\\\\////КОНЕЦ\\\\
-
-                                                Container(
-                                                  height: width * 0.002,
-                                                  width: width * 0.7177,
-                                                  color: Colors.grey.shade400,
-                                                ),
-
-                                                ///////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///QR-КОД\\\\////НАЧАЛО\\\\
-
-                                                Container(
-                                                  height: width * 0.146,
-                                                  width: width * 0.7077,
-                                                  child: ElevatedButton(
-                                                    onPressed: () {},
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      backgroundColor:
-                                                          Color.fromRGBO(
-                                                              255, 255, 255, 1),
-                                                      foregroundColor:
-                                                          Colors.black54,
-                                                      shadowColor:
-                                                          Colors.transparent,
-                                                      elevation: 0.0,
-                                                    ),
-                                                    child: Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Image.asset(
-                                                          'assets/icons/qr-code.png',
-                                                          height: width * 0.064,
-                                                          width: width * 0.064,
-                                                        ),
-                                                        Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: width *
-                                                                        0.031)),
-                                                        Container(
-                                                          width: width * 0.2462,
-                                                          height:
-                                                              width * 0.0564,
-                                                          child: AutoSizeText(
-                                                            "QR-код",
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "assets/fonts/Inter-Regular.ttf",
-                                                                fontSize: 100,
-                                                                color: Colors
-                                                                    .black),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-
-                                                ///////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///QR-КОД\\\\////КОНЕЦ\\\\
-
-                                                Container(
-                                                  height: width * 0.002,
-                                                  width: width * 0.7177,
-                                                  color: Colors.grey.shade400,
-                                                ),
-
-                                                //////////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ИЗБРАННОЕ\\\\////НАЧАЛО\\\\
-
-                                                Container(
-                                                  height: width * 0.146,
-                                                  width: width * 0.7077,
-                                                  child: ElevatedButton(
-                                                    onPressed: () {},
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      backgroundColor:
-                                                          Color.fromRGBO(
-                                                              255, 255, 255, 1),
-                                                      foregroundColor:
-                                                          Colors.black54,
-                                                      shadowColor:
-                                                          Colors.transparent,
-                                                      elevation: 0.0,
-                                                    ),
-                                                    child: Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Image.asset(
-                                                          'assets/icons/favorite.png',
-                                                          height: width * 0.064,
-                                                          width: width * 0.064,
-                                                        ),
-                                                        Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: width *
-                                                                        0.031)),
-                                                        Container(
-                                                          width: width * 0.2462,
-                                                          height:
-                                                              width * 0.0564,
-                                                          child: AutoSizeText(
-                                                            "Избранное",
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "assets/fonts/Inter-Regular.ttf",
-                                                                fontSize: 100,
-                                                                color: Colors
-                                                                    .black),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-
-                                                Container(
-                                                  height: width * 0.002,
-                                                  width: width * 0.7177,
-                                                  color: Colors.grey.shade400,
-                                                ),
-
-                                                ///////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ИЗБРАННОЕ\\\\////КОНЕЦ\\\\
-
-                                                //////////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НЕВИДИМКА\\\\////НАЧАЛО\\\\
-
-                                                Container(
-                                                  height: width * 0.146,
-                                                  width: width * 0.7077,
-                                                  child: ElevatedButton(
-                                                    onPressed: () {},
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      backgroundColor:
-                                                          Color.fromRGBO(
-                                                              255, 255, 255, 1),
-                                                      foregroundColor:
-                                                          Colors.black54,
-                                                      shadowColor:
-                                                          Colors.transparent,
-                                                      elevation: 0.0,
-                                                    ),
-                                                    child: Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Image.asset(
-                                                          'assets/icons/incognito.png',
-                                                          height: width * 0.064,
-                                                          width: width * 0.064,
-                                                        ),
-                                                        Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: width *
-                                                                        0.031)),
-                                                        Container(
-                                                          width: width * 0.2462,
-                                                          height:
-                                                              width * 0.0564,
-                                                          child: AutoSizeText(
-                                                            "Невидимка",
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "assets/fonts/Inter-Regular.ttf",
-                                                                fontSize: 100,
-                                                                color: Colors
-                                                                    .black),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-
-                                                ///////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НЕВИДИМКА\\\\////КОНЕЦ\\\\
-
-                                                ////////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КОНЕЦ\\\\
-                                              ],
-                                            ),
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        backgroundColor: Color(0x00FFFFFF),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20.0))),
+                                        contentPadding: EdgeInsets.all(0),
+                                        insetPadding: EdgeInsets.fromLTRB(
+                                            width * 0.2558,
+                                            height * 0.1338,
+                                            width * 0.0564,
+                                            height * 0.2738),
+                                        content: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(90),
+                                            color: Color(0x00FFFFFF),
                                           ),
-                                        );
-                                      });
-                                },
-                                icon: const Icon(Icons.menu),
-                                iconSize: height * 0.095,
-                                color: Color(0xFFffffff),
-                              ))
-                        ],
-                      ),
+                                          width: width * 0.7077,
+                                          height: width * 0.79,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              //------------------------///ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НАСТРОЙКИ\\\\////НАЧАЛО\\-------------------------------\\
+
+                                              Container(
+                                                height: width * 0.146,
+                                                width: width * 0.7077,
+                                                child: ElevatedButton(
+                                                  onPressed: () {},
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    shape: RoundedRectangleBorder(
+                                                        side: BorderSide(
+                                                            color: Colors
+                                                                .white),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        20),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        20))),
+                                                    backgroundColor:
+                                                        Color.fromRGBO(
+                                                            255, 255, 255, 1),
+                                                    foregroundColor:
+                                                        Colors.black54,
+                                                    shadowColor: Colors.white,
+                                                    elevation: 0.0,
+                                                  ),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Image.asset(
+                                                        'assets/icons/settings.png',
+                                                        height: width * 0.064,
+                                                        width: width * 0.064,
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: width *
+                                                                      0.031)),
+                                                      Container(
+                                                        width: width * 0.2462,
+                                                        height: width * 0.0564,
+                                                        child: AutoSizeText(
+                                                          "Настройки",
+                                                          style: TextStyle(
+                                                              fontSize: 100,
+                                                              fontFamily:
+                                                                  "assets/fonts/Inter-Regular.ttf",
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+
+                                              //----------------------------------------///ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НАСТРОЙКИ\\\\////КОНЕЦ\\---------------------------\\
+
+//-----------------------------------------//ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ВАШИ ДЕЙСТВИЯ\\\\////НАЧАЛО\\-------------------------------------\\
+
+                                              Container(
+                                                height: width * 0.146,
+                                                width: width * 0.7077,
+                                                child: ElevatedButton(
+                                                  onPressed: () {},
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    shape: RoundedRectangleBorder(
+                                                        side: BorderSide(
+                                                            color:
+                                                                Colors.white),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    0))),
+                                                    backgroundColor:
+                                                        Color.fromRGBO(
+                                                            255, 255, 255, 1),
+                                                    foregroundColor:
+                                                        Colors.black54,
+                                                    shadowColor: Colors.white,
+                                                    elevation: 0.0,
+                                                  ),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Image.asset(
+                                                        'assets/icons/last-moove.png',
+                                                        height: width * 0.064,
+                                                        width: width * 0.064,
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: width *
+                                                                      0.031)),
+                                                      Container(
+                                                        width: width * 0.3462,
+                                                        height: width * 0.0564,
+                                                        child: AutoSizeText(
+                                                          "Ваши действия",
+                                                          style: TextStyle(
+                                                              fontSize: 100,
+                                                              fontFamily:
+                                                                  "assets/fonts/Inter-Regular.ttf",
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+
+                                              //------------------------------------------//ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ВАШИ ДЕЙСТВИЯ\\\\////КОНЕЦ\\---------------------------------------------\\
+
+//------------------------------------------------/////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///QR-КОД\\\\////НАЧАЛО\\------------------------------------------\\
+
+                                              Container(
+                                                height: width * 0.146,
+                                                width: width * 0.7077,
+                                                child: ElevatedButton(
+                                                  onPressed: () {},
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    shape: RoundedRectangleBorder(
+                                                        side: BorderSide(
+                                                            color:
+                                                                Colors.white),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    0))),
+                                                    backgroundColor:
+                                                        Color.fromRGBO(
+                                                            255, 255, 255, 1),
+                                                    foregroundColor:
+                                                        Colors.black54,
+                                                    shadowColor: Colors.white,
+                                                    elevation: 0.0,
+                                                  ),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Image.asset(
+                                                        'assets/icons/qr-code.png',
+                                                        height: width * 0.064,
+                                                        width: width * 0.064,
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: width *
+                                                                      0.031)),
+                                                      Container(
+                                                        width: width * 0.2462,
+                                                        height: width * 0.0564,
+                                                        child: AutoSizeText(
+                                                          "QR-код",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "assets/fonts/Inter-Regular.ttf",
+                                                              fontSize: 100,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+
+//------------------------------------------------------------/////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///QR-КОД\\\\////КОНЕЦ\\--------------------------------------------------\\
+
+//-----------------------------------------------------------////////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ИЗБРАННОЕ\\\\////НАЧАЛО\\---------------------------------------------\\
+
+                                              Container(
+                                                height: width * 0.146,
+                                                width: width * 0.7077,
+                                                child: ElevatedButton(
+                                                  onPressed: () {},
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    shape: RoundedRectangleBorder(
+                                                        side: BorderSide(
+                                                            color:
+                                                                Colors.white),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    0))),
+                                                    backgroundColor:
+                                                        Color.fromRGBO(
+                                                            255, 255, 255, 1),
+                                                    foregroundColor:
+                                                        Colors.black54,
+                                                    shadowColor: Colors.white,
+                                                    elevation: 0.0,
+                                                  ),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Image.asset(
+                                                        'assets/icons/favorite.png',
+                                                        height: width * 0.064,
+                                                        width: width * 0.064,
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: width *
+                                                                      0.031)),
+                                                      Container(
+                                                        width: width * 0.2462,
+                                                        height: width * 0.0564,
+                                                        child: AutoSizeText(
+                                                          "Избранное",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "assets/fonts/Inter-Regular.ttf",
+                                                              fontSize: 100,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+
+                                              //----------------------------------------------------/////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ИЗБРАННОЕ\\\\////КОНЕЦ\\----------------------------------------------\\
+
+                                              //---------------------------------------------////////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НЕВИДИМКА\\\\////НАЧАЛО\\------------------------------------\\
+
+                                              Container(
+                                                height: width * 0.146,
+                                                width: width * 0.7077,
+                                                child: ElevatedButton(
+                                                  onPressed: () {},
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    shape: RoundedRectangleBorder(
+                                                        side: BorderSide(
+                                                            color: Colors
+                                                                .white),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        20),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        20))),
+                                                    backgroundColor:
+                                                        Color.fromRGBO(
+                                                            255, 255, 255, 1),
+                                                    foregroundColor:
+                                                        Colors.black54,
+                                                    shadowColor: Colors.white,
+                                                    elevation: 0.0,
+                                                  ),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Image.asset(
+                                                        'assets/icons/incognito.png',
+                                                        height: width * 0.064,
+                                                        width: width * 0.064,
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: width *
+                                                                      0.031)),
+                                                      Container(
+                                                        width: width * 0.2462,
+                                                        height: width * 0.0564,
+                                                        child: AutoSizeText(
+                                                          "Невидимка",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "assets/fonts/Inter-Regular.ttf",
+                                                              fontSize: 100,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+
+                                              //--------------------------------------------/////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НЕВИДИМКА\\\\////КОНЕЦ\\\------------------------------------------------\
+
+                                              //-----------------------------------------------------//////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КОНЕЦ\\\------------------------------------------------\
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    });
+                              },
+                              icon: const Icon(Icons.menu),
+                              iconSize: width * 0.153,
+                              color: Color(0xFFffffff),
+                            )
+                          ],
+                        ),
+                      )
                     ]),
                   ),
-                  Positioned(
-                    top: height * 0.4538,
-                    child: Container(
-                      width: width,
-                      height: height * 0.5557,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                              BorderRadius.vertical(top: (Radius.circular(32))),
-                          border: Border.all(
-                            width: 1,
-                            color: Color(0x707C7C7C),
-                          )),
-                      child: Column(
-                        children: [
-                          Row(
+                  SlidingUpPanel(
+                      maxHeight: height * 0.6557,
+                      minHeight: height * 0.5557,
+                      borderRadius:
+                          BorderRadius.vertical(top: (Radius.circular(32))),
+                      panel: SafeArea(
+                        child: Container(
+                          width: width,
+                          height: height * 0.6557,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.vertical(
+                                  top: (Radius.circular(32))),
+                              border: Border.all(
+                                width: 1,
+                                color: Color(0x707C7C7C),
+                              )),
+                          child: Column(
                             children: [
-                              ///ИМЯ ФАМИЛИЯ\\\///НАЧАЛО\\\
+                              Row(
+                                children: [
+                                  //----------------------------/ИМЯ ФАМИЛИЯ\\\///НАЧАЛО\----------------------------\
 
-                              Container(
-                                width: width * 0.756,
-                                height: height * 0.0995,
-                                margin: EdgeInsets.fromLTRB(
-                                    width * 0.074, height * 0.031, 0, 0),
-                                child: AutoSizeText(
-                                  "Никита\nФомичев",
-                                  style: TextStyle(
-                                    color: Color(0xff4D4D4D),
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "assets/fonts/Inter-Bold.ttf",
+                                  Container(
+                                    width: width * 0.756,
+                                    height: height * 0.0995,
+                                    margin: EdgeInsets.fromLTRB(
+                                        width * 0.074, height * 0.031, 0, 0),
+                                    child: AutoSizeText(
+                                      textfield[0] +
+                                          "\n" +
+                                          textfield[
+                                              1], //------------------------берет данные из массива------------\\
+                                      style: TextStyle(
+                                        color: Color(0xff4D4D4D),
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily:
+                                            "assets/fonts/Inter-Bold.ttf",
+                                      ),
+                                    ),
                                   ),
-                                ),
+
+                                  //----------------------------/ИМЯ ФАМИЛИЯ\\\///КОНЕЦ\\----------------------------\
+
+                                  //----------------------------/КНОПКА РЕДАКТИРОВАНИЯ\\\///НАЧАЛО\----------------------------\\
+
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.edit,
+                                      color: Color(0x954D4D4D),
+                                      size: width * 0.063,
+                                    ),
+                                  ),
+
+                                  //----------------------------/КНОПКА РЕДАКТИРОВАНИЯ\\\///КОНЕЦ\----------------------------\\
+                                ],
                               ),
 
-                              ///ИМЯ ФАМИЛИЯ\\\///КОНЕЦ\\\
-
-                              ///КНОПКА РЕДАКТИРОВАНИЯ\\\///НАЧАЛО\\\
-
-                              Container(
-                                width: width * 0.063,
-                                height: width * 0.063,
-                                margin: EdgeInsets.fromLTRB(
-                                    width * 0.010, 0, width * 0.070, 0),
-                                child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.edit,
-                                    color: Color(0x954D4D4D),
-                                    size: width * 0.063,
+                              //----------------------------/Возраст&Город\\\///НАЧАЛО\----------------------------\\
+                              Row(
+                                children: [
+                                  Container(
+                                    width: width * 0.17,
+                                    height: height * 0.024,
+                                    margin: EdgeInsets.fromLTRB(
+                                        width * 0.074, height * 0.017, 0, 0),
+                                    child: AutoSizeText(
+                                      'Возраст',
+                                      style: TextStyle(
+                                        color: Color(0x50000000),
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily:
+                                            "assets/fonts/Inter-Medium.ttf",
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              )
-
-                              ///КНОПКА РЕДАКТИРОВАНИЯ\\\///КОНЕЦ\\\
-                            ],
-                          ),
-
-                          ///Возраст&Город\\\///НАЧАЛО\\\
-                          Row(
-                            children: [
-                              Container(
-                                width: width * 0.17,
-                                height: height * 0.024,
-                                margin: EdgeInsets.fromLTRB(
-                                    width * 0.074, height * 0.017, 0, 0),
-                                child: AutoSizeText(
-                                  'Возраст',
-                                  style: TextStyle(
-                                    color: Color(0x50000000),
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "assets/fonts/Inter-Medium.ttf",
+                                  Container(
+                                    width: width * 0.17,
+                                    height: height * 0.024,
+                                    margin: EdgeInsets.fromLTRB(
+                                        width * 0.259, height * 0.017, 0, 0),
+                                    child: AutoSizeText(
+                                      'Город',
+                                      style: TextStyle(
+                                        color: Color(0x50000000),
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily:
+                                            "assets/fonts/Inter-Medium.ttf",
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                              Container(
-                                width: width * 0.17,
-                                height: height * 0.024,
-                                margin: EdgeInsets.fromLTRB(
-                                    width * 0.259, height * 0.017, 0, 0),
-                                child: AutoSizeText(
-                                  'Город',
-                                  style: TextStyle(
-                                    color: Color(0x50000000),
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "assets/fonts/Inter-Medium.ttf",
+
+                              //----------------------------/Возраст&Город\\\///КОНЕЦ\----------------------------\\
+
+                              //----------------------------/Возраст&Город\\\///ПОЛЬЗОВАТЕЛЬ\\\///НАЧАЛО\----------------------------\\
+
+                              Row(
+                                children: [
+                                  Container(
+                                    width: width * 0.162,
+                                    height: height * 0.0294,
+                                    margin: EdgeInsets.fromLTRB(
+                                        width * 0.074, height * 0.0086, 0, 0),
+                                    child: AutoSizeText(
+                                      textfield[
+                                          2], //------------------------берет данные из массива------------\\
+                                      style: TextStyle(
+                                        color: Color(0xff4D4D4D),
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily:
+                                            "assets/fonts/Inter-Bold.ttf",
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  Container(
+                                    width: width * 0.423,
+                                    height: height * 0.0294,
+                                    margin: EdgeInsets.fromLTRB(
+                                        width * 0.2641, height * 0.0086, 0, 0),
+                                    child: AutoSizeText(
+                                      textfield[3],
+                                      style: TextStyle(
+                                        color: Color(0xff4D4D4D),
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily:
+                                            "assets/fonts/Inter-Bold.ttf",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              //----------------------------/Возраст&Город\\\///ПОЛЬЗОВАТЕЛЬ\\\///КОНЕЦ\----------------------------\\
+
+                              Row(
+                                children: [
+                                  Container(
+                                    width: width * 0.21,
+                                    height: height * 0.0233,
+                                    margin: EdgeInsets.fromLTRB(
+                                        width * 0.074, height * 0.0282, 0, 0),
+                                    child: AutoSizeText(
+                                      'Контакты',
+                                      style: TextStyle(
+                                        color: Color(0x50000000),
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily:
+                                            "assets/fonts/Inter-Medium.ttf",
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+
+                              Row(
+                                children: [
+                                  Container(
+                                    width: width * 0.485,
+                                    height: height * 0.0294,
+                                    margin: EdgeInsets.fromLTRB(
+                                        width * 0.074, height * 0.0086, 0, 0),
+                                    child: AutoSizeText(
+                                      textfield[
+                                          4], //------------------------берет данные из массива------------\\
+                                      style: TextStyle(
+                                        color: Color(0x80000000),
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily:
+                                            "assets/fonts/Inter-Medium.ttf",
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+
+                              Row(
+                                children: [
+                                  Container(
+                                    width: width * 0.851,
+                                    height: height * 0.0294,
+                                    margin: EdgeInsets.fromLTRB(
+                                        width * 0.074, height * 0.0086, 0, 0),
+                                    child: AutoSizeText(
+                                      textfield[
+                                          5], //------------------------берет данные из массива------------\\
+                                      style: TextStyle(
+                                        color: Color(0x80000000),
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily:
+                                            "assets/fonts/Inter-Medium.ttf",
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+
+                              Row(
+                                children: [
+                                  Container(
+                                    width: width * 0.21,
+                                    height: height * 0.0233,
+                                    margin: EdgeInsets.fromLTRB(
+                                        width * 0.074, height * 0.0282, 0, 0),
+                                    child: AutoSizeText(
+                                      'Описание',
+                                      style: TextStyle(
+                                        color: Color(0x50000000),
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily:
+                                            "assets/fonts/Inter-Medium.ttf",
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+
+                              Row(
+                                children: [
+                                  Container(
+                                    width: width * 0.848,
+                                    height: height * 0.1884,
+                                    margin: EdgeInsets.fromLTRB(
+                                        width * 0.074, height * 0.0172, 0, 0),
+                                    child: Flexible(
+                                      child: Text(
+                                        textfield[
+                                            6], //------------------------берет данные из массива------------\\
+                                        maxLines: 10,
+                                        style: TextStyle(
+                                          color: Color(0x90000000),
+                                          fontSize: fontSizeOP,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily:
+                                              "assets/fonts/Inter-Medium.ttf",
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-
-                          ///Возраст&Город\\\///КОНЕЦ\\\
-
-                          ///Возраст&Город\\\///ПОЛЬЗОВАТЕЛЬ\\\///НАЧАЛО\\\
-
-                          Row(
-                            children: [
-                              Container(
-                                width: width * 0.162,
-                                height: height * 0.0294,
-                                margin: EdgeInsets.fromLTRB(
-                                    width * 0.074, height * 0.0086, 0, 0),
-                                child: AutoSizeText(
-                                  '18 лет',
-                                  style: TextStyle(
-                                    color: Color(0xff4D4D4D),
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "assets/fonts/Inter-Bold.ttf",
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: width * 0.423,
-                                height: height * 0.0294,
-                                margin: EdgeInsets.fromLTRB(
-                                    width * 0.2641, height * 0.0086, 0, 0),
-                                child: AutoSizeText(
-                                  'Ростов-на-Дону',
-                                  style: TextStyle(
-                                    color: Color(0xff4D4D4D),
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "assets/fonts/Inter-Bold.ttf",
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          ///Возраст&Город\\\///ПОЛЬЗОВАТЕЛЬ\\\///КОНЕЦ\\\
-
-                          Row(
-                            children: [
-                              Container(
-                                width: width * 0.21,
-                                height: height * 0.0233,
-                                margin: EdgeInsets.fromLTRB(
-                                    width * 0.074, height * 0.0282, 0, 0),
-                                child: AutoSizeText(
-                                  'Контакты',
-                                  style: TextStyle(
-                                    color: Color(0x50000000),
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "assets/fonts/Inter-Medium.ttf",
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-
-                          Row(
-                            children: [
-                              Container(
-                                width: width * 0.485,
-                                height: height * 0.0294,
-                                margin: EdgeInsets.fromLTRB(
-                                    width * 0.074, height * 0.0086, 0, 0),
-                                child: AutoSizeText(
-                                  '+7-999-999-99-99',
-                                  style: TextStyle(
-                                    color: Color(0x80000000),
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "assets/fonts/Inter-Medium.ttf",
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-
-                          Row(
-                            children: [
-                              Container(
-                                width: width * 0.851,
-                                height: height * 0.0294,
-                                margin: EdgeInsets.fromLTRB(
-                                    width * 0.074, height * 0.0086, 0, 0),
-                                child: AutoSizeText(
-                                  '@Kratos0506',
-                                  style: TextStyle(
-                                    color: Color(0x80000000),
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "assets/fonts/Inter-Medium.ttf",
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-
-                          Row(
-                            children: [
-                              Container(
-                                width: width * 0.21,
-                                height: height * 0.0233,
-                                margin: EdgeInsets.fromLTRB(
-                                    width * 0.074, height * 0.0282, 0, 0),
-                                child: AutoSizeText(
-                                  'Описание',
-                                  style: TextStyle(
-                                    color: Color(0x50000000),
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "assets/fonts/Inter-Medium.ttf",
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-
-                          Row(
-                            children: [
-                              Container(
-                                width: width * 0.848,
-                                height: height * 0.0884,
-                                margin: EdgeInsets.fromLTRB(
-                                    width * 0.074, height * 0.0172, 0, 0),
-                                child: AutoSizeText(
-                                  'Всем привет) Меня зовут Никита и я пользуюсь VKURSE;)\nчитать дальше...',
-                                  style: TextStyle(
-                                    color: Color(0x90000000),
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "assets/fonts/Inter-Medium.ttf",
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
+                        ),
+                      ))
                 ],
               ),
             ),

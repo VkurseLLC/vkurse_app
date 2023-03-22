@@ -10,6 +10,7 @@ import 'package:vkurse_app/pages/loading.dart';
 import 'package:vkurse_app/pages/map.dart';
 import 'package:vkurse_app/pages/profile.dart';
 import 'package:vkurse_app/pages/profile_filling.dart';
+import 'package:vkurse_app/pages/test_Nikita.dart';
 import 'package:vkurse_app/pages/welcome.dart';
 
 import 'package:vkurse_app/pages/test.dart';
@@ -35,9 +36,11 @@ class MainNavigation {
 
     '/profile': (context) => const Profile(),
 
+    '/profile_edit': (context) => const ProfileEdit(),
+
     '/map': (context) => Map(),
 
     // Если нужно затестить свой экран, то разкомитьте следующую строку и вместо > AuthProvider < вставьте нужный класс
-    '/auth': (context) => Profile(),
+    '/auth': (context) => ProfileEdit(),
   };
 }
