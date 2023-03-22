@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class AuthApi {
@@ -19,13 +20,18 @@ class AuthApi {
       var json = jsonDecode(response.body);
 
       if (json['answer'] == 'successful') {
-        await EasyLoading.showSuccess("user_id: ${json['user_id'].toString()}");
+        // await EasyLoading.showSuccess("user_id: ${json['user_id'].toString()}");
+
+        var prefs = await SharedPreferences.getInstance();
+        prefs.setString('user_id', json['user_id'].toString());
+        prefs.setString('user_account_status', json['user_account_status'].toString());
 
         if (json['user_account_status'] == 'new_user') {
           await Navigator.pushNamed(context, '/initial_setting_username');
         }
-        else if (json['user_account_status'] == 'old_user') {
 
+        else if (json['user_account_status'] == 'old_user') {
+          await Navigator.pushNamed(context, '/map');
         }
 
       } 
