@@ -52,6 +52,8 @@ class _Test extends State<Test> {
     final mediaQuery = MediaQuery.of(context);
     var width = mediaQuery.size.width;
     var height = mediaQuery.size.height;
+
+    var maskFormatter = new MaskTextInputFormatter(mask: '+# (###) ###-##-##');
   
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -82,17 +84,17 @@ class _Test extends State<Test> {
                     ),
 
                     Positioned(
-                      left: width * 0.032,
+                      left: width * 0.025,
                       child: SizedBox(
-                        width: width * 0.1641,
-                        height: width * 0.1641,
+                        width: width * 0.2,
+                        height: width * 0.2,
                         child: IconButton(
                           onPressed: () async {
                             await Navigator.pushNamed(context, '/auth');
                           }, 
                           icon: const Icon(Icons.arrow_back_ios_new),
-                          iconSize: width * 0.082,
-                          color: Color(0xFFA8A8A8),
+                          iconSize: width * 0.1,
+                          color: Color(0xF0DADADA),
                         )
                       )
                     ),
@@ -100,8 +102,8 @@ class _Test extends State<Test> {
                     Positioned(
                       // left: width * 0.325,
                       child: Container(
-                        height: width * 0.35,
-                        width: width * 0.35,
+                        height: width * 0.4,
+                        width: width * 0.4,
                         decoration: BoxDecoration(
                           image: const DecorationImage(
                             image: AssetImage("assets/images/logo_pic.png"),
@@ -124,8 +126,8 @@ class _Test extends State<Test> {
             ///\\\ (НАЧАЛО) ///\\\ ЛОГО ///\\\
 
             SizedBox(
-              width: width * 0.15,
-              height: width * 0.15,
+              width: width * 0.05,
+              height: width * 0.05,
             ),
 
             //!\\\ (КОНЕЦ) ///\\\ ЛОГО ///\\\
@@ -155,7 +157,7 @@ class _Test extends State<Test> {
                           textAlign: TextAlign.left,
                         ),),
 
-                      Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, width * 0.02)),
+                      Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, width * 0.1)),
                       
                       ////////// ПОЛЕ ВВОДА НОМЕРА ТЕЛЕФОНА ////////// 
                       Container(
@@ -170,7 +172,11 @@ class _Test extends State<Test> {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(width * 0.0488),
-                            border: Border.all(color: Colors.black.withOpacity(0.13)),
+                            border: Border.all(
+                              color: Color(0xF0894EB8),
+                              width: 2
+                            ),
+                            
 
                             boxShadow: [
                               BoxShadow(
@@ -190,7 +196,8 @@ class _Test extends State<Test> {
                                 textStyle: TextStyle(
                                   fontSize: 18,
                                   fontFamily: "Comfortaa"
-                                ),                               
+                                ),
+
                                 onInputChanged: (PhoneNumber number) {
                                   // print(number.phoneNumber);
                                   // field_phone_number = "${number.phoneNumber}";
@@ -219,7 +226,7 @@ class _Test extends State<Test> {
                                 // maxLength: _PhoneNumberLength,
                                 keyboardType:TextInputType.numberWithOptions(signed: true, decimal: true),
                                 cursorColor: Colors.black,
-                                
+
                                 inputDecoration: InputDecoration(                                
                                   // contentPadding: EdgeInsets.only(bottom: 15, left: 0),
                                   border: InputBorder.none,
@@ -235,6 +242,7 @@ class _Test extends State<Test> {
                                 //   print('On Saved: $number');
                                 // },
                               ),
+
                               Positioned(
                                 left: width * 0.219,
                                 top: width * 0.0195,
@@ -327,8 +335,6 @@ class ShapePainter extends CustomPainter{
   
   @override
   void paint(Canvas canvas, Size size) {
-    
-    
 
   Paint paint0 = Paint()
       ..color = Color(0xF0894EB8)
@@ -339,9 +345,10 @@ class ShapePainter extends CustomPainter{
     Path path0 = Path();
     path0.moveTo(0,0);
     path0.lineTo(size.width,0);
-    path0.lineTo(size.width,size.height * 0.7905138);
-    path0.quadraticBezierTo(size.width * 0.7513750, size.height * 0.9863636, size.width * 0.5000000, size.height);
-    path0.quadraticBezierTo(size.width * 0.2511500, size.height * 0.9863636, 0, size.height * 0.7905138);
+    path0.lineTo(size.width,size.height*0.8000000);
+    path0.quadraticBezierTo(size.width*0.8434750,size.height*1.0186800,size.width*0.5000000,size.height);
+    path0.quadraticBezierTo(size.width*0.1569500,size.height*1.0205600,0,size.height*0.8000000);
+    path0.close();
 
     canvas.drawPath(path0, paint0);
   

@@ -13,7 +13,7 @@ import 'package:vkurse_app/pages/profile_filling.dart';
 import 'package:vkurse_app/pages/welcome.dart';
 
 
-import 'package:vkurse_app/pages/test.dart';
+import 'package:vkurse_app/pages/testDmitriy.dart';
 
 
 abstract class MainNavigationRoutNames  {
