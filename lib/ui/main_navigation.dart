@@ -10,28 +10,22 @@ import 'package:vkurse_app/pages/loading.dart';
 import 'package:vkurse_app/pages/map.dart';
 import 'package:vkurse_app/pages/profile.dart';
 import 'package:vkurse_app/pages/profile_filling.dart';
+import 'package:vkurse_app/pages/test_Nikita.dart';
 import 'package:vkurse_app/pages/welcome.dart';
-
 
 import 'package:vkurse_app/pages/testDmitriy.dart';
 
-
-abstract class MainNavigationRoutNames  {
+abstract class MainNavigationRoutNames {
   static const auth = '/auth';
   static const map = '/map';
-  
 }
 
-
 class MainNavigation {
-  
-
   String initialRoute(bool isAuth) =>
       isAuth ? MainNavigationRoutNames.map : MainNavigationRoutNames.auth;
 
   // String initialRoute(bool isAuth) =>
   //       isAuth ? MainNavigationRoutNames.map : MainNavigationRoutNames.auth;
-
 
   final routes = <String, Widget Function(BuildContext)>{
     // Написанное ниже не трогать !!!
@@ -42,9 +36,12 @@ class MainNavigation {
 
     '/initial_setting_username': (context) => const InputUsername(),
     '/initial_setting_accaunt_data': (context) => const ProfileFilling(),
-    '/initial_setting_accaunt_completed': (context) => const EndProfileFilling(),
+    '/initial_setting_accaunt_completed': (context) =>
+        const EndProfileFilling(),
 
     '/profile': (context) => const Profile(),
+
+    '/profile_edit': (context) => const ProfileEdit(),
 
     '/map': (context) => Map(),
 
