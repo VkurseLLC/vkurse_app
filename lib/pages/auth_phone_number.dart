@@ -1,15 +1,16 @@
-import 'package:auto_size_text/auto_size_text.dart';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 // import 'package:vkurse_app/pages/auth_get_verification_code.dart';
-import '../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import '../custom_package/src/utils/phone_number.dart';
 import '../custom_package/src/utils/selector_config.dart';
 import '../custom_package/src/widgets/input_widget.dart';
+import '../generated/locale_keys.g.dart';
 
 // Класс для отображения страницы перехода к боту
 
@@ -93,67 +94,66 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
+      body: Column(
           children: [
 
              ///\\\ (НАЧАЛО) ///\\\ ИКОНКА "НАЗАД" + ЛОГО ///\\\
             
-            Padding(padding: EdgeInsets.fromLTRB(0, width * 0.05, 0, 0)),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
-                Padding(padding: EdgeInsets.fromLTRB(width * 0.05, 0, 0, 0)),
-
-                Column(
-                  children: [
-                    Container(
-                      width: width * 0.2,
-                      height: width * 0.2,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x26A0A0A0),
-                            blurRadius: 20,
-                          )
-                        ]
+                SizedBox(
+                  width: width,
+                  height: height * 0.3,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                        child: SizedBox(
+                          width: width,
+                          height: height * 0.3,
+                          child: CustomPaint(
+                            foregroundPainter: ShapePainter(),
+                          ),
+                        ),
                       ),
 
-                      child: IconButton(
-                        onPressed: () async {
-                          await Navigator.pushNamed(context, '/auth');
-                        }, 
-                        icon: const Icon(Icons.arrow_back_ios_new),
-                        iconSize: width * 0.1,
-                        color: Color(0xFFA8A8A8),
-                      )
-                    )
-                  ],
-                ),
+                      Positioned(
+                        left: width * 0.025,
+                        child: SizedBox(
+                          width: width * 0.2,
+                          height: width * 0.2,
+                          child: IconButton(
+                            onPressed: () async {
+                              await Navigator.pushNamed(context, '/auth');
+                            }, 
+                            icon: const Icon(Icons.arrow_back_ios_new),
+                            iconSize: width * 0.1,
+                            color: Color(0xF0DADADA),
+                          )
+                        )
+                      ),
 
-                Expanded(
-                  child: Column(
-                    children: [
-                        Container(
-                        height: width * 0.35,
-                        width: width * 0.35,
-                        decoration: BoxDecoration(
-                            image: const DecorationImage(
-                              image: AssetImage("assets/images/logo_pic.png"),
+                      Positioned(
+                        // left: width * 0.325,
+                        child: Container(
+                          height: width * 0.4,
+                          width: width * 0.4,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              // image: AssetImage("assets/images/logo_pic.png"),
+                              // image: AssetImage("assets/images/logo_pic_gray.png"),
+                              image: AssetImage("assets/images/logo_pic_white.png"),
                             opacity: 0.4,
                             )
                           ),
                         )
+                      )
                     ],
-                  )
+                  ),
                 ),
-                
-                Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.2 + width * 0.05, 0)),
-                
-              ],
+              ]
             ),
 
              //!\\\ (КОНЕЦ) ///\\\ ИКОНКА "НАЗАД" + ЛОГО ///\\\
@@ -163,8 +163,8 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
             ///\\\ (НАЧАЛО) ///\\\ ЛОГО ///\\\
 
             SizedBox(
-              width: width * 0.2,
-              height: width * 0.2,
+              width: width * 0.05,
+              height: width * 0.05,
             ),
 
             //!\\\ (КОНЕЦ) ///\\\ ЛОГО ///\\\
@@ -180,27 +180,26 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      const SizedBox(
                         child: AutoSizeText(
-                          "Введите номер телефона",
+                          "Bведите номер\nтелефона",
                           style: TextStyle(
-                            color: Color(0xFF000000),
-                            fontSize: fontSizeText, 
-                            fontFamily: "assets/fonts/Inter-Bold.ttf",
+                            color: Color(0xF0894EB8),
+                            fontSize: 30, 
+                            fontFamily: "Comfortaa",
                             ),
-                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          textAlign: TextAlign.left,
                         ),),
 
-                      Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, width * 0.02)),
+                      Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, width * 0.1)),
                       
                       ////////// ПОЛЕ ВВОДА НОМЕРА ТЕЛЕФОНА ////////// 
-                      Container(
-
+                      SizedBox(
                         width: width * 0.75,
                         height: (width * 0.7) * 0.23,
-
                         child: Container(
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(horizontal: 15),
@@ -208,10 +207,14 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(width * 0.0488),
-                            border: Border.all(color: Colors.black.withOpacity(0.13)),
+                            border: Border.all(
+                              color: Color(0xF0894EB8),
+                              width: 2
+                            ),
 
+                            // ignore: prefer_const_literals_to_create_immutables
                             boxShadow: [
-                              BoxShadow(
+                              const BoxShadow(
                                 color: Color(0xffeeeeee),
                                 blurRadius: 10,
                                 offset: Offset(0, 4),
@@ -225,14 +228,16 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                               InternationalPhoneNumberInput(
                                 textAlign: TextAlign.start,
                                 textAlignVertical: TextAlignVertical.center,
-                                textStyle: TextStyle(fontSize: 18,),                               
+                                textStyle: TextStyle(
+                                  fontSize: 18,
+                                  fontFamily: "Comfortaa"
+                                ),
+
                                 onInputChanged: (PhoneNumber number) {
-                                  print(number.phoneNumber);
                                   field_phone_number = "${number.phoneNumber}";
                                 },
                                 
                                 onInputValidated: (bool value) {
-                                    print(value);
                                 },
 
                                 selectorConfig: SelectorConfig(
@@ -244,7 +249,11 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                                 initialValue: number,
                                 ignoreBlank: false,
                                 autoValidateMode: AutovalidateMode.disabled,
-                                selectorTextStyle: TextStyle(color: Colors.black),
+                                selectorTextStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: "Comfortaa"
+                                ),
                                 textFieldController: controller,
                                 formatInput: false,
                                 maxLength: _PhoneNumberLength,
@@ -255,66 +264,31 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                                   // contentPadding: EdgeInsets.only(bottom: 15, left: 0),
                                   border: InputBorder.none,
                                   hintText: '(999) 999-99-99',
-                                  hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 18),
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey.shade500, 
+                                    fontFamily: "Comfortaa",
+                                    fontSize: 18
+                                  ),
                                 ),
 
                                 // onSaved: (PhoneNumber number) {
                                 //   print('On Saved: $number');
                                 // },
                               ),
+
                               Positioned(
-                                left: 90,
-                                top: 8,
-                                bottom: 8,
+                                left: width * 0.219,
+                                top: width * 0.0195,
+                                bottom: width * 0.0195,
                                 child: Container(
-                                  height: 40,
-                                  width: 1,
-                                  color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.13),
+                                  height: width * 0.0973,
+                                  width: width * 0.0024,
+                                  color: Colors.black.withOpacity(0.13),
                                 ),
                               )
                             ],
                           ),
                         ),
-                      // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        // child: TextField(
-                        //   onChanged: (value) {
-                        //     field_phone_number = value;
-                        //   },
-                        //   style: TextStyle(
-                        //     color: Colors.black,
-                        //     fontSize: fontSizeButton
-                            
-                        //   ),
-                        //   textAlign: TextAlign.center,
-
-                        //   // inputFormatters: [MaskTextInputFormatter(mask: "+7 (###) ###-##-##")],
-
-                        //   keyboardType: TextInputType.phone,
-
-                        //   decoration: InputDecoration(
-                        //     counter: Offstage(),
-                        //     hintText: "(___) ___-__-__",
-                        //     hintStyle: TextStyle(
-                        //       color: Colors.blueGrey
-                        //     ),
-
-                        //     focusedBorder: OutlineInputBorder(
-                        //       borderSide: BorderSide(
-                        //         color: Colors.blueGrey,
-                        //         width: 2),
-                        //       borderRadius: BorderRadius.all(Radius.circular(20)),
-                        //     ),
-
-                        //     enabledBorder: OutlineInputBorder(
-                        //       borderSide: BorderSide(
-                        //         color: Colors.blueGrey,
-                        //         width: 2),
-                        //       borderRadius: BorderRadius.all(Radius.circular(20)),
-                        //     ),
-
-                        //   ),
-                        //   maxLength: 18,
-                        // ),
                       )
                     ],
                   )
@@ -338,15 +312,15 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        width: buttonWidth,
-                        height: buttonHeight,
+                        width: width * 0.7007,
+                        height: width * 0.1338,
                         
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
                               color: Color.fromARGB(70, 0, 0, 0),
-                              blurRadius: 25,
-                              offset: Offset(0.0, 10.0)),
+                              blurRadius: width * 0.0608,
+                              offset: Offset(0.0, width * 0.0243)),
                           ],
                         ),
 
@@ -368,16 +342,22 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
                                   borderRadius: BorderRadius.circular(width * 0.039),
                                 ),
                               ),
-                            backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF6F2EAE))
+                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xF0894EB8))
                             ),
 
-                            child:
-                            AutoSizeText(
+                            child: 
+                            SizedBox(
+                              width: width * 0.7,
+                              height: width * 0.0784,
+                              child: const AutoSizeText(
                                 'Продолжить',
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: fontSizeButton,
-                                  fontFamily: "assets/fonts/Inter-Regular.ttf",
-                                  fontWeight: FontWeight.bold),
+                                  fontSize: 30,
+                                  fontFamily: "Comfortaa",
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
                             )
                           ),
                         ),
@@ -393,8 +373,38 @@ class _GetPhoneNumber extends State<GetPhoneNumber> {
             //!\\\ (КОНЕЦ) ///\\\ КНОПКА "ПРОДОЛЖИТЬ" ///\\\
 
           ]
-        ),
       ),
     );
   }
+}
+
+class ShapePainter extends CustomPainter{
+  
+  @override
+  void paint(Canvas canvas, Size size) {
+
+  Paint paint0 = Paint()
+      ..color = Color(0xF0894EB8)
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 1;
+     
+         
+    Path path0 = Path();
+    path0.moveTo(0,0);
+    path0.lineTo(size.width,0);
+    path0.lineTo(size.width,size.height*0.80);
+    path0.quadraticBezierTo(size.width*0.8434750,size.height*1.0186800,size.width*0.50,size.height);
+    path0.quadraticBezierTo(size.width*0.1569500,size.height*1.0205600,0,size.height*0.8000000);
+    path0.close();
+
+    canvas.drawPath(path0, paint0);
+  
+    
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+  
 }

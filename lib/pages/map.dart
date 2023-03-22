@@ -216,14 +216,21 @@ class _Map extends State<Map> {
                     builder: (context, markers) {
                       return Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(),
-                            color: Color(0xFF894EB8)
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Color(0xFF894EB8),
+                              width: 4,
+                            ),
+                            color: Colors.white
                         ),
                         child: Center(
                           child: Text(
                             markers.length.toString(),
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(
+                              color: Color(0xFF894EB8),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       );
