@@ -15,14 +15,15 @@ import 'package:flutter/material.dart';
 import 'package:vkurse_app/data/api_location.dart';
 import 'package:vkurse_app/pages/app_location.dart';
 
+int user_id = 1;
 
-void locationHandler () {
+void locationHandler (_user_id) {
   final cron = Cron();
   cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
     if (await LocationService().checkPermission() == true) {
       await Geolocator.getCurrentPosition().then((value) {
-      LocationApi.user_location_save("1", "${value.latitude}", "${value.longitude}");
-    });
+        LocationApi.user_location_save(_user_id.toString(), "${value.latitude}", "${value.longitude}");
+      });
     }
   });
 }
@@ -38,8 +39,10 @@ class _Map extends State<Map> {
   
   final mapController = MapController();
 
+  // double myLatitude = 47.283020;
+  // double myLongitude = 39.702150;
+
   List<Marker> markers = [];
-  
   List<Marker> mapObject = [];
 
   // List userInfo = [["Kratos0506", "assets/images/nikitaLogo.jpg", 47.237339, 39.712246], ["Semyown", "assets/images/semenLogo.jpg", 47.239339, 39.712246], ["olardaniil", null, 47.637339, 39.715246], ["THKssssssssssss", null, 47.639339, 39.715246]];
@@ -144,35 +147,44 @@ class _Map extends State<Map> {
   }
 
   // Метод для размещения маркеров
-  void placeMarker() {
+  void placeMarker(_user_id) {
     final cron = Cron();
     cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
       mapObject.clear();
     // var userLocation = [{"type": "user_location", "user_id": "2", "latitude": 47.289020, "longitude": 39.702150}, {"type": "user_location", "user_id": "3", "latitude": 47.289020, "longitude": 39.701150} ];
-      var userLocation = await LocationApi.users_location_stream("1");
-      print(userLocation);
+      var userLocation = await LocationApi.users_location_stream(_user_id.toString());
       var data_item = null;
 
       // createMarker("2", "username", "assets/images/nikitaLogo.jpg", 47.289020, 39.702150);
       for (data_item in userLocation) {
         if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
-          createMarker(data_item["user_id"], "username", null, data_item["latitude"], data_item["longitude"]);
+          createMarker(data_item["user_id"], "username", "assets/images/danilLogo.jpg", data_item["latitude"], data_item["longitude"]);
         }
       }
       
       setState(() {
         markers = mapObject;
       });
-      print(markers);
-
     });
   }
+
+  // Цинтровка экрана по местоположению пользователя
+  void myCurrentLocation() async {
+    await Geolocator.getCurrentPosition().then((value) {
+      setState(() {
+        mapController.center.latitude = value.latitude;
+        mapController.center.longitude = value.longitude;
+      });
+    });
+  }
+
 
   @override
   void initState() {
     _initPermission();
-    locationHandler();
-    placeMarker();
+    myCurrentLocation();
+    locationHandler(user_id);
+    placeMarker(user_id);
   }
 
   @override
@@ -188,7 +200,7 @@ class _Map extends State<Map> {
             FlutterMap(
               mapController: mapController,
               options: MapOptions(
-                center: latLng.LatLng(47.237319946, 39.712245941),
+                // center:  latLng.LatLng(myLatitude, myLongitude),
                 zoom: 13.0,
                 maxZoom: 18.0,
                 minZoom: 3.0,
@@ -275,7 +287,9 @@ class _Map extends State<Map> {
                 width: width * 0.1216, //50
                 height: width * 0.1216, //50
                 child: ElevatedButton(
-                  onPressed: () {}, 
+                  onPressed: () {
+                    myCurrentLocation();
+                  }, 
                   child: Image.asset("assets/icons/currentPosition.png"),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
