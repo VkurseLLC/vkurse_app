@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:vkurse_app/data/api_location.dart';
 import 'package:vkurse_app/pages/app_location.dart';
 
-int user_id = 1;
+int user_id = 2;
 
 void locationHandler (_user_id) {
   final cron = Cron();
@@ -55,7 +55,7 @@ class _Map extends State<Map> {
           mapObject.add(Marker(
           width: 90.0,
           height: 90.0,
-          point: latLng.LatLng(_latitude + 0.0001, _longitude),
+          point: latLng.LatLng(_latitude , _longitude),
           builder: (ctx) => IconButton(
             onPressed: (){},
             icon: Container(
@@ -99,7 +99,7 @@ class _Map extends State<Map> {
             mapObject.add(Marker(
             width: 90.0,
             height: 90.0,
-            point: latLng.LatLng(_latitude + 0.0001, _longitude),
+            point: latLng.LatLng(_latitude, _longitude),
             builder: (ctx) => IconButton(
               onPressed: (){},
               icon: Container(
