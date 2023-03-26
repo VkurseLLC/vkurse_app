@@ -1,13 +1,20 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/foundation.dart';
+//?_________________________________________НАЧАЛО ИМПОРТОВ________________________________________________?\\
+//_____________________________________________СИСТЕМНЫЕ________________________________________________\\
+
 import 'package:flutter/material.dart';
-import 'package:url_launcher/link.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:vkurse_app/data/api_auth.dart';
-import 'package:vkurse_app/pages/auth_phone_number.dart';
-import '../generated/locale_keys.g.dart';
+
+//_____________________________________________БИБЛИОТЕКИ________________________________________________\\
+
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+//_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
+
+// import '../generated/locale_keys.g.dart';
+// import 'package:vkurse_app/pages/style/canvas.dart';
+// import 'package:vkurse_app/pages/auth_verification_code.dart';
+//!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
+
 
 // Класс для отображения страницы перехода к боту
 class EndProfileFilling extends StatefulWidget {

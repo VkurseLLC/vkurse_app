@@ -28,9 +28,13 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final mediaQuery = MediaQuery.of(context);
+    var width = mediaQuery.size.width;
+
     String dialCode = (country?.dialCode ?? '');
     if (trailingSpace) {
-      dialCode = dialCode.padRight(5, "   ");
+      dialCode = dialCode.padRight((width * 0.0076).toInt(), "   ");
     }
     return Container(
       child: Row(
@@ -43,7 +47,7 @@ class Item extends StatelessWidget {
             showFlag: showFlag,
             useEmoji: useEmoji,
           ),
-          SizedBox(width: 12.0),
+          SizedBox(width: width * 0.0307),
           Text(
             '$dialCode',
             textDirection: TextDirection.ltr,
@@ -65,6 +69,10 @@ class _Flag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final mediaQuery = MediaQuery.of(context);
+    var width = mediaQuery.size.width;
+
     return country != null && showFlag!
         ? Container(
             child: useEmoji!
@@ -74,7 +82,7 @@ class _Flag extends StatelessWidget {
                   )
                 : Image.asset(
                     country!.flagUri,
-                    width: 32.0,
+                    width: width * 0.0820,
                     // package: 'intl_phone_number_input',
                     errorBuilder: (context, error, stackTrace) {
                       return SizedBox.shrink();

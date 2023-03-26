@@ -1,19 +1,24 @@
-// import 'dart:ui';
-// import 'dart:async';
-// import 'dart:developer';
-// import 'dart:typed_data';
-
-import 'package:cron/cron.dart';
-import 'package:geolocator/geolocator.dart';
-
-import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
-import 'package:latlong2/latlong.dart' as latLng;
-import 'package:auto_size_text/auto_size_text.dart';
+//?_________________________________________НАЧАЛО ИМПОРТОВ________________________________________________?\\
+//_____________________________________________СИСТЕМНЫЕ________________________________________________\\
 
 import 'package:flutter/material.dart';
+
+//_____________________________________________БИБЛИОТЕКИ________________________________________________\\
+
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:latlong2/latlong.dart' as latLng;
+
+import 'package:cron/cron.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
+
+//_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
+
 import 'package:vkurse_app/data/api_location.dart';
-import 'package:vkurse_app/pages/app_location.dart';
+import 'package:vkurse_app/pages/additionally/app_location.dart';
+//!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
+
 
 
 void locationHandler () {

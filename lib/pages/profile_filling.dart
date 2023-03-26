@@ -1,14 +1,21 @@
+//?_________________________________________НАЧАЛО ИМПОРТОВ________________________________________________?\\
+//_____________________________________________СИСТЕМНЫЕ________________________________________________\\
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+
+//_____________________________________________БИБЛИОТЕКИ________________________________________________\\
+
+import 'package:intl/intl.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:intl/intl.dart';
-// import 'package:validators/sanitizers.dart';
-import 'package:vkurse_app/data/api_account_data.dart';
-import 'package:vkurse_app/data/api_city_selection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+
+//_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
+import 'package:vkurse_app/data/api_account_data.dart';
+//!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
+
 
 // Класс для отображения страницы ввода username
 

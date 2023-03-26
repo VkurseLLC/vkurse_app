@@ -1,12 +1,19 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
+//?_________________________________________НАЧАЛО ИМПОРТОВ________________________________________________?\\
+//_____________________________________________СИСТЕМНЫЕ________________________________________________\\
+
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+
+//_____________________________________________БИБЛИОТЕКИ________________________________________________\\
 import 'package:url_launcher/url_launcher.dart';
-import 'package:vkurse_app/pages/auth_get_verification_code.dart';
-import 'package:vkurse_app/pages/auth_phone_number.dart';
-import '../generated/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
+//_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
+
+
+//!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
+
+
 
 void _launchUrl(url) async {
   if (!await launchUrl(Uri.parse(url))) {
