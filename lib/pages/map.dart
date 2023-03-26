@@ -20,16 +20,18 @@ import 'package:vkurse_app/pages/additionally/app_location.dart';
 //!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
 
 
+int user_id = 2;
 
-void locationHandler () {
+void locationHandler (_user_id) {
   final cron = Cron();
   cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
-    await Geolocator.getCurrentPosition().then((value) {
-      LocationApi.user_location_save("2", "${value.latitude}", "${value.longitude}");
-    });
+    if (await LocationService().checkPermission() == true) {
+      await Geolocator.getCurrentPosition().then((value) {
+        LocationApi.user_location_save(_user_id.toString(), "${value.latitude}", "${value.longitude}");
+      });
+    }
   });
 }
-
 
 class Map extends StatefulWidget {
 
@@ -42,17 +44,23 @@ class _Map extends State<Map> {
   
   final mapController = MapController();
 
+  // double myLatitude = 47.283020;
+  // double myLongitude = 39.702150;
+
   List<Marker> markers = [];
+  List<Marker> mapObject = [];
 
-  List userInfo = [["Kratos0506", "assets/images/nikitaLogo.jpg", 47.237339, 39.712246], ["Semyown", "assets/images/semenLogo.jpg", 47.239339, 39.712246], ["olardaniil", null, 47.637339, 39.715246], ["THKssssssssssss", null, 47.639339, 39.715246]];
+  // List userInfo = [["Kratos0506", "assets/images/nikitaLogo.jpg", 47.237339, 39.712246], ["Semyown", "assets/images/semenLogo.jpg", 47.239339, 39.712246], ["olardaniil", null, 47.637339, 39.715246], ["THKssssssssssss", null, 47.639339, 39.715246]];
+  
+  // user_id ЭТО user_name !!!
+  void createMarker(_user_id, _username, _photo, _latitude, _longitude) {
 
-  void createMarker(_user_id, _photo, _latitude, _longitude) {
-    for(var info in userInfo){
-      if(info[1] != null){
-        var mark = Marker(
+      if (_photo != null) {
+        setState(() {
+          mapObject.add(Marker(
           width: 90.0,
           height: 90.0,
-          point: latLng.LatLng(info[2], info[3]),
+          point: latLng.LatLng(_latitude , _longitude),
           builder: (ctx) => IconButton(
             onPressed: (){},
             icon: Container(
@@ -71,16 +79,13 @@ class _Map extends State<Map> {
                         ),
                       ),
                       Positioned(
-                        // top: 8,
-                        // left: width * 0.325,
                         child: Container(
                           height: 48,
                           width: 48,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                             image: DecorationImage(
-                              image: AssetImage(info[1]),
-                            // opacity: 0.4,
+                              image: AssetImage(_photo),
                             )
                           )
                         )
@@ -91,16 +96,15 @@ class _Map extends State<Map> {
               ),
             )
           )
-        );  
-        setState(() {
-          markers.add(mark);
+        ));
         });
-          
+        
         } else {
-          var mark = Marker(
+          setState(() {
+            mapObject.add(Marker(
             width: 90.0,
             height: 90.0,
-            point: latLng.LatLng(info[2], info[3]),
+            point: latLng.LatLng(_latitude, _longitude),
             builder: (ctx) => IconButton(
               onPressed: (){},
               icon: Container(
@@ -119,14 +123,12 @@ class _Map extends State<Map> {
                           ),
                         ),
                         Positioned(
-                        // top: 8,
-                        // left: width * 0.325,
                           child: Container(
                             height: 50,
                             width: 50,
                             alignment: Alignment.center,
                             child: AutoSizeText(
-                              info[0],
+                              _username, // user_name !!!
                               maxLines: 1,
                               minFontSize: 10,
                               overflow: TextOverflow.ellipsis,
@@ -144,41 +146,51 @@ class _Map extends State<Map> {
                 ),
               )
             )
-          );
-          setState(() {
-            markers.add(mark);
+          ));
           });
         }
-      }
   }
+
+  // Метод для размещения маркеров
+  void placeMarker(_user_id) {
+    final cron = Cron();
+    cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
+      mapObject.clear();
+    // var userLocation = [{"type": "user_location", "user_id": "2", "latitude": 47.289020, "longitude": 39.702150}, {"type": "user_location", "user_id": "3", "latitude": 47.289020, "longitude": 39.701150} ];
+      var userLocation = await LocationApi.users_location_stream(_user_id.toString());
+      var data_item = null;
+
+      // createMarker("2", "username", "assets/images/nikitaLogo.jpg", 47.289020, 39.702150);
+      for (data_item in userLocation) {
+        if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
+          createMarker(data_item["user_id"], "username", "assets/images/danilLogo.jpg", data_item["latitude"], data_item["longitude"]);
+        }
+      }
+      
+      setState(() {
+        markers = mapObject;
+      });
+    });
+  }
+
+  // Цинтровка экрана по местоположению пользователя
+  void myCurrentLocation() async {
+    await Geolocator.getCurrentPosition().then((value) {
+      setState(() {
+        mapController.center.latitude = value.latitude;
+        mapController.center.longitude = value.longitude;
+      });
+    });
+  }
+
 
   @override
   void initState() {
-    createMarker(userInfo[0][0], userInfo[0][1], userInfo[0][2], userInfo[0][3]);
-    // placeMarker(context);
-    // locationHandler();
-    // _initPermission();
+    _initPermission();
+    myCurrentLocation();
+    locationHandler(user_id);
+    placeMarker(user_id);
   }
-
-  // void placeMarker(_context) {
-  
-  //   final cron = Cron();
-  //   cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
-
-  //   // var userLocation = [{"type": "user_location", "user_id": "2", "latitude": 47.289020, "longitude": 39.702150}, {"type": "user_location", "user_id": "3", "latitude": 47.289020, "longitude": 39.701150} ];
-  //     var userLocation = await LocationApi.users_location_stream("2");
-  //     var data_item = null;
-
-  //     for (data_item in userLocation) {
-  //       if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
-  //         createMarker(data_item["user_id"], data_item["latitude"], data_item["longitude"], _context);
-  //       }
-  //     }
-
-  //     final status = controller.updateMarkers(mapObject as List<GisMapMarker>);
-  //     mapObject.clear();
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +205,7 @@ class _Map extends State<Map> {
             FlutterMap(
               mapController: mapController,
               options: MapOptions(
-                center: latLng.LatLng(47.237319946, 39.712245941),
+                // center:  latLng.LatLng(myLatitude, myLongitude),
                 zoom: 13.0,
                 maxZoom: 18.0,
                 minZoom: 3.0,
@@ -201,17 +213,23 @@ class _Map extends State<Map> {
 
               children: [
                 TileLayer(
-                  urlTemplate:
-                    'http://tile2.maps.2gis.com/tiles?x={x}&y={y}&z={z}',
-                  subdomains: 
-                    ['a', 'b', 'c'],
-                    
                   // urlTemplate:
-                  //     'https://api.mapbox.com/styles/v1/olardaniil/clf5o14q2000s01mrhe1byyg8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
-                  // additionalOptions: {
-                  //   'accessToken': 'pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
-                  //   'id': 'mapbox.mapbox-streets-v8',
-                  // },
+                  //   'http://tile2.maps.2gis.com/tiles?x={x}&y={y}&z={z}',
+                  // subdomains: 
+                  //   ['a', 'b', 'c'],
+
+                  // urlTemplate:
+                  //   'http://mapgl.2gis.com//tiles?x={x}&y={y}&z={z}',
+                  // subdomains: 
+                  //   ['a', 'b', 'c'],
+
+                    
+                  urlTemplate:
+                      'https://api.mapbox.com/styles/v1/olardaniil/clf5o14q2000s01mrhe1byyg8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
+                  additionalOptions: {
+                    'accessToken': 'pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
+                    'id': 'mapbox.mapbox-streets-v8',
+                  },
                 ),
 
                 MarkerClusterLayerWidget(
@@ -274,7 +292,9 @@ class _Map extends State<Map> {
                 width: width * 0.1216, //50
                 height: width * 0.1216, //50
                 child: ElevatedButton(
-                  onPressed: () {}, 
+                  onPressed: () {
+                    myCurrentLocation();
+                  }, 
                   child: Image.asset("assets/icons/currentPosition.png"),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -365,13 +385,12 @@ class _Map extends State<Map> {
       );
     }
 
-  // / Проверка разрешений на доступ к геопозиции пользователя
-  // Future<void> _initPermission() async {
-  //   if (!await LocationService().checkPermission()) {
-  //     await LocationService().requestPermission();
-  //   }
-  //   await _fetchCurrentLocation();
-  // }
+
+  Future<void> _initPermission() async {
+    if (!await LocationService().checkPermission()) {
+      await LocationService().requestPermission();
+    }
+  }
 
   // /// Получение текущей геопозиции пользователя
   // Future<void> _fetchCurrentLocation() async {

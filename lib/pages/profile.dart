@@ -747,8 +747,7 @@ class _Profile extends State<Profile> {
                                         width * 0.074, height * 0.0172, 0, 0),
                                     child: Flexible(
                                       child: Text(
-                                        textfield[
-                                            6], //------------------------берет данные из массива------------\\
+                                        "Test", //------------------------берет данные из массива------------\\
                                         maxLines: 10,
                                         style: TextStyle(
                                           color: Color(0x90000000),
