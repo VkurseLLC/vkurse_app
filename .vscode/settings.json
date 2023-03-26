@@ -1,6 +1,5 @@
 {
-    "editor.tokenColorCustomizations":
-    {
-        "comments": "#71be71"
+    "editor.tokenColorCustomizations": {
+        "comments": "#90ce88"
     },
 }

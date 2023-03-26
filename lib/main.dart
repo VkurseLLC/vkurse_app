@@ -1,15 +1,21 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
+//?_________________________________________НАЧАЛО ИМПОРТОВ________________________________________________?\\
+//_____________________________________________СИСТЕМНЫЕ________________________________________________\\
+
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+
+//_____________________________________________БИБЛИОТЕКИ________________________________________________\\
+
+import 'package:easy_localization/easy_localization.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:vkurse_app/ui/main_navigation.dart';
-// import 'package:vkurse_app/utils/theme.dart';
-
+//_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
 import 'generated/codegen_loader.g.dart';
+import 'package:vkurse_app/ui/main_navigation.dart';
+
+//!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

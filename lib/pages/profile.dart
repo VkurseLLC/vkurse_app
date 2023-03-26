@@ -1,11 +1,18 @@
+//?_________________________________________НАЧАЛО ИМПОРТОВ________________________________________________?\\
+//_____________________________________________СИСТЕМНЫЕ________________________________________________\\
+
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
+
+//_____________________________________________БИБЛИОТЕКИ________________________________________________\\
 import 'package:intl/intl.dart';
-import 'package:validators/sanitizers.dart';
-import 'package:vkurse_app/data/api_account_data.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+//_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
+
+//!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
+
+
 
 // Класс для отображения страницы ввода username
 
@@ -740,8 +747,7 @@ class _Profile extends State<Profile> {
                                         width * 0.074, height * 0.0172, 0, 0),
                                     child: Flexible(
                                       child: Text(
-                                        textfield[
-                                            6], //------------------------берет данные из массива------------\\
+                                        "Test", //------------------------берет данные из массива------------\\
                                         maxLines: 10,
                                         style: TextStyle(
                                           color: Color(0x90000000),
