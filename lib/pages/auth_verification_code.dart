@@ -72,6 +72,7 @@ Widget build(BuildContext context) {
     String field_verification_code = "";
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Row(
@@ -99,7 +100,7 @@ Widget build(BuildContext context) {
                         height: width * 0.2,
                         child: IconButton(
                           onPressed: () async {
-                            await Navigator.pushNamed(context, '/auth');
+                            await Navigator.pushNamed(context, '/auth_get_verification_code');
                           }, 
                           icon: const Icon(Icons.arrow_back_ios_new),
                           iconSize: width * 0.1,

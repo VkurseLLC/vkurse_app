@@ -36,6 +36,7 @@ class _AuthGetVerificationCodeState extends State<AuthGetVerificationCode> {
     var width = mediaQuery.size.width, height = mediaQuery.size.height;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Row(
