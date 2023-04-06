@@ -103,7 +103,7 @@ class _AuthProviderState extends State<AuthProvider> {
                       decoration: BoxDecoration(
                           image: const DecorationImage(
                         image: AssetImage("assets/images/logo_pic.png"),
-                        opacity: 0.4,
+                        opacity: 0.6,
                       )),
                     ),
                     Container(
@@ -113,7 +113,7 @@ class _AuthProviderState extends State<AuthProvider> {
                       decoration: BoxDecoration(
                           image: const DecorationImage(
                         image: AssetImage("assets/images/logo_text.png"),
-                        opacity: 0.8,
+                        opacity: 0.6,
                       )),
                     ),
                   ],
@@ -164,13 +164,13 @@ class _AuthProviderState extends State<AuthProvider> {
                                 ),
                               ),
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Color(0xFF6F2EAE)),
+                                  Color(0xFF894EB8)),
                             ),
                             child: AutoSizeText(
-                              'Вход',
+                              'Bход',
                               style: TextStyle(
                                   fontSize: fontSizeButton,
-                                  fontFamily: "assets/fonts/Inter-Regular.ttf",
+                                  fontFamily: "Comfortaa",
                                   fontWeight: FontWeight.bold),
                             )),
                       ),
@@ -219,15 +219,17 @@ class _AuthProviderState extends State<AuthProvider> {
                               ),
                             ),
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xFF808080)), // Кнопка неактивна
+                                Color(0xFFD1D1D1)), // Кнопка неактивна
                             // backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF350068)), // Кнопка активна
                           ),
                           child: AutoSizeText(
                             'Тех. Поддержка',
                             style: TextStyle(
-                                fontSize: fontSizeButton,
-                                fontFamily: "assets/fonts/Inter-Regular.ttf",
-                                fontWeight: FontWeight.bold),
+                              // color: Colors.white,
+                              fontSize: fontSizeButton,
+                              fontFamily: "Comfortaa",
+                              fontWeight: FontWeight.bold
+                            ),
                           ),
                         ),
                       ),

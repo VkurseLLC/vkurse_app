@@ -91,6 +91,7 @@ Widget build(BuildContext context) {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Row(
