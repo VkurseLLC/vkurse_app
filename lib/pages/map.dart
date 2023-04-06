@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart' as latLng;
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cron/cron.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
@@ -19,10 +19,9 @@ import 'package:vkurse_app/data/api_location.dart';
 import 'package:vkurse_app/pages/additionally/app_location.dart';
 //!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
 
-
-int user_id = 2;
-
-void locationHandler (_user_id) {
+void locationHandler () async {
+  var prefs = await SharedPreferences.getInstance();
+  var _user_id = prefs.getString('user_id');
   final cron = Cron();
   cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
     if (await LocationService().checkPermission() == true) {
@@ -31,6 +30,11 @@ void locationHandler (_user_id) {
       });
     }
   });
+}
+
+void get_user_id() async {
+  var prefs = await SharedPreferences.getInstance();
+  var user_id = prefs.getString('user_id');
 }
 
 class Map extends StatefulWidget {
@@ -49,6 +53,8 @@ class _Map extends State<Map> {
 
   List<Marker> markers = [];
   List<Marker> mapObject = [];
+
+  var user_id = null;
 
   // List userInfo = [["Kratos0506", "assets/images/nikitaLogo.jpg", 47.237339, 39.712246], ["Semyown", "assets/images/semenLogo.jpg", 47.239339, 39.712246], ["olardaniil", null, 47.637339, 39.715246], ["THKssssssssssss", null, 47.639339, 39.715246]];
   
@@ -152,12 +158,15 @@ class _Map extends State<Map> {
   }
 
   // Метод для размещения маркеров
-  void placeMarker(_user_id) {
+  void placeMarker() async {
+    var prefs = await SharedPreferences.getInstance();
+    var user_id = prefs.getString('user_id');
+
     final cron = Cron();
     cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
       mapObject.clear();
     // var userLocation = [{"type": "user_location", "user_id": "2", "latitude": 47.289020, "longitude": 39.702150}, {"type": "user_location", "user_id": "3", "latitude": 47.289020, "longitude": 39.701150} ];
-      var userLocation = await LocationApi.users_location_stream(_user_id.toString());
+      var userLocation = await LocationApi.users_location_stream(user_id.toString());
       var data_item = null;
 
       // createMarker("2", "username", "assets/images/nikitaLogo.jpg", 47.289020, 39.702150);
@@ -188,8 +197,8 @@ class _Map extends State<Map> {
   void initState() {
     _initPermission();
     myCurrentLocation();
-    locationHandler(user_id);
-    placeMarker(user_id);
+    locationHandler();
+    placeMarker();
   }
 
   @override

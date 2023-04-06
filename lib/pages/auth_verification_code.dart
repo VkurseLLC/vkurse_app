@@ -167,12 +167,21 @@ Widget build(BuildContext context) {
                               height: width * 0.141,
                               child: PinCodeTextField(
 
-                                onCompleted: (v) {
-                                  debugPrint("Completed");
+                                onCompleted: (value) async {
+                                  field_verification_code = value;
+
+                                  var prefs = await SharedPreferences.getInstance();
+                                  var phone_number = prefs.getString('phone_number');
+                                  var verification_code = "$field_verification_code";
+
+                                  await AuthApi.user_authorisation(
+                                      phone_number,
+                                      verification_code,
+                                      context);
+
                                 },
 
                                 onChanged: (value) {
-                                  debugPrint(value);
                                   setState(() {
                                     field_verification_code = value;
                                   });
