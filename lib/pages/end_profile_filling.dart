@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:vkurse_app/pages/style/canvas.dart';
 
 //_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
 
@@ -99,65 +98,55 @@ class _EndProfileFilling extends State<EndProfileFilling> {
                           ],
                         )),
                     Expanded(
-                      flex: 1,
-                      child: Row(
+                        flex: 1,
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                      width: width * 0.524,
-                                      height: width * 0.1333,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color:
-                                                  Color.fromARGB(70, 0, 0, 0),
-                                              blurRadius: 25,
-                                              offset: Offset(0.0, 10.0)),
-                                        ],
+                            Container(
+                              width: width * 0.6538,
+                              height: width * 0.1333,
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Color.fromARGB(70, 0, 0, 0),
+                                      blurRadius: width * 0.0608,
+                                      offset: Offset(0.0, width * 0.0243)),
+                                ],
+                              ),
+                              child: Opacity(
+                                opacity: 0.9,
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/map');
+                                    },
+                                    style: ButtonStyle(
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                width * 0.039),
+                                          ),
+                                        ),
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Color(0xF0894EB8))),
+                                    child: SizedBox(
+                                      width: width * 0.3692,
+                                      height: width * 0.0564,
+                                      child: const AutoSizeText(
+                                        'Начать',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 60,
+                                            fontFamily: "Comfortaa",
+                                            fontWeight: FontWeight.bold),
                                       ),
-                                      child: Opacity(
-                                        opacity: 0.9,
-                                        child: ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.pushNamed(
-                                                  context, '/map');
-                                            },
-                                            style: ButtonStyle(
-                                                shape:
-                                                    MaterialStateProperty.all<
-                                                        RoundedRectangleBorder>(
-                                                  RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            width * 0.039),
-                                                  ),
-                                                ),
-                                                backgroundColor:
-                                                    MaterialStateProperty.all<
-                                                            Color>(
-                                                        Color(0xFF6F2EAE))),
-                                            child: SizedBox(
-                                              width: width * 0.3692,
-                                              height: width * 0.0564,
-                                              child: const AutoSizeText(
-                                                'Начать',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontSize: 60,
-                                                    fontFamily: "Comfortaa",
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            )),
-                                      ))
-                                ]),
-                          ]),
-                    )
+                                    )),
+                              ),
+                            ),
+                          ],
+                        ))
                   ],
                 ))
               ],
