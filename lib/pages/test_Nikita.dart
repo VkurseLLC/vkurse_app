@@ -30,7 +30,7 @@ class _ProfileEdit extends State<ProfileEdit> {
   File? _imageFile;
 
   Future<void> _pickImage(ImageSource source) async {
-    final pickedFile = await ImagePicker().getImage(source: source);
+    final pickedFile = await ImagePicker().pickImage(source: source);
     print("pickedFile: $pickedFile");
 
     setState(() {
@@ -346,451 +346,370 @@ class _ProfileEdit extends State<ProfileEdit> {
               ),
             ),
             Padding(padding: EdgeInsets.only(top: height * 0.007)),
-            Container(
-                width: width,
-                height: height,
-                color: Colors.white,
-                child: Column(children: [
-                  ///----------------------------------////НАЗВАНИЕ\\\///ИМЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
+            Column(children: [
+              ///----------------------------------////НАЗВАНИЕ\\\///ИМЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
 
-                  Row(
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                      Container(
-                        width: width * 0.252,
-                        height: width * 0.062,
-                        child: AutoSizeText(
-                          'Ваше имя',
-                          style: TextStyle(fontSize: 50),
-                        ),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.417, 0, 0, 0)),
-                      IconButton(
-                        onPressed: () {
+              Row(
+                children: [
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                  Container(
+                    width: width * 0.252,
+                    height: width * 0.062,
+                    child: AutoSizeText(
+                      'Ваше имя',
+                      style: TextStyle(fontSize: 50),
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.417, 0, 0, 0)),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isDisabled1 = true;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.edit,
+                      color: Color(0x954D4D4D),
+                      size: width * 0.063,
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.053, 0, 0, 0)),
+                ],
+              ),
+
+              ///----------------------------------////НАЗВАНИЕ\\\///ИМЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
+
+              Padding(padding: EdgeInsets.only(top: width * 0.033)),
+
+              ///----------------------------------////СТРОКА ВВОДА \\\///ИМЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
+
+              Row(children: [
+                Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: width * 0.141,
+                      width: width * 0.738,
+                      child: TextField(
+                        onSubmitted: (value) {
                           setState(() {
-                            isDisabled1 = true;
+                            isDisabled1 = false;
                           });
                         },
-                        icon: Icon(
-                          Icons.edit,
-                          color: Color(0x954D4D4D),
-                          size: width * 0.063,
-                        ),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.053, 0, 0, 0)),
-                    ],
-                  ),
-
-                  ///----------------------------------////НАЗВАНИЕ\\\///ИМЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
-                  Padding(padding: EdgeInsets.only(top: width * 0.033)),
-
-                  ///----------------------------------////СТРОКА ВВОДА \\\///ИМЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-                  Row(children: [
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                    Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: width * 0.141,
-                          width: width * 0.738,
-                          child: TextField(
-                            onSubmitted: (value) {
-                              setState(() {
-                                isDisabled1 = false;
-                              });
-                            },
-                            enabled: isDisabled1,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: fsize,
-                                height: height * 0.0013,
-                                color: Colors.black),
-                            decoration: InputDecoration(
-                                filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                  borderSide: BorderSide(
-                                    width: 0.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                  borderSide: BorderSide(
-                                    width: 0.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                disabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                  borderSide: BorderSide(
-                                    width: 0.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                hintText: textfield[
-                                    0], //------------------------берет данные из массива------------\\
-                                fillColor: Colors.grey.shade300),
-                          ),
-                        )),
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
-                  ]),
-
-                  ///----------------------------------////СТРОКА ВВОДА \\\///ИМЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
-                  Padding(padding: EdgeInsets.only(top: width * 0.0656)),
-
-                  ///----------------------------------////НАЗВАНИЕ \\\///ФАМИЛИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-                  Row(
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                      Container(
-                        width: width * 0.388,
-                        height: width * 0.062,
-                        child: AutoSizeText(
-                          'Ваша Фамилия',
-                          style: TextStyle(fontSize: 50),
-                        ),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.281, 0, 0, 0)),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isDisabled2 = true;
-                          });
-                        },
-                        icon: Icon(
-                          Icons.edit,
-                          color: Color(0x954D4D4D),
-                          size: width * 0.063,
-                        ),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.053, 0, 0, 0))
-                    ],
-                  ),
-
-                  ///----------------------------------////НАЗВАНИЕ \\\///ФАМИЛИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
-                  Padding(padding: EdgeInsets.only(top: width * 0.033)),
-
-                  ///----------------------------------////СТРОКА ВВОДА \\\///ФАМИЛИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-                  Row(children: [
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                    Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: width * 0.141,
-                          width: width * 0.738,
-                          child: TextField(
-                            onSubmitted: (value) {
-                              setState(() {
-                                isDisabled2 = false;
-                              });
-                            },
-                            enabled: isDisabled2,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: fsize,
-                                height: height * 0.0013,
-                                color: Colors.black),
-                            decoration: InputDecoration(
-                                filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                  borderSide: BorderSide(
-                                    width: 0.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                  borderSide: BorderSide(
-                                    width: 0.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                disabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                  borderSide: BorderSide(
-                                    width: 0.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                hintText: textfield[
-                                    1], //------------------------берет данные из массива------------\\
-                                fillColor: Colors.grey.shade300),
-                          ),
-                        )),
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
-                  ]),
-
-                  ///----------------------------------////СТРОКА ВВОДА \\\///ФАМИЛИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
-                  Padding(padding: EdgeInsets.only(top: width * 0.0656)),
-
-                  ///----------------------------------////НАЗВАНИЕ \\\///ГОРОД ПРОЖИВАНИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-                  Row(
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                      Container(
-                        width: width * 0.49,
-                        height: width * 0.062,
-                        child: AutoSizeText(
-                          'Город проживания',
-                          style: TextStyle(fontSize: 50),
-                        ),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.179, 0, 0, 0)),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isDisabled3 = true;
-                          });
-                        },
-                        icon: Icon(
-                          Icons.edit,
-                          color: Color(0x954D4D4D),
-                          size: width * 0.063,
-                        ),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.053, 0, 0, 0)),
-                    ],
-                  ),
-
-                  ///----------------------------------////НАЗВАНИЕ \\\///ГОРОД ПРОЖИВАНИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
-                  Padding(padding: EdgeInsets.only(top: width * 0.033)),
-
-                  ///----------------------------------////СТРОКА ВВОДА \\\///ГОРОД ПРОЖИВАНИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-                  Row(children: [
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                          width: width * 0.682,
-                          height: width * 0.141,
-                          child: Form(
-                            key: _formKey,
-                            child: TypeAheadFormField(
-                              suggestionsCallback: (pattern) =>
-                                  countriesList.where((item) => item
-                                      .toLowerCase()
-                                      .contains(pattern.toLowerCase())),
-                              itemBuilder: (_, String item) =>
-                                  ListTile(title: Text(item)),
-                              onSuggestionSelected: (String val) {
-                                this.controllerCity.text =
-                                    val; // ЗДЕСЬ ХРАНИТСЯ ГОРОД (val)
-                                setState(() {
-                                  choosenCity = val;
-                                });
-                              },
-                              getImmediateSuggestions: true,
-                              hideSuggestionsOnKeyboardHide: false,
-                              hideOnEmpty: false,
-                              noItemsFoundBuilder: (context) => Padding(
-                                padding: EdgeInsets.all(2.0),
-                                child: Text("Город не найден",
-                                    style: TextStyle(
-                                      fontSize: fontSizeText,
-                                    )),
-                              ),
-                              textFieldConfiguration: TextFieldConfiguration(
-                                onSubmitted: (value) {
-                                  setState(() {
-                                    isDisabled3 = false;
-                                  });
-                                },
-                                enabled: isDisabled3,
-                                style: TextStyle(
-                                  height: height * 0.0013,
-                                  color: Colors.black,
-                                  fontSize: fsize,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(width * 0.039),
-                                      borderSide: BorderSide(
-                                        width: 0.0,
-                                        color: Colors.white,
-                                      )),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(width * 0.039),
-                                      borderSide: BorderSide(
-                                        width: 0.0,
-                                        color: Colors.white,
-                                      )),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(width * 0.039),
-                                    borderSide: BorderSide(
-                                      width: 0.0,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  errorBorder: borderErrorStyle,
-                                  errorStyle: textErrorStyle,
-                                  hintText: textfield[
-                                      2], //------------------------берет данные из массива------------\\
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: fsize,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.grey.shade300,
-                                ),
-                                controller: this.controllerCity,
+                        enabled: isDisabled1,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: fsize,
+                            height: height * 0.0013,
+                            color: Colors.black),
+                        decoration: InputDecoration(
+                            filled: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                              borderSide: BorderSide(
+                                width: 0.0,
+                                color: Colors.white,
                               ),
                             ),
-                          )),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
-                  ]),
-
-                  ///----------------------------------////СТРОКА ВВОДА \\\///ГОРОД ПРОЖИВАНИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
-                  Padding(padding: EdgeInsets.only(top: width * 0.0656)),
-
-                  ///----------------------------------////НАЗВАНИЕ \\\///ДАТА РОЖДЕНИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-                  Row(
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                      Container(
-                        width: width * 0.402,
-                        height: width * 0.062,
-                        child: AutoSizeText(
-                          'Дата рождения',
-                          style: TextStyle(
-                            fontSize: 50,
-                          ),
-                        ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                              borderSide: BorderSide(
+                                width: 0.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                              borderSide: BorderSide(
+                                width: 0.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                            hintText: textfield[
+                                0], //------------------------берет данные из массива------------\\
+                            fillColor: Colors.grey.shade300),
                       ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.267, 0, 0, 0)),
-                      IconButton(
-                        onPressed: () {
+                    )),
+                Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
+              ]),
+
+              ///----------------------------------////СТРОКА ВВОДА \\\///ИМЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
+
+              Padding(padding: EdgeInsets.only(top: width * 0.0656)),
+
+              ///----------------------------------////НАЗВАНИЕ \\\///ФАМИЛИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
+
+              Row(
+                children: [
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                  Container(
+                    width: width * 0.388,
+                    height: width * 0.062,
+                    child: AutoSizeText(
+                      'Ваша Фамилия',
+                      style: TextStyle(fontSize: 50),
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.281, 0, 0, 0)),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isDisabled2 = true;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.edit,
+                      color: Color(0x954D4D4D),
+                      size: width * 0.063,
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.053, 0, 0, 0))
+                ],
+              ),
+
+              ///----------------------------------////НАЗВАНИЕ \\\///ФАМИЛИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
+
+              Padding(padding: EdgeInsets.only(top: width * 0.033)),
+
+              ///----------------------------------////СТРОКА ВВОДА \\\///ФАМИЛИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
+
+              Row(children: [
+                Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: width * 0.141,
+                      width: width * 0.738,
+                      child: TextField(
+                        onSubmitted: (value) {
                           setState(() {
-                            isDisabled4 = true;
+                            isDisabled2 = false;
                           });
                         },
-                        icon: Icon(
-                          Icons.edit,
-                          color: Color(0x954D4D4D),
-                          size: width * 0.063,
-                        ),
+                        enabled: isDisabled2,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: fsize,
+                            height: height * 0.0013,
+                            color: Colors.black),
+                        decoration: InputDecoration(
+                            filled: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                              borderSide: BorderSide(
+                                width: 0.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                              borderSide: BorderSide(
+                                width: 0.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                              borderSide: BorderSide(
+                                width: 0.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                            hintText: textfield[
+                                1], //------------------------берет данные из массива------------\\
+                            fillColor: Colors.grey.shade300),
                       ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.033, 0, 0, 0)),
-                    ],
+                    )),
+                Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
+              ]),
+
+              ///----------------------------------////СТРОКА ВВОДА \\\///ФАМИЛИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
+
+              Padding(padding: EdgeInsets.only(top: width * 0.0656)),
+
+              ///----------------------------------////НАЗВАНИЕ \\\///ГОРОД ПРОЖИВАНИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
+
+              Row(
+                children: [
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                  Container(
+                    width: width * 0.49,
+                    height: width * 0.062,
+                    child: AutoSizeText(
+                      'Город проживания',
+                      style: TextStyle(fontSize: 50),
+                    ),
                   ),
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.179, 0, 0, 0)),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isDisabled3 = true;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.edit,
+                      color: Color(0x954D4D4D),
+                      size: width * 0.063,
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.053, 0, 0, 0)),
+                ],
+              ),
 
-                  ///----------------------------------////НАЗВАНИЕ \\\///ДАТА РОЖДЕНИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
+              ///----------------------------------////НАЗВАНИЕ \\\///ГОРОД ПРОЖИВАНИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
 
-                  Padding(padding: EdgeInsets.only(top: width * 0.033)),
+              Padding(padding: EdgeInsets.only(top: width * 0.033)),
 
-                  ///----------------------------------////СТРОКА ВВОДА \\\///ДАТА РОЖДЕНИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
+              ///----------------------------------////СТРОКА ВВОДА \\\///ГОРОД ПРОЖИВАНИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
 
-                  Row(
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+              Row(children: [
+                Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                      width: width * 0.682,
+                      height: width * 0.141,
+                      child: Form(
+                        key: _formKey,
+                        child: TypeAheadFormField(
+                          suggestionsCallback: (pattern) => countriesList.where(
+                              (item) => item
+                                  .toLowerCase()
+                                  .contains(pattern.toLowerCase())),
+                          itemBuilder: (_, String item) =>
+                              ListTile(title: Text(item)),
+                          onSuggestionSelected: (String val) {
+                            this.controllerCity.text =
+                                val; // ЗДЕСЬ ХРАНИТСЯ ГОРОД (val)
+                            setState(() {
+                              choosenCity = val;
+                            });
+                          },
+                          getImmediateSuggestions: true,
+                          hideSuggestionsOnKeyboardHide: false,
+                          hideOnEmpty: false,
+                          noItemsFoundBuilder: (context) => Padding(
+                            padding: EdgeInsets.all(2.0),
+                            child: Text("Город не найден",
+                                style: TextStyle(
+                                  fontSize: fontSizeText,
+                                )),
+                          ),
+                          textFieldConfiguration: TextFieldConfiguration(
+                            onSubmitted: (value) {
+                              setState(() {
+                                isDisabled3 = false;
+                              });
+                            },
+                            enabled: isDisabled3,
+                            style: TextStyle(
+                              height: height * 0.0013,
+                              color: Colors.black,
+                              fontSize: fsize,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(width * 0.039),
+                                  borderSide: BorderSide(
+                                    width: 0.0,
+                                    color: Colors.white,
+                                  )),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(width * 0.039),
+                                  borderSide: BorderSide(
+                                    width: 0.0,
+                                    color: Colors.white,
+                                  )),
+                              disabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.039),
+                                borderSide: BorderSide(
+                                  width: 0.0,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              errorBorder: borderErrorStyle,
+                              errorStyle: textErrorStyle,
+                              hintText: textfield[
+                                  2], //------------------------берет данные из массива------------\\
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: fsize,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              filled: true,
+                              fillColor: Colors.grey.shade300,
+                            ),
+                            controller: this.controllerCity,
+                          ),
+                        ),
+                      )),
+                ),
+                Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
+              ]),
 
-                      ///----------------------------------////ДЕНЬ \\\///ДАТА РОЖДЕНИЯ\\\\-------------------------------------------------------------\\\\
+              ///----------------------------------////СТРОКА ВВОДА \\\///ГОРОД ПРОЖИВАНИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
 
-                      Column(
-                        children: [
-                          SizedBox(
-                              width: width * 0.2,
-                              height: width * 0.141,
-                              child: OutlinedButton(
-                                  style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            width * 0.039),
-                                      ),
-                                    ),
-                                    side: MaterialStateProperty.all(
-                                      const BorderSide(
-                                          color: Color(0x0F000000), width: 0),
-                                    ),
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.grey.shade300),
-                                  ),
-                                  onPressed: isDisabled4
-                                      ? () {
-                                          Utils.showSheet(context,
-                                              child: buildDatePicker(width),
-                                              onClicked: () {
-                                            setState(() {
-                                              isDisabled4 = false;
-                                            });
-                                            Navigator.pop(context);
-                                          });
-                                        }
-                                      : null,
-                                  child: Container(
-                                    width: width * 0.15,
-                                    height: width * 0.072,
-                                    child: Row(
-                                      children: [
-                                        AutoSizeText(
-                                            isDateSelected
-                                                ? day
-                                                : textfield[
-                                                    3], //------------------------берет данные из массива------------\\
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 50,
-                                              fontWeight: FontWeight.w500,
-                                              color: isDateSelected
-                                                  ? Colors.black
-                                                  : Colors.grey,
-                                            )),
-                                      ],
-                                    ),
-                                  ))),
-                        ],
+              Padding(padding: EdgeInsets.only(top: width * 0.0656)),
+
+              ///----------------------------------////НАЗВАНИЕ \\\///ДАТА РОЖДЕНИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
+
+              Row(
+                children: [
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                  Container(
+                    width: width * 0.402,
+                    height: width * 0.062,
+                    child: AutoSizeText(
+                      'Дата рождения',
+                      style: TextStyle(
+                        fontSize: 50,
                       ),
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.267, 0, 0, 0)),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isDisabled4 = true;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.edit,
+                      color: Color(0x954D4D4D),
+                      size: width * 0.063,
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.033, 0, 0, 0)),
+                ],
+              ),
 
-                      ///----------------------------------////МЕСЯЦ \\\///ДАТА РОЖДЕНИЯ\\\\-------------------------------------------------------------\\\\
+              ///----------------------------------////НАЗВАНИЕ \\\///ДАТА РОЖДЕНИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
 
+              Padding(padding: EdgeInsets.only(top: width * 0.033)),
+
+              ///----------------------------------////СТРОКА ВВОДА \\\///ДАТА РОЖДЕНИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
+
+              Row(
+                children: [
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+
+                  ///----------------------------------////ДЕНЬ \\\///ДАТА РОЖДЕНИЯ\\\\-------------------------------------------------------------\\\\
+
+                  Column(
+                    children: [
                       SizedBox(
-                          width: width * 0.345,
+                          width: width * 0.2,
                           height: width * 0.141,
                           child: OutlinedButton(
                               style: ButtonStyle(
@@ -822,15 +741,15 @@ class _ProfileEdit extends State<ProfileEdit> {
                                     }
                                   : null,
                               child: Container(
-                                width: width * 0.315,
-                                height: width * 0.073,
+                                width: width * 0.15,
+                                height: width * 0.072,
                                 child: Row(
                                   children: [
                                     AutoSizeText(
                                         isDateSelected
-                                            ? month
+                                            ? day
                                             : textfield[
-                                                4], //------------------------берет данные из массива------------\\
+                                                3], //------------------------берет данные из массива------------\\
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 50,
@@ -842,177 +761,226 @@ class _ProfileEdit extends State<ProfileEdit> {
                                   ],
                                 ),
                               ))),
-
-                      ///----------------------------------////ГОД \\\///ДАТА РОЖДЕНИЯ\\\\-------------------------------------------------------------\\\\
-
-                      SizedBox(
-                          width: width * 0.25,
-                          height: width * 0.141,
-                          child: OutlinedButton(
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                ),
-                              ),
-                              side: MaterialStateProperty.all(
-                                const BorderSide(
-                                    color: Color(0x0F000000), width: 0),
-                              ),
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.grey.shade300),
-                            ),
-                            onPressed: isDisabled4
-                                ? () {
-                                    Utils.showSheet(context,
-                                        child: buildDatePicker(width),
-                                        onClicked: () {
-                                      setState(() {
-                                        isDisabled4 = false;
-                                      });
-                                      Navigator.pop(context);
-                                    });
-                                  }
-                                : null,
-                            child: Container(
-                              width: width * 0.16,
-                              height: width * 0.072,
-                              child: Row(
-                                children: [
-                                  AutoSizeText(
-                                      isDateSelected
-                                          ? year
-                                          : textfield[
-                                              5], //------------------------берет данные из массива------------\\
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        fontSize: 50,
-                                        fontWeight: FontWeight.w500,
-                                        color: isDateSelected
-                                            ? Colors.black
-                                            : Colors.grey,
-                                      )),
-                                ],
-                              ),
-                            ),
-                          )),
                     ],
                   ),
-                  Padding(padding: EdgeInsets.only(top: width * 0.0656)),
 
-                  ///----------------------------------////СТРОКА ВВОДА \\\///ДАТА РОЖДЕНИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
+                  ///----------------------------------////МЕСЯЦ \\\///ДАТА РОЖДЕНИЯ\\\\-------------------------------------------------------------\\\\
+
+                  SizedBox(
+                      width: width * 0.345,
+                      height: width * 0.141,
+                      child: OutlinedButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.039),
+                              ),
+                            ),
+                            side: MaterialStateProperty.all(
+                              const BorderSide(
+                                  color: Color(0x0F000000), width: 0),
+                            ),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.grey.shade300),
+                          ),
+                          onPressed: isDisabled4
+                              ? () {
+                                  Utils.showSheet(context,
+                                      child: buildDatePicker(width),
+                                      onClicked: () {
+                                    setState(() {
+                                      isDisabled4 = false;
+                                    });
+                                    Navigator.pop(context);
+                                  });
+                                }
+                              : null,
+                          child: Container(
+                            width: width * 0.315,
+                            height: width * 0.073,
+                            child: Row(
+                              children: [
+                                AutoSizeText(
+                                    isDateSelected
+                                        ? month
+                                        : textfield[
+                                            4], //------------------------берет данные из массива------------\\
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 50,
+                                      fontWeight: FontWeight.w500,
+                                      color: isDateSelected
+                                          ? Colors.black
+                                          : Colors.grey,
+                                    )),
+                              ],
+                            ),
+                          ))),
+
+                  ///----------------------------------////ГОД \\\///ДАТА РОЖДЕНИЯ\\\\-------------------------------------------------------------\\\\
+
+                  SizedBox(
+                      width: width * 0.25,
+                      height: width * 0.141,
+                      child: OutlinedButton(
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                            ),
+                          ),
+                          side: MaterialStateProperty.all(
+                            const BorderSide(
+                                color: Color(0x0F000000), width: 0),
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.grey.shade300),
+                        ),
+                        onPressed: isDisabled4
+                            ? () {
+                                Utils.showSheet(context,
+                                    child: buildDatePicker(width),
+                                    onClicked: () {
+                                  setState(() {
+                                    isDisabled4 = false;
+                                  });
+                                  Navigator.pop(context);
+                                });
+                              }
+                            : null,
+                        child: Container(
+                          width: width * 0.16,
+                          height: width * 0.072,
+                          child: Row(
+                            children: [
+                              AutoSizeText(
+                                  isDateSelected
+                                      ? year
+                                      : textfield[
+                                          5], //------------------------берет данные из массива------------\\
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.w500,
+                                    color: isDateSelected
+                                        ? Colors.black
+                                        : Colors.grey,
+                                  )),
+                            ],
+                          ),
+                        ),
+                      )),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(top: width * 0.0656)),
+
+              ///----------------------------------////СТРОКА ВВОДА \\\///ДАТА РОЖДЕНИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
-                  ///----------------------------------///ОПИСАНИЕ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
+              ///----------------------------------///ОПИСАНИЕ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
 
-                  Row(
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                      Container(
-                        width: width * 0.257,
-                        height: width * 0.062,
-                        child: AutoSizeText(
-                          'Описание',
-                          style: TextStyle(fontSize: 50),
-                        ),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.412, 0, 0, 0)),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isDisabled = true;
-                          });
-                        },
-                        icon: Icon(
-                          Icons.edit,
-                          color: Color(0x954D4D4D),
-                          size: width * 0.063,
-                        ),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.053, 0, 0, 0)),
-                    ],
-                  ),
-
-                  Padding(padding: EdgeInsets.only(top: width * 0.033)),
-
-                  ///----------------------------------////СТРОКА ВВОДА \\\///ОПИСАНИЕ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-                  Row(children: [
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        height: width * 0.541,
-                        width: width * 0.685,
-                        child: TextField(
-                          enabled: isDisabled,
-                          controller: controller,
-
-                          ///----------------------------------////БЛОК ПОЛЯ ОПИСАНИЕ, ПРИ НАЖАТИИ НА ГАЛОЧКУ\\\\\-------------------------------------------------------------\\\\
-
-                          textInputAction: TextInputAction.done,
-                          /*----ГАЛОЧКА----*/
-                          onSubmitted: (value) {
-                            setState(() {
-                              isDisabled = false;
-                            });
-                          },
-
-                          ///----------------------------------////БЛОК ПОЛЯ ОПИСАНИЕ, ПРИ НАЖАТИИ НА ГАЛОЧКУ\\\\\-------------------------------------------------------------\\\\
-
-                          textAlignVertical: TextAlignVertical.top,
-                          textAlign: TextAlign.left,
-                          minLines: 1,
-                          maxLines: null,
-                          maxLength: 200,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: fsize,
-                              height: height * 0.0013,
-                              color: Colors.black),
-                          decoration: InputDecoration(
-                              filled: true,
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(width * 0.039),
-                                borderSide: BorderSide(
-                                  width: 0.0,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(width * 0.039),
-                                borderSide: BorderSide(
-                                  width: 0.0,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              disabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(width * 0.039),
-                                borderSide: BorderSide(
-                                  width: 0.0,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              hintText: textfield[
-                                  6], //------------------------берет данные из массива------------\\
-                              fillColor: Colors.grey.shade300),
-                        ),
-                      ),
+              Row(
+                children: [
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                  Container(
+                    width: width * 0.257,
+                    height: width * 0.062,
+                    child: AutoSizeText(
+                      'Описание',
+                      style: TextStyle(fontSize: 50),
                     ),
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
-                  ]),
-                ])),
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.412, 0, 0, 0)),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isDisabled = true;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.edit,
+                      color: Color(0x954D4D4D),
+                      size: width * 0.063,
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.fromLTRB(width * 0.053, 0, 0, 0)),
+                ],
+              ),
+
+              Padding(padding: EdgeInsets.only(top: width * 0.033)),
+
+              ///----------------------------------////СТРОКА ВВОДА \\\///ОПИСАНИЕ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
+
+              Row(children: [
+                Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    height: width * 0.341,
+                    width: width * 0.685,
+                    child: TextField(
+                      enabled: isDisabled,
+                      controller: controller,
+
+                      ///----------------------------------////БЛОК ПОЛЯ ОПИСАНИЕ, ПРИ НАЖАТИИ НА ГАЛОЧКУ\\\\\-------------------------------------------------------------\\\\
+
+                      textInputAction: TextInputAction.done,
+                      /*----ГАЛОЧКА----*/
+                      onSubmitted: (value) {
+                        setState(() {
+                          isDisabled = false;
+                        });
+                      },
+
+                      ///----------------------------------////БЛОК ПОЛЯ ОПИСАНИЕ, ПРИ НАЖАТИИ НА ГАЛОЧКУ\\\\\-------------------------------------------------------------\\\\
+
+                      textAlignVertical: TextAlignVertical.top,
+                      textAlign: TextAlign.left,
+                      minLines: 1,
+                      maxLines: null,
+                      maxLength: 200,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: fsize,
+                          height: height * 0.0013,
+                          color: Colors.black),
+                      decoration: InputDecoration(
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(width * 0.039),
+                            borderSide: BorderSide(
+                              width: 0.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(width * 0.039),
+                            borderSide: BorderSide(
+                              width: 0.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(width * 0.039),
+                            borderSide: BorderSide(
+                              width: 0.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                          hintText: textfield[
+                              6], //------------------------берет данные из массива------------\\
+                          fillColor: Colors.grey.shade300),
+                    ),
+                  ),
+                ),
+                Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
+              ]),
+            ]),
 
             ///----------------------------------///////ОПИСАНИЕ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
             Container(

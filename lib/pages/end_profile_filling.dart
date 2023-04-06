@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:vkurse_app/pages/style/canvas.dart';
 
 //_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
 
@@ -14,7 +15,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:vkurse_app/pages/style/canvas.dart';
 // import 'package:vkurse_app/pages/auth_verification_code.dart';
 //!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
-
 
 // Класс для отображения страницы перехода к боту
 class EndProfileFilling extends StatefulWidget {
@@ -26,7 +26,6 @@ class EndProfileFilling extends StatefulWidget {
 
 class _EndProfileFilling extends State<EndProfileFilling> {
   // bool isButtonActive = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -112,34 +111,46 @@ class _EndProfileFilling extends State<EndProfileFilling> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              width: width * 0.6538,
-                              height: width * 0.1333,
-
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromARGB(70, 0, 0, 0),
-                                    blurRadius: width * 0.0608,
-                                    offset: Offset(0.0, width * 0.0243)),
-                                ],
-                              ),
-
-                              child: Opacity(
-                                opacity: 0.9,
-                                child: ElevatedButton(
-
-                                  onPressed: (){
-                                    Navigator.pushNamed(context, '/map');
-                                  },
-
-                                 style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(width * 0.039),
-                                      ),
-                                    ),
-                                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xF0894EB8))                  
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: width * 0.524,
+                                  height: buttonHeight,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color.fromARGB(70, 0, 0, 0),
+                                          blurRadius: 25,
+                                          offset: Offset(0.0, 10.0)),
+                                    ],
+                                  ),
+                                  child: Opacity(
+                                    opacity: 0.9,
+                                    child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(context, '/map');
+                                        },
+                                        style: ButtonStyle(
+                                            shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(width * 0.039),
+                                              ),
+                                            ),
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                    Color>(Color(0xFF6F2EAE))),
+                                        child: AutoSizeText(
+                                          'Начать',
+                                          style: TextStyle(
+                                              fontSize: fontSizeButton,
+                                              fontFamily:
+                                                  "assets/fonts/Inter-Regular.ttf",
+                                              fontWeight: FontWeight.bold),
+                                        )),
                                   ),
 
                                   child: SizedBox(
