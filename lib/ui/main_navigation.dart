@@ -1,6 +1,8 @@
 //?_________________________________________НАЧАЛО ИМПОРТОВ________________________________________________?\\
 //_____________________________________________СИСТЕМНЫЕ________________________________________________\\
 import 'package:flutter/material.dart';
+import 'package:vkurse_app/pages/friends.dart';
+import 'package:vkurse_app/pages/know_friend.dart';
 
 //_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
 import 'package:vkurse_app/pages/welcome.dart';
@@ -15,6 +17,8 @@ import 'package:vkurse_app/pages/map.dart';
 // import 'package:vkurse_app/pages/loading.dart';
 import 'package:vkurse_app/pages/test_Nikita.dart';
 import 'package:vkurse_app/pages/testDmitriy.dart';
+
+import '../pages/unknow_friend.dart';
 //!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
 
 abstract class MainNavigationRoutNames {
@@ -48,6 +52,6 @@ class MainNavigation {
     '/map': (context) => Map(),
 
     // Если нужно затестить свой экран, то разкомитьте следующую строку и вместо > AuthProvider < вставьте нужный класс
-    '/auth': (context) => Profile(),
+    '/auth': (context) => KnowFriend(),
   };
 }

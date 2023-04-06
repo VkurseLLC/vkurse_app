@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:vkurse_app/pages/style/canvas.dart';
 
 //_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
 
@@ -14,7 +15,6 @@ import 'package:easy_localization/easy_localization.dart';
 // import 'package:vkurse_app/pages/style/canvas.dart';
 // import 'package:vkurse_app/pages/auth_verification_code.dart';
 //!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
-
 
 // Класс для отображения страницы перехода к боту
 class EndProfileFilling extends StatefulWidget {
@@ -26,7 +26,6 @@ class EndProfileFilling extends StatefulWidget {
 
 class _EndProfileFilling extends State<EndProfileFilling> {
   // bool isButtonActive = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -112,14 +111,56 @@ class _EndProfileFilling extends State<EndProfileFilling> {
 
           ///\\\ (НАЧАЛО) ///\\\ ЛОГО ///\\\
 
-          Container(
-            width: width * 0.63,
-            height: width * 0.63,
-            decoration: BoxDecoration(
-              image: const DecorationImage(
-                image: AssetImage("assets/images/logo_pic.png"),
-                opacity: 0.4,
-            )),
+          // Container(
+          //   width: width * 0.63,
+          //   height: width * 0.63,
+          //   decoration: BoxDecoration(
+          //     image: const DecorationImage(
+          //       image: AssetImage("assets/images/logo_pic.png"),
+          //       opacity: 0.4,
+          //   )),
+          // ),
+
+          SizedBox(
+            width: width,
+            height: height * 0.3,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Positioned(
+                  child: SizedBox(
+                    width: width,
+                    height: height * 0.3,
+                    child: CustomPaint(
+                      foregroundPainter: HeaderPainter(),
+                    ),
+                  ),
+                ),
+                Positioned(
+                    left: width * 0.025,
+                    child: SizedBox(
+                        width: width * 0.2,
+                        height: width * 0.2,
+                        child: IconButton(
+                          onPressed: () async {
+                            await Navigator.pushNamed(context, '/auth');
+                          },
+                          icon: const Icon(Icons.arrow_back_ios_new),
+                          iconSize: width * 0.1,
+                          color: Color(0xF0DADADA),
+                        ))),
+                Positioned(
+                    child: Container(
+                  height: width * 0.4,
+                  width: width * 0.4,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                    image: AssetImage("assets/images/logo_pic_white.png"),
+                    opacity: 0.4,
+                  )),
+                ))
+              ],
+            ),
           ),
 
           //!\\\ (КОНЕЦ) ///\\\ ЛОГО ///\\\
@@ -204,7 +245,8 @@ class _EndProfileFilling extends State<EndProfileFilling> {
                                                 RoundedRectangleBorder>(
                                               RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(width * 0.039),
+                                                    BorderRadius.circular(
+                                                        width * 0.039),
                                               ),
                                             ),
                                             backgroundColor:
