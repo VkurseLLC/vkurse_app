@@ -162,6 +162,8 @@ class _ProfileEdit extends State<ProfileEdit> {
         fontSize: fontSizeErrorText,
         fontWeight: FontWeight.bold);
 
+    File imageFile;
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
