@@ -34,54 +34,51 @@ class _EndProfileFilling extends State<EndProfileFilling> {
     var height = mediaQuery.size.height;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: width,
-                height: height * 0.3,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Positioned(
-                      child: SizedBox(
-                        width: width,
-                        height: height * 0.3,
-                        child: CustomPaint(
-                          foregroundPainter: HeaderPainter(),
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.white,
+        body: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: width,
+                  height: height * 0.3,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                        child: SizedBox(
+                          width: width,
+                          height: height * 0.3,
+                          child: CustomPaint(
+                            foregroundPainter: HeaderPainter(),
+                          ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      child: Container(
+                      Positioned(
+                          child: Container(
                         height: width * 0.35,
                         width: width * 0.35,
                         decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/logo_pic_white.png"),
+                            image: DecorationImage(
+                          image: AssetImage("assets/images/logo_pic_white.png"),
                           opacity: 0.4,
-                          )
-                        ),
-                      )
-                    )
-                  ],
+                        )),
+                      ))
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-
-          Expanded(
-            child: Row(
+              ],
+            ),
+            Expanded(
+                child: Row(
               children: [
                 Expanded(
-                  child: Column(
-                    children: [
-                      Expanded(
+                    child: Column(
+                  children: [
+                    Expanded(
                         flex: 2,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -90,102 +87,87 @@ class _EndProfileFilling extends State<EndProfileFilling> {
                             Container(
                               width: width * 0.8718,
                               height: width * 0.2808,
-                              child: const AutoSizeText(
-                                'Настройка завершена!',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF6F2EAE),
-                                  fontSize: 50,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "Comfortaa",
-                                )
-                              ),
+                              child: const AutoSizeText('Настройка завершена!',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Color(0xFF6F2EAE),
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Comfortaa",
+                                  )),
                             ),
                           ],
-                        )
-                      ),
-
-                       Expanded(
-                        flex: 1,
-                        child: Row(
+                        )),
+                    Expanded(
+                      flex: 1,
+                      child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: width * 0.524,
-                                  height: buttonHeight,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Color.fromARGB(70, 0, 0, 0),
-                                          blurRadius: 25,
-                                          offset: Offset(0.0, 10.0)),
-                                    ],
-                                  ),
-                                  child: Opacity(
-                                    opacity: 0.9,
-                                    child: ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.pushNamed(context, '/map');
-                                        },
-                                        style: ButtonStyle(
-                                            shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(width * 0.039),
-                                              ),
-                                            ),
-                                            backgroundColor:
-                                                MaterialStateProperty.all<
-                                                    Color>(Color(0xFF6F2EAE))),
-                                        child: AutoSizeText(
-                                          'Начать',
-                                          style: TextStyle(
-                                              fontSize: fontSizeButton,
-                                              fontFamily:
-                                                  "assets/fonts/Inter-Regular.ttf",
-                                              fontWeight: FontWeight.bold),
-                                        )),
-                                  ),
-
-                                  child: SizedBox(
-                                    width: width * 0.3692,
-                                    height: width * 0.0564,
-                                    child: const AutoSizeText(
-                                      'Начать',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 60,
-                                        fontFamily: "Comfortaa",
-                                        fontWeight: FontWeight.bold
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                      width: width * 0.524,
+                                      height: width * 0.1333,
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color:
+                                                  Color.fromARGB(70, 0, 0, 0),
+                                              blurRadius: 25,
+                                              offset: Offset(0.0, 10.0)),
+                                        ],
                                       ),
-                                    ),
-                                  )
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      )
-                    ],
-                  )
-                )
+                                      child: Opacity(
+                                        opacity: 0.9,
+                                        child: ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pushNamed(
+                                                  context, '/map');
+                                            },
+                                            style: ButtonStyle(
+                                                shape:
+                                                    MaterialStateProperty.all<
+                                                        RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            width * 0.039),
+                                                  ),
+                                                ),
+                                                backgroundColor:
+                                                    MaterialStateProperty.all<
+                                                            Color>(
+                                                        Color(0xFF6F2EAE))),
+                                            child: SizedBox(
+                                              width: width * 0.3692,
+                                              height: width * 0.0564,
+                                              child: const AutoSizeText(
+                                                'Начать',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontSize: 60,
+                                                    fontFamily: "Comfortaa",
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            )),
+                                      ))
+                                ]),
+                          ]),
+                    )
+                  ],
+                ))
               ],
-            )
-          ),
+            ))
+          ],
+        ));
 
-          Expanded(
-            child: Row(
-              children: [],
-            )
-          )
-        ]
-      )
-    );
+    Expanded(
+        child: Row(
+      children: [],
+    ));
   }
 }
