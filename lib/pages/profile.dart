@@ -2,6 +2,7 @@
 //_____________________________________________СИСТЕМНЫЕ________________________________________________\\
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //_____________________________________________БИБЛИОТЕКИ________________________________________________\\
 import 'package:intl/intl.dart';
@@ -436,7 +437,11 @@ class _Profile extends State<Profile> {
                                                 height: width * 0.146,
                                                 width: width * 0.7077,
                                                 child: ElevatedButton(
-                                                  onPressed: () {},
+                                                  onPressed: () async {
+                                                    var prefs = await SharedPreferences.getInstance();
+                                                    await prefs.remove('user_id');
+                                                    Navigator.pushNamed(context, '/auth');
+                                                  },
                                                   style:
                                                       ElevatedButton.styleFrom(
                                                     shape: RoundedRectangleBorder(
@@ -465,7 +470,7 @@ class _Profile extends State<Profile> {
                                                             .center,
                                                     children: [
                                                       Image.asset(
-                                                        'assets/icons/incognito.png',
+                                                        'assets/icons/exit.png',
                                                         height: width * 0.064,
                                                         width: width * 0.064,
                                                       ),
@@ -478,13 +483,13 @@ class _Profile extends State<Profile> {
                                                         width: width * 0.2462,
                                                         height: width * 0.0564,
                                                         child: AutoSizeText(
-                                                          "Невидимка",
+                                                          "Выход",
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   "assets/fonts/Inter-Regular.ttf",
                                                               fontSize: 100,
                                                               color:
-                                                                  Colors.black),
+                                                                  Colors.red),
                                                         ),
                                                       )
                                                     ],

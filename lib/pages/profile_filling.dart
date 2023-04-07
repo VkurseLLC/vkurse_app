@@ -56,11 +56,12 @@ class _ProfileFilling extends State<ProfileFilling> {
   var choosenCity = "";
 
   static const countriesList = [
-    "Rostov-on-Don",
-    "Krasnodar",
-    "Есентуки",
+    "Ростов-на-Дону",
+    "Азов",
+    "Батайск",
     "Жирнов",
-    "Батайск"
+    "Краснода",
+    "Сочи"
   ];
 
   @override
@@ -835,22 +836,21 @@ class _ProfileFilling extends State<ProfileFilling> {
                                 isSoNameChoosen &&
                                 (_formKey.currentState!.validate()) &&
                                 isDateSelected
-                            ? () {
-                                // var prefs =
-                                //     await SharedPreferences.getInstance();
-                                // var user_id = prefs.getString('user_id');
-                                // var username = prefs.getString('username');
-                                // var first_name = nameOfUser;
-                                // var city = this.controllerCity.text;
-                                // var d_birth = "$dateTime";
+                            ? () async {
+                                var prefs = await SharedPreferences.getInstance();
+                                var user_id = prefs.getString('user_id');
+                                var username = prefs.getString('username');
+                                var first_name = nameOfUser;
+                                var city = this.controllerCity.text;
+                                var d_birth = "$dateTime";
 
-                                // AccountDataApi.save_filling_profile(
-                                //     context,
-                                //     user_id,
-                                //     username,
-                                //     first_name,
-                                //     city,
-                                //     d_birth);
+                                AccountDataApi.save_filling_profile(
+                                    context,
+                                    user_id,
+                                    username,
+                                    first_name,
+                                    city,
+                                    d_birth);
                               }
                             : null,
                         style: ButtonStyle(

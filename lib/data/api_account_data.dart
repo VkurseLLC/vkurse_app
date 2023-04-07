@@ -45,6 +45,7 @@ class AccountDataApi {
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
+      print("json: $json");
       if (json['answer'] == 'successful') {
         await Navigator.pushNamed(context, '/initial_setting_accaunt_completed');
       } 
