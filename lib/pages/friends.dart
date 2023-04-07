@@ -8,15 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 //_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:intl/intl.dart';
-import 'package:validators/sanitizers.dart';
-import 'package:vkurse_app/data/api_account_data.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:vkurse_app/pages/style/canvas.dart';
@@ -29,8 +21,8 @@ class Friends extends StatefulWidget {
   State<Friends> createState() => _Friends();
 
 }
-String searchQuery = "Search query";
 
+String searchQuery = "Search query";
 
 class _Friends extends State<Friends> {
 
@@ -45,74 +37,74 @@ class _Friends extends State<Friends> {
 
     for(String name in listFriendsData){
       var friend = Container(
-        height: width * 0.244,
-        width: width * 0.869,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xffF7F7F7),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.circular(width * 0.05),
-            )
-          ),
-          onPressed: () {},
-          child: Row(
-            children: [
-              Padding(padding: EdgeInsets.only(left: width * 0.007)),
-              Container(
-                width: width * 0.192,
-                height: width * 0.192,
-                decoration: BoxDecoration(
-                    color: Colors.grey.shade400,
-                    borderRadius: BorderRadius.circular(90)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: width * 0.205,
-                      height: width * 0.108,
-                      child: Image.asset(
-                        "assets/images/camera-to-take-photos.png",
-                      )
-                    )
-                  ]
-                ),
-              ),
-              Padding(padding: EdgeInsets.only(left: width * 0.0615)),
-              SizedBox(
-                width: width * 0.410,
-                height: width * 0.0615,
-                child: AutoSizeText(
-                  name,
-                  style: TextStyle(fontSize: 70, color: Colors.black),
-                ),
-              ),
-              Padding(padding: EdgeInsets.only(left: width * 0.016)),
-              SizedBox(
-                width: width * 0.086,
-                height: width * 0.086,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0x00ffffff),
-                    elevation: 0.0,
-                    padding: EdgeInsets.all(0.0)),
-                  onPressed: () {},
-                  child: Container(
-                    width: width * 0.086,
-                    height: width * 0.86,
-                    child: Image.asset("assets/icons/chat-balloon_c_2.png",)
-                  )
-                    //  Image.asset(
-                    //   "assets/icons/chat-balloon_c_2.png",
-                    //   height: width * 0.064,
-                    //   width: width * 0.064,
-                    // )
-                ),
+          height: width * 0.244,
+          width: width * 0.869,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xffF7F7F7),
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(width * 0.05),
               )
-            ],
+            ),
+
+            onPressed: () {},
+
+            child: Row(
+              children: [
+                Padding(padding: EdgeInsets.only(left: width * 0.007)),
+                Container(
+                  width: width * 0.192,
+                  height: width * 0.192,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade400,
+                      borderRadius: BorderRadius.circular(90)),
+
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: width * 0.205,
+                        height: width * 0.108,
+                        child: Image.asset(
+                          "assets/images/camera-to-take-photos.png",
+                        )
+                      )
+                    ]
+                  ),
+                ),
+
+                Padding(padding: EdgeInsets.only(left: width * 0.0615)),
+                SizedBox(
+                  width: width * 0.410,
+                  height: width * 0.0615,
+                  child: AutoSizeText(
+                    name,
+                    style: TextStyle(fontSize: 70, color: Colors.black),
+                  ),
+                ),
+
+                Padding(padding: EdgeInsets.only(left: width * 0.016)),
+                SizedBox(
+                  width: width * 0.086,
+                  height: width * 0.086,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0x00ffffff),
+                      elevation: 0.0,
+                      padding: EdgeInsets.all(0.0)),
+                    onPressed: () {},
+                    child: Container(
+                      width: width * 0.086,
+                      height: width * 0.86,
+                      child: Image.asset("assets/icons/chat-balloon_c_2.png",)
+                    )
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      )   ;
+        );
 
         setState(() {
           listFriends.add(friend);
