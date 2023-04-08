@@ -133,7 +133,9 @@ class _Friends extends State<Friends> {
 
   @override
   void initState() {
-    createFriendCard(context);
+    new Future.delayed(Duration.zero,() {
+      createFriendCard(context);
+    });
   }
 
   final TextEditingController controller = TextEditingController();
