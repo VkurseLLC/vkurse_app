@@ -32,17 +32,18 @@ class AccountDataApi {
       }
   }
 
-  static var api_save_filling_profile = Uri.parse('http://80.78.240.205:5000/filling_profile');
+  static var api_save_filling_profile = Uri.parse('http://80.78.240.205:5000/api/user_profile/filling_profile');
 
-  static save_filling_profile(context, user_id, username, first_name, city, d_birth) async {
-    http.Response response = await _client.post(api_check_username_availability, body: {
-      "users_id": user_id,
-      "username": username,
-      "first_name": first_name,
-      "d_birth": d_birth,
-      "city": city,
+  static save_filling_profile(context, _user_id, _username, _name, _surname, _d_birth, _city) async {
+    http.Response response = await _client.post(api_save_filling_profile, body: {
+      "users_id": _user_id,
+      "username": _username,
+      "name": _name,
+      "surname": _surname,
+      "d_birth": _d_birth,
+      "city": _city,
     });
-
+    
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
       print("json: $json");
@@ -64,6 +65,25 @@ class AccountDataApi {
           "Error Code : ${response.statusCode.toString()}");
     }
 
+
+  }
+
+  static var api_view_filling_profile = Uri.parse('http://80.78.240.205:5000/api/user_profile/show_profile');
+
+  static view_user_data_profile (_user_id) async {
+    http.Response response = await _client.post(api_view_filling_profile, body: {
+      "users_id": _user_id,
+    });
+
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+
+      print("view_user_data_profile: $json");
+      return json;
+      
+    } else {
+      await EasyLoading.showError("Ошибка API");
+      }
 
   }
 

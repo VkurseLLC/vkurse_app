@@ -170,11 +170,14 @@ class _Map extends State<Map> {
       var data_item = null;
 
       // createMarker("2", "username", "assets/images/nikitaLogo.jpg", 47.289020, 39.702150);
-      for (data_item in userLocation) {
+      if (userLocation != null) {
+        for (data_item in userLocation) {
         if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
-          createMarker(data_item["user_id"], "username", "assets/images/danilLogo.jpg", data_item["latitude"], data_item["longitude"]);
+          createMarker(data_item["user_id"], data_item["username"], null, data_item["latitude"], data_item["longitude"]);
         }
       }
+      }
+      
       
       setState(() {
         markers = mapObject;
@@ -232,7 +235,6 @@ class _Map extends State<Map> {
                   // subdomains: 
                   //   ['a', 'b', 'c'],
 
-                    
                   urlTemplate:
                       'https://api.mapbox.com/styles/v1/olardaniil/clf5o14q2000s01mrhe1byyg8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
                   additionalOptions: {
@@ -240,40 +242,42 @@ class _Map extends State<Map> {
                     'id': 'mapbox.mapbox-streets-v8',
                   },
                 ),
-
-                MarkerClusterLayerWidget(
-                  options: MarkerClusterLayerOptions(
-                    maxClusterRadius: 40,
-                    disableClusteringAtZoom: 10,
-                    size: Size(50, 50),
-                    // anchor: AnchorPos.align(AnchorAlign.center),
-                    rotate: true,
-                    rotateAlignment: Alignment.center,
-                    markers: markers,
-                    builder: (context, markers) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Color(0xFF894EB8),
-                              width: 4,
-                            ),
-                            color: Colors.white
-                        ),
-                        child: Center(
-                          child: Text(
-                            markers.length.toString(),
-                            style: const TextStyle(
-                              color: Color(0xFF894EB8),
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                MarkerLayer(
+                  markers: markers
                 ),
+                // MarkerClusterLayerWidget(
+                //   options: MarkerClusterLayerOptions(
+                //     maxClusterRadius: 40,
+                //     disableClusteringAtZoom: 10,
+                //     size: Size(50, 50),
+                //     // anchor: AnchorPos.align(AnchorAlign.center),
+                //     rotate: true,
+                //     rotateAlignment: Alignment.center,
+                //     markers: markers,
+                //     builder: (context, markers) {
+                //       return Container(
+                //         decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(15),
+                //             border: Border.all(
+                //               color: Color(0xFF894EB8),
+                //               width: 4,
+                //             ),
+                //             color: Colors.white
+                //         ),
+                //         child: Center(
+                //           child: Text(
+                //             markers.length.toString(),
+                //             style: const TextStyle(
+                //               color: Color(0xFF894EB8),
+                //               fontSize: 20,
+                //               fontWeight: FontWeight.bold,
+                //             ),
+                //           ),
+                //         ),
+                //       );
+                //     },
+                //   ),
+                // ),
               ],
             ),
 

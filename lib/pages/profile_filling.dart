@@ -38,6 +38,8 @@ double fontSizeErrorText = 20.0;
 
 class _ProfileFilling extends State<ProfileFilling> {
   final _formKey = GlobalKey<FormState>();
+  String name = "";
+  String surName = "";
 
   final TextEditingController controller = TextEditingController();
   bool isDateSelected = false;
@@ -103,7 +105,6 @@ class _ProfileFilling extends State<ProfileFilling> {
     var height = mediaQuery.size.height;
     var dialogheight = mediaQuery.size.height;
     var proporcia = width / height;
-    String nameOfUser = "";
 
     double fsize = 18;
     if (width > 700) {
@@ -388,6 +389,9 @@ class _ProfileFilling extends State<ProfileFilling> {
                       height: width * 0.141,
                       width: width * 0.738,
                       child: TextField(
+                        onChanged: (String value) {
+                          name = value;
+                        },
                         controller: controllerName,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
@@ -471,6 +475,9 @@ class _ProfileFilling extends State<ProfileFilling> {
                       height: width * 0.141,
                       width: width * 0.738,
                       child: TextField(
+                        onChanged: (String value) {
+                          surName = value;  
+                        },
                         controller: controllerSoName,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
@@ -840,17 +847,19 @@ class _ProfileFilling extends State<ProfileFilling> {
                                 var prefs = await SharedPreferences.getInstance();
                                 var user_id = prefs.getString('user_id');
                                 var username = prefs.getString('username');
-                                var first_name = nameOfUser;
                                 var city = this.controllerCity.text;
                                 var d_birth = "$dateTime";
+                                d_birth = d_birth[0] + d_birth[1] + d_birth[2] + d_birth[3] + d_birth[4] + d_birth[5] + d_birth[6] + d_birth[7] + d_birth[8] + d_birth[9];
 
                                 AccountDataApi.save_filling_profile(
                                     context,
                                     user_id,
                                     username,
-                                    first_name,
+                                    name,
+                                    surName,
+                                    d_birth,
                                     city,
-                                    d_birth);
+                                    );
                               }
                             : null,
                         style: ButtonStyle(
