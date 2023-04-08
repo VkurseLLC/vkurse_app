@@ -74,6 +74,7 @@ class _ProfileFilling extends State<ProfileFilling> {
 
       setState(() => this.controllerName = controllerName);
     });
+
     controllerSoName = TextEditingController();
     controllerSoName.addListener(() {
       isSoNameChoosen = controllerSoName.text.isNotEmpty;
@@ -167,442 +168,334 @@ class _ProfileFilling extends State<ProfileFilling> {
 
     return Scaffold(
         backgroundColor: Colors.white,
-        body: SafeArea(
-            child: SingleChildScrollView(
-                child: Stack(children: <Widget>[
-          Row(children: [
-            SizedBox(
-                width: width,
-                height: height * 0.15,
-                child: Stack(alignment: Alignment.center, children: [
-                  Positioned(
-                    child: SizedBox(
+        body: SingleChildScrollView(
+          child: Stack(
+            children: <Widget>[
+              Row(
+                children: [
+                  SizedBox(
                       width: width,
                       height: height * 0.15,
-                      child: CustomPaint(
-                        foregroundPainter: HeaderPainter(),
-                      ),
-                    ),
-                  ),
-                ]))
-          ]),
+                      child: Stack(alignment: Alignment.center, children: [
+                        Positioned(
+                          child: SizedBox(
+                            width: width,
+                            height: height * 0.15,
+                            child: CustomPaint(
+                              foregroundPainter: HeaderPainter(),
+                            ),
+                          ),
+                        ),
+                      ]
+                    )
+                  )
+                ]
+              ),
 
           ///----------------------------------////КНОПКА\\\///НАЗАД\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
 
-          Positioned(
-            top: height * 0.045,
-            left: width * 0.0745,
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.arrow_back_ios_new),
-              color: Color(0xFFffffff),
-              iconSize: width * 0.115,
-            ),
-          ),
+              Positioned(
+                top: height * 0.045,
+                left: width * 0.0745,
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.arrow_back_ios_new),
+                  color: Color(0xFFffffff),
+                  iconSize: width * 0.115,
+                ),
+              ),
 
           ///----------------------------------////КНОПКА\\\///НАЗАД\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
 
-          Column(children: [
-            Padding(padding: EdgeInsets.only(top: height * 0.064)),
-            SizedBox(
-              width: width * 0.348,
-              height: width * 0.348,
-              child: ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          backgroundColor: Color(0x00FFFFFF),
-                          shape: RoundedRectangleBorder(
+              Column(
+                children: [
+                Padding(padding: EdgeInsets.only(top: height * 0.064)),
+                SizedBox(
+                  width: width * 0.348,
+                  height: width * 0.348,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            backgroundColor: Color(0x00FFFFFF),
+                            shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
-                          contentPadding: EdgeInsets.all(0),
-                          insetPadding: EdgeInsets.fromLTRB(
+                            contentPadding: EdgeInsets.all(0),
+                            insetPadding: EdgeInsets.fromLTRB(
                               width * 0.1558,
                               dialogheight * 0.2838,
                               width * 0.1564,
                               dialogheight * 0.5038),
-                          content: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(90),
-                              color: Color(0x00FFFFFF),
-                            ),
-                            width: width * 0.7077,
-                            height: width * 0.79,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                /////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ИЗМЕНИТЬ ФОТО\\\\////НАЧАЛО\\\\
-
-                                Container(
-                                  height: width * 0.146,
-                                  width: width * 0.7077,
-                                  child: ElevatedButton(
-                                    onPressed: () async {},
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          side: BorderSide(color: Colors.white),
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(20),
-                                              topRight: Radius.circular(20))),
-                                      backgroundColor:
-                                          Color.fromRGBO(255, 255, 255, 1),
-                                      foregroundColor: Colors.black54,
-                                      shadowColor: Colors.white,
-                                      elevation: 0.0,
-                                    ),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          'assets/icons/gallery.png',
-                                          height: width * 0.064,
-                                          width: width * 0.064,
-                                        ),
-                                        Padding(
-                                            padding: EdgeInsets.only(
-                                                left: width * 0.031)),
-                                        Container(
-                                          width: width * 0.3532,
-                                          height: width * 0.0564,
-                                          child: AutoSizeText(
-                                            "Изменить фото",
-                                            style: TextStyle(
-                                                fontSize: 100,
-                                                fontFamily:
-                                                    "assets/fonts/Inter-Regular.ttf",
-                                                color: Color(0xff626262)),
+                            content: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(90),
+                                color: Color(0x00FFFFFF),
+                              ),
+                              width: width * 0.7077,
+                              height: width * 0.79,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  /////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ИЗМЕНИТЬ ФОТО\\\\////НАЧАЛО\\\\
+                              /// 
+                                  Container(
+                                    height: width * 0.146,
+                                    width: width * 0.7077,
+                                    child: ElevatedButton(
+                                      onPressed: () async {},
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            side: BorderSide(color: Colors.white),
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                topRight: Radius.circular(20))),
+                                        backgroundColor:
+                                            Color.fromRGBO(255, 255, 255, 1),
+                                        foregroundColor: Colors.black54,
+                                        shadowColor: Colors.white,
+                                        elevation: 0.0,
+                                      ),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            'assets/icons/gallery.png',
+                                            height: width * 0.064,
+                                            width: width * 0.064,
                                           ),
-                                        )
-                                      ],
+                                          Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: width * 0.031)),
+                                          Container(
+                                            width: width * 0.3532,
+                                            height: width * 0.0564,
+                                            child: AutoSizeText(
+                                              "Изменить фото",
+                                              style: TextStyle(
+                                                  fontSize: 100,
+                                                  fontFamily:
+                                                      "assets/fonts/Inter-Regular.ttf",
+                                                  color: Color(0xff626262)),
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-
-                                /////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НАСТРОЙКИ\\\\////КОНЕЦ\\\\
-
-                                //////////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НЕВИДИМКА\\\\////НАЧАЛО\\\\
-
-                                Container(
-                                  height: width * 0.146,
-                                  width: width * 0.7077,
-                                  child: ElevatedButton(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          side: BorderSide(color: Colors.white),
-                                          borderRadius: BorderRadius.only(
-                                              bottomLeft: Radius.circular(20),
-                                              bottomRight:
-                                                  Radius.circular(20))),
-                                      backgroundColor:
-                                          Color.fromRGBO(255, 255, 255, 1),
-                                      foregroundColor: Colors.black54,
-                                      shadowColor: Colors.white,
-                                      elevation: 0.0,
-                                    ),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          'assets/icons/delete.png',
-                                          height: width * 0.064,
-                                          width: width * 0.064,
-                                        ),
-                                        Padding(
-                                            padding: EdgeInsets.only(
-                                                left: width * 0.031)),
-                                        Container(
-                                          width: width * 0.308,
-                                          height: width * 0.0564,
-                                          child: AutoSizeText(
-                                            "Удалить фото",
-                                            style: TextStyle(
-                                                fontFamily:
-                                                    "assets/fonts/Inter-Regular.ttf",
-                                                fontSize: 100,
-                                                color: Color(0xff626262)),
+                                  /////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НАСТРОЙКИ\\\\////КОНЕЦ\\\\
+                              /// 
+                                  //////////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НЕВИДИМКА\\\\////НАЧАЛО\\\\
+                              /// 
+                                  Container(
+                                    height: width * 0.146,
+                                    width: width * 0.7077,
+                                    child: ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            side: BorderSide(color: Colors.white),
+                                            borderRadius: BorderRadius.only(
+                                                bottomLeft: Radius.circular(20),
+                                                bottomRight:
+                                                    Radius.circular(20))),
+                                        backgroundColor:
+                                            Color.fromRGBO(255, 255, 255, 1),
+                                        foregroundColor: Colors.black54,
+                                        shadowColor: Colors.white,
+                                        elevation: 0.0,
+                                      ),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            'assets/icons/delete.png',
+                                            height: width * 0.064,
+                                            width: width * 0.064,
                                           ),
-                                        )
-                                      ],
+                                          Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: width * 0.031)),
+                                          Container(
+                                            width: width * 0.308,
+                                            height: width * 0.0564,
+                                            child: AutoSizeText(
+                                              "Удалить фото",
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      "assets/fonts/Inter-Regular.ttf",
+                                                  fontSize: 100,
+                                                  color: Color(0xff626262)),
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-
-                                ///////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НЕВИДИМКА\\\\////КОНЕЦ\\\\
-
-                                ////////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КОНЕЦ\\\\
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      });
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey.shade400,
-                  shape: CircleBorder(
-                      side: BorderSide(width: 5, color: Colors.grey.shade200)),
+                          );
+                        }
+                      );
+                    },
+
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey.shade400,
+                      shape: CircleBorder(
+                          side: BorderSide(width: 5, color: Colors.grey.shade200)),
+                    ),
+
+                    child: Image.asset(
+                      'assets/images/camera-to-take-photos.png',
+                      height: width * 0.203,
+                      width: width * 0.203,
+                    ),
+                  ),
                 ),
-                child: Image.asset(
-                  'assets/images/camera-to-take-photos.png',
-                  height: width * 0.203,
-                  width: width * 0.203,
-                ),
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(top: height * 0.007)),
-            Column(children: [
-              ///----------------------------------////НАЗВАНИЕ\\\///ИМЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-              Row(
-                children: [
-                  Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                  Container(
-                    width: width * 0.252,
-                    height: width * 0.062,
-                    child: AutoSizeText(
-                      'Ваше имя',
-                      style: TextStyle(
-                          fontSize: 50,
-                          fontFamily: "Comfortaa",
-                          color: Color(0xff898989)),
-                    ),
-                  ),
-                ],
-              ),
-
-              ///----------------------------------////НАЗВАНИЕ\\\///ИМЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
-              Padding(padding: EdgeInsets.only(top: width * 0.033)),
-
-              ///----------------------------------////СТРОКА ВВОДА \\\///ИМЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-              Row(children: [
-                Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                Expanded(
-                    flex: 1,
-                    child: Container(
-                      height: width * 0.141,
-                      width: width * 0.738,
-                      child: TextField(
-                        controller: controllerName,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: fsize,
-                          height: height * 0.0013,
-                          color: Colors.black,
-                          fontFamily: "Comfortaa",
-                        ),
-                        decoration: InputDecoration(
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.circular(width * 0.039),
-                              borderSide: BorderSide(
-                                width: 0.0,
-                                color: Colors.white,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.circular(width * 0.039),
-                              borderSide: BorderSide(
-                                width: 0.0,
-                                color: Colors.white,
-                              ),
-                            ),
-                            disabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.circular(width * 0.039),
-                              borderSide: BorderSide(
-                                width: 0.0,
-                                color: Colors.white,
-                              ),
-                            ),
-                            hintText: 'Bведите имя',
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: fsize,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            fillColor: Colors.grey.shade300),
-                      ),
-                    )),
-                Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
-              ]),
-
-              ///----------------------------------////СТРОКА ВВОДА \\\///ИМЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
-              Padding(padding: EdgeInsets.only(top: width * 0.0656)),
-
-              ///----------------------------------////НАЗВАНИЕ \\\///ФАМИЛИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-              Row(
-                children: [
-                  Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                  Container(
-                    width: width * 0.388,
-                    height: width * 0.062,
-                    child: AutoSizeText(
-                      'Ваша Фамилия',
-                      style: TextStyle(
-                          fontSize: 50,
-                          fontFamily: "Comfortaa",
-                          color: Color(0xff898989)),
-                    ),
-                  ),
-                ],
-              ),
-
-              ///----------------------------------////НАЗВАНИЕ \\\///ФАМИЛИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
-              Padding(padding: EdgeInsets.only(top: width * 0.033)),
-
-              ///----------------------------------////СТРОКА ВВОДА \\\///ФАМИЛИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-              Row(children: [
-                Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                Expanded(
-                    flex: 1,
-                    child: Container(
-                      height: width * 0.141,
-                      width: width * 0.738,
-                      child: TextField(
-                        controller: controllerSoName,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: fsize,
-                          height: height * 0.0013,
-                          color: Colors.black,
-                          fontFamily: "Comfortaa",
-                        ),
-                        decoration: InputDecoration(
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.circular(width * 0.039),
-                              borderSide: BorderSide(
-                                width: 0.0,
-                                color: Colors.white,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.circular(width * 0.039),
-                              borderSide: BorderSide(
-                                width: 0.0,
-                                color: Colors.white,
-                              ),
-                            ),
-                            disabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.circular(width * 0.039),
-                              borderSide: BorderSide(
-                                width: 0.0,
-                                color: Colors.white,
-                              ),
-                            ),
-                            hintText: 'Bведите фамилию',
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: fsize,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            fillColor: Colors.grey.shade300),
-                      ),
-                    )),
-                Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
-              ]),
-
-              ///----------------------------------////СТРОКА ВВОДА \\\///ФАМИЛИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
-              Padding(padding: EdgeInsets.only(top: width * 0.0656)),
-
-              ///----------------------------------////НАЗВАНИЕ \\\///ГОРОД ПРОЖИВАНИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-              Row(
-                children: [
-                  Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                  Container(
-                    width: width * 0.49,
-                    height: width * 0.062,
-                    child: AutoSizeText(
-                      'Город проживания',
-                      style: TextStyle(
-                          fontSize: 50,
-                          fontFamily: "Comfortaa",
-                          color: Color(0xff898989)),
-                    ),
-                  ),
-                ],
-              ),
-
-              ///----------------------------------////НАЗВАНИЕ \\\///ГОРОД ПРОЖИВАНИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
-              Padding(padding: EdgeInsets.only(top: width * 0.033)),
-
-              ///----------------------------------////СТРОКА ВВОДА \\\///ГОРОД ПРОЖИВАНИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-              Row(children: [
-                Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                      width: width * 0.682,
-                      height: width * 0.141,
-                      child: Form(
-                        key: _formKey,
-                        child: TypeAheadFormField(
-                          suggestionsCallback: (pattern) => countriesList.where(
-                              (item) => item
-                                  .toLowerCase()
-                                  .contains(pattern.toLowerCase())),
-                          itemBuilder: (_, String item) =>
-                              ListTile(title: Text(item)),
-                          onSuggestionSelected: (String val) {
-                            this.controllerCity.text =
-                                val; // ЗДЕСЬ ХРАНИТСЯ ГОРОД (val)
-                            setState(() {
-                              choosenCity = val;
-                            });
-                          },
-                          getImmediateSuggestions: true,
-                          hideSuggestionsOnKeyboardHide: false,
-                          hideOnEmpty: false,
-                          noItemsFoundBuilder: (context) => Padding(
-                            padding: EdgeInsets.all(2.0),
-                            child: Text("Город не найден",
-                                style: TextStyle(
-                                  fontSize: fontSizeText,
-                                )),
-                          ),
-                          textFieldConfiguration: TextFieldConfiguration(
-                            onSubmitted: (value) {},
+                
+                Padding(padding: EdgeInsets.only(top: height * 0.007)),
+                
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                        Container(
+                          width: width * 0.252,
+                          height: width * 0.062,
+                          child: AutoSizeText(
+                            'Ваше имя',
                             style: TextStyle(
+                                fontSize: 50,
+                                fontFamily: "Comfortaa",
+                                color: Color(0xff898989)),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Padding(padding: EdgeInsets.only(top: width * 0.033)),
+                    
+                    Row(
+                      children: [
+                        Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            height: width * 0.141,
+                            width: width * 0.738,
+                            child: TextField(
+                              controller: controllerName,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: fsize,
+                                height: height * 0.0013,
+                                color: Colors.black,
+                                fontFamily: "Comfortaa",
+                              ),
+                              decoration: InputDecoration(
+                                filled: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(width * 0.039),
+                                  borderSide: BorderSide(
+                                    width: 0.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(width * 0.039),
+                                  borderSide: BorderSide(
+                                    width: 0.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                disabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(width * 0.039),
+                                  borderSide: BorderSide(
+                                    width: 0.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                hintText: 'Bведите имя',
+                                hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: fsize,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                fillColor: Colors.grey.shade300
+                              ),
+                            ),
+                          )
+                        ),
+                        Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
+                      ]
+                    ),
+
+                    Padding(padding: EdgeInsets.only(top: width * 0.0656)),
+
+                    Row(
+                      children: [
+                        Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                        Container(
+                          width: width * 0.388,
+                          height: width * 0.062,
+                          child: AutoSizeText(
+                            'Ваша Фамилия',
+                            style: TextStyle(
+                              fontSize: 50,
+                              fontFamily: "Comfortaa",
+                              color: Color(0xff898989)),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                  Padding(padding: EdgeInsets.only(top: width * 0.033)),
+
+                  Row(
+                    children: [
+                      Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          height: width * 0.141,
+                          width: width * 0.738,
+                          child: TextField(
+                            controller: controllerSoName,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: fsize,
                               height: height * 0.0013,
                               color: Colors.black,
-                              fontSize: fsize,
-                              fontWeight: FontWeight.w500,
                               fontFamily: "Comfortaa",
                             ),
                             decoration: InputDecoration(
+                              filled: true,
                               enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                  borderSide: BorderSide(
-                                    width: 0.0,
-                                    color: Colors.white,
-                                  )),
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.039),
+                                borderSide: BorderSide(
+                                  width: 0.0,
+                                  color: Colors.white,
+                                ),
+                              ),
                               focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                  borderSide: BorderSide(
-                                    width: 0.0,
-                                    color: Colors.white,
-                                  )),
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.039),
+                                borderSide: BorderSide(
+                                  width: 0.0,
+                                  color: Colors.white,
+                                ),
+                              ),
                               disabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(width * 0.039),
@@ -611,66 +504,162 @@ class _ProfileFilling extends State<ProfileFilling> {
                                   color: Colors.white,
                                 ),
                               ),
-                              errorBorder: borderErrorStyle,
-                              errorStyle: textErrorStyle,
-                              hintText: 'Bведите город проживания',
+                              hintText: 'Bведите фамилию',
                               hintStyle: TextStyle(
                                 color: Colors.grey,
                                 fontSize: fsize,
                                 fontWeight: FontWeight.w500,
                               ),
-                              filled: true,
-                              fillColor: Colors.grey.shade300,
+                              fillColor: Colors.grey.shade300
                             ),
-                            controller: this.controllerCity,
                           ),
-                        ),
-                      )),
-                ),
-                Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
-              ]),
-
-              ///----------------------------------////СТРОКА ВВОДА \\\///ГОРОД ПРОЖИВАНИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
-              Padding(padding: EdgeInsets.only(top: width * 0.0656)),
-
-              ///----------------------------------////НАЗВАНИЕ \\\///ДАТА РОЖДЕНИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-              Row(
-                children: [
-                  Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                  Container(
-                    width: width * 0.402,
-                    height: width * 0.062,
-                    child: AutoSizeText(
-                      'Дата рождения',
-                      style: TextStyle(
-                          fontSize: 50,
-                          fontFamily: "Comfortaa",
-                          color: Color(0xff898989)),
-                    ),
+                        )
+                      ),
+                      Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
+                    ]
                   ),
-                ],
-              ),
 
-              ///----------------------------------////НАЗВАНИЕ \\\///ДАТА РОЖДЕНИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
+                  Padding(padding: EdgeInsets.only(top: width * 0.0656)),
 
-              Padding(padding: EdgeInsets.only(top: width * 0.033)),
-
-              ///----------------------------------////СТРОКА ВВОДА \\\///ДАТА РОЖДЕНИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
-              Row(
-                children: [
-                  Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-
-                  ///----------------------------------////ДЕНЬ \\\///ДАТА РОЖДЕНИЯ\\\\-------------------------------------------------------------\\\\
-
-                  Column(
+                  Row(
                     children: [
-                      SizedBox(
-                          width: width * 0.2,
+                      Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                      Container(
+                        width: width * 0.49,
+                        height: width * 0.062,
+                        child: AutoSizeText(
+                          'Город проживания',
+                          style: TextStyle(
+                              fontSize: 50,
+                              fontFamily: "Comfortaa",
+                              color: Color(0xff898989)),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  Padding(padding: EdgeInsets.only(top: width * 0.033)),
+
+                  Row(
+                    children: [
+                      Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          width: width * 0.682,
                           height: width * 0.141,
-                          child: OutlinedButton(
+                          child: Form(
+                            key: _formKey,
+                            child: TypeAheadFormField(
+                              suggestionsCallback: (pattern) => countriesList.where(
+                                (item) => item
+                                    .toLowerCase()
+                                    .contains(pattern.toLowerCase())),
+                              itemBuilder: (_, String item) =>
+                                  ListTile(title: Text(item)),
+                              onSuggestionSelected: (String val) {
+                                this.controllerCity.text =
+                                    val; // ЗДЕСЬ ХРАНИТСЯ ГОРОД (val)
+                                setState(() {
+                                  choosenCity = val;
+                                });
+                              },
+                              getImmediateSuggestions: true,
+                              hideSuggestionsOnKeyboardHide: false,
+                              hideOnEmpty: false,
+                              noItemsFoundBuilder: (context) => Padding(
+                                padding: EdgeInsets.all(2.0),
+                                child: Text("Город не найден",
+                                  style: TextStyle(
+                                    fontSize: fontSizeText,
+                                  )),
+                              ),
+                              textFieldConfiguration: TextFieldConfiguration(
+                                onSubmitted: (value) {},
+                                style: TextStyle(
+                                  height: height * 0.0013,
+                                  color: Colors.black,
+                                  fontSize: fsize,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: "Comfortaa",
+                                ),
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(width * 0.039),
+                                    borderSide: BorderSide(
+                                      width: 0.0,
+                                      color: Colors.white,
+                                    )
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(width * 0.039),
+                                    borderSide: BorderSide(
+                                      width: 0.0,
+                                      color: Colors.white,
+                                    )
+                                  ),
+                                  disabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(width * 0.039),
+                                    borderSide: BorderSide(
+                                      width: 0.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  errorBorder: borderErrorStyle,
+                                  errorStyle: textErrorStyle,
+                                  hintText: 'Bведите город проживания',
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: fsize,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.grey.shade300,
+                                ),
+                                controller: this.controllerCity,
+                              ),
+                            ),
+                          )
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
+                    ]
+                  ),
+
+                  Padding(padding: EdgeInsets.only(top: width * 0.0656)),
+
+                  Row(
+                    children: [
+                      Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                      Container(
+                        width: width * 0.402,
+                        height: width * 0.062,
+                        child: AutoSizeText(
+                          'Дата рождения',
+                          style: TextStyle(
+                              fontSize: 50,
+                              fontFamily: "Comfortaa",
+                              color: Color(0xff898989)),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  Padding(padding: EdgeInsets.only(top: width * 0.033)),
+
+                  Row(
+                    children: [
+                      Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: width * 0.2,
+                            height: width * 0.141,
+                            child: OutlinedButton(
                               style: ButtonStyle(
                                 shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
@@ -689,10 +678,11 @@ class _ProfileFilling extends State<ProfileFilling> {
                               ),
                               onPressed: () {
                                 Utils.showSheet(context,
-                                    child: buildDatePicker(width),
-                                    onClicked: () {
-                                  Navigator.pop(context);
-                                });
+                                  child: buildDatePicker(width),
+                                  onClicked: () {
+                                    Navigator.pop(context);
+                                  }
+                                );
                               },
                               child: Container(
                                 width: width * 0.15,
@@ -700,36 +690,36 @@ class _ProfileFilling extends State<ProfileFilling> {
                                 child: Row(
                                   children: [
                                     AutoSizeText(
-                                        isDateSelected
-                                            ? day
-                                            : '01', //------------------------берет данные из массива------------\\
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 50,
-                                          fontWeight: FontWeight.w500,
-                                          color: isDateSelected
-                                              ? Colors.black
-                                              : Colors.grey,
-                                          fontFamily: "Comfortaa",
-                                        )),
+                                      isDateSelected
+                                          ? day
+                                          : '01', //------------------------берет данные из массива------------\\
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 50,
+                                        fontWeight: FontWeight.w500,
+                                        color: isDateSelected
+                                            ? Colors.black
+                                            : Colors.grey,
+                                        fontFamily: "Comfortaa",
+                                      )
+                                    ),
                                   ],
                                 ),
-                              ))),
-                    ],
-                  ),
+                              )
+                            )
+                          ),
+                        ],
+                      ),
 
-                  ///----------------------------------////МЕСЯЦ \\\///ДАТА РОЖДЕНИЯ\\\\-------------------------------------------------------------\\\\
-
-                  SizedBox(
-                      width: width * 0.345,
-                      height: width * 0.141,
-                      child: OutlinedButton(
+                      SizedBox(
+                        width: width * 0.345,
+                        height: width * 0.141,
+                        child: OutlinedButton(
                           style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.circular(width * 0.039),
+                                  BorderRadius.circular(width * 0.039),
                               ),
                             ),
                             side: MaterialStateProperty.all(
@@ -741,9 +731,10 @@ class _ProfileFilling extends State<ProfileFilling> {
                           ),
                           onPressed: () {
                             Utils.showSheet(context,
-                                child: buildDatePicker(width), onClicked: () {
-                              Navigator.pop(context);
-                            });
+                              child: buildDatePicker(width), onClicked: () {
+                                Navigator.pop(context);
+                              }
+                            );
                           },
                           child: Container(
                             width: width * 0.315,
@@ -751,55 +742,57 @@ class _ProfileFilling extends State<ProfileFilling> {
                             child: Row(
                               children: [
                                 AutoSizeText(
-                                    isDateSelected
-                                        ? month
-                                        : 'Январь', //------------------------берет данные из массива------------\\
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 50,
-                                      fontWeight: FontWeight.w500,
-                                      color: isDateSelected
-                                          ? Colors.black
-                                          : Colors.grey,
-                                      fontFamily: "Comfortaa",
-                                    )),
+                                  isDateSelected
+                                      ? month
+                                      : 'Январь', //------------------------берет данные из массива------------\\
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.w500,
+                                    color: isDateSelected
+                                        ? Colors.black
+                                        : Colors.grey,
+                                    fontFamily: "Comfortaa",
+                                  )
+                                ),
                               ],
                             ),
-                          ))),
+                          )
+                        )
+                      ),
 
-                  ///----------------------------------////ГОД \\\///ДАТА РОЖДЕНИЯ\\\\-------------------------------------------------------------\\\\
-
-                  SizedBox(
-                      width: width * 0.25,
-                      height: width * 0.141,
-                      child: OutlinedButton(
-                        style: ButtonStyle(
-                          shape:
+                      SizedBox(
+                        width: width * 0.25,
+                        height: width * 0.141,
+                        child: OutlinedButton(
+                          style: ButtonStyle(
+                            shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(width * 0.039),
+                                RoundedRectangleBorder(
+                                  borderRadius:
+                                    BorderRadius.circular(width * 0.039),
+                                ),
+                              ),
+                            side: MaterialStateProperty.all(
+                              const BorderSide(
+                                  color: Color(0x0F000000), width: 0),
                             ),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.grey.shade300),
                           ),
-                          side: MaterialStateProperty.all(
-                            const BorderSide(
-                                color: Color(0x0F000000), width: 0),
-                          ),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.grey.shade300),
-                        ),
-                        onPressed: () {
-                          Utils.showSheet(context,
+                          onPressed: () {
+                            Utils.showSheet(context,
                               child: buildDatePicker(width), onClicked: () {
-                            Navigator.pop(context);
-                          });
-                        },
-                        child: Container(
-                          width: width * 0.16,
-                          height: width * 0.072,
-                          child: Row(
-                            children: [
-                              AutoSizeText(isDateSelected ? year : '1999',
+                                Navigator.pop(context);
+                              }
+                            );
+                          },
+                          child: Container(
+                            width: width * 0.16,
+                            height: width * 0.072,
+                            child: Row(
+                              children: [
+                                AutoSizeText(isDateSelected ? year : '1999',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontFamily: "Comfortaa",
@@ -808,60 +801,61 @@ class _ProfileFilling extends State<ProfileFilling> {
                                     color: isDateSelected
                                         ? Colors.black
                                         : Colors.grey,
-                                  )),
-                            ],
+                                  )
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      )),
-                ],
-              ),
-              Padding(padding: EdgeInsets.only(top: width * 0.1656)),
+                        )
+                      ),
+                    ],
+                  ),
+                  Padding(padding: EdgeInsets.only(top: width * 0.1656)),
 
-              ///----------------------------------////СТРОКА ВВОДА \\\///ДАТА РОЖДЕНИЯ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-              Container(
-                  width: width * 0.6538,
-                  height: width * 0.1333,
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
+                  Container(
+                    width: width * 0.6538,
+                    height: width * 0.1333,
+                    decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
                           color: Color.fromARGB(70, 0, 0, 0),
                           blurRadius: 25,
                           offset: Offset(0.0, 10.0)),
-                    ],
-                  ),
-                  child: Opacity(
-                    opacity: 0.9,
-                    child: ElevatedButton(
-                        onPressed: isNameChoosen &&
-                                isSoNameChoosen &&
-                                (_formKey.currentState!.validate()) &&
-                                isDateSelected
-                            ? () async {
-                                var prefs = await SharedPreferences.getInstance();
-                                var user_id = prefs.getString('user_id');
-                                var username = prefs.getString('username');
-                                var first_name = nameOfUser;
-                                var city = this.controllerCity.text;
-                                var d_birth = "$dateTime";
+                      ],
+                    ),
 
-                                AccountDataApi.save_filling_profile(
-                                    context,
-                                    user_id,
-                                    username,
-                                    first_name,
-                                    city,
-                                    d_birth);
-                              }
-                            : null,
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(width * 0.039),
+                    child: Opacity(
+                      opacity: 0.9,
+                      child: ElevatedButton(
+                        onPressed: isNameChoosen &&
+                          isSoNameChoosen &&
+                          (_formKey.currentState!.validate()) &&
+                          isDateSelected
+                            ? () async {
+                          var prefs = await SharedPreferences.getInstance();
+                          var user_id = prefs.getString('user_id');
+                          var username = prefs.getString('username');
+                          var first_name = nameOfUser;
+                          var city = this.controllerCity.text;
+                          var d_birth = "$dateTime";
+
+                              AccountDataApi.save_filling_profile(
+                                  context,
+                                  user_id,
+                                  username,
+                                  first_name,
+                                  city,
+                                  d_birth);
+                            }
+                          : null,
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(width * 0.039),
+                                ),
                               ),
-                            ),
-                            backgroundColor: isNameChoosen &&
+                              backgroundColor: isNameChoosen &&
                                     isSoNameChoosen &&
                                     (_formKey.currentState!.validate()) &&
                                     isDateSelected
@@ -869,11 +863,11 @@ class _ProfileFilling extends State<ProfileFilling> {
                                     Color(0xFF9A68C2))
                                 : MaterialStateProperty.all<Color>(
                                     Color(0xFFA0A0A0))),
-                        child: Row(
-                          children: [
-                            Padding(
+                          child: Row(
+                            children: [
+                              Padding(
                                 padding: EdgeInsets.only(right: width * 0.157)),
-                            SizedBox(
+                              SizedBox(
                                 width: width * 0.3692,
                                 height: width * 0.0564,
                                 child: AutoSizeText(
@@ -882,23 +876,28 @@ class _ProfileFilling extends State<ProfileFilling> {
                                       fontSize: 50,
                                       fontFamily: "Comfortaa",
                                       fontWeight: FontWeight.bold),
-                                ))
-                          ],
-                        )),
-                  )),
-              Padding(padding: EdgeInsets.only(top: width * 0.1656)),
+                                )
+                              )
+                            ],
+                          )
+                        ),
+                      )
+                    ),
+                    Padding(padding: EdgeInsets.only(top: width * 0.1656)),
+                  ]
+                ),
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\\
-            ]),
-
-            ///----------------------------------///////ОПИСАНИЕ\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-            Container(
-              width: width,
-              height: height * 0,
-              color: Colors.white,
-            )
-          ]),
-        ]))));
+                Container(
+                  width: width,
+                  height: height * 0,
+                  color: Colors.white,
+                )
+              ]
+            ),
+          ]
+        )
+      )
+    );
   }
 
   Widget buildDatePicker(width) => SizedBox(
