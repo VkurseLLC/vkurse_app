@@ -27,7 +27,7 @@ class LocationApi {
         }
 
     } else {
-      await EasyLoading.showError("Error Code : ${response.statusCode.toString()}");
+      await EasyLoading.showError("Ошибка API");
       }
   }
 
@@ -48,7 +48,7 @@ class LocationApi {
       }
       
     } else {
-      await EasyLoading.showError("Error Code : ${response.statusCode.toString()}");
+      await EasyLoading.showError("Ошибка API");
       }
   }
 }

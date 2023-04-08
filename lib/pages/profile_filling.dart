@@ -38,6 +38,8 @@ double fontSizeErrorText = 20.0;
 
 class _ProfileFilling extends State<ProfileFilling> {
   final _formKey = GlobalKey<FormState>();
+  String name = "";
+  String surName = "";
 
   final TextEditingController controller = TextEditingController();
   bool isDateSelected = false;
@@ -104,7 +106,6 @@ class _ProfileFilling extends State<ProfileFilling> {
     var height = mediaQuery.size.height;
     var dialogheight = mediaQuery.size.height;
     var proporcia = width / height;
-    String nameOfUser = "";
 
     double fsize = 18;
     if (width > 700) {
@@ -379,66 +380,63 @@ class _ProfileFilling extends State<ProfileFilling> {
                       ],
                     ),
 
-                    Padding(padding: EdgeInsets.only(top: width * 0.033)),
-                    
-                    Row(
-                      children: [
-                        Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+              Padding(padding: EdgeInsets.only(top: width * 0.033)),
 
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            height: width * 0.141,
-                            width: width * 0.738,
-                            child: TextField(
-                              controller: controllerName,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: fsize,
-                                height: height * 0.0013,
-                                color: Colors.black,
-                                fontFamily: "Comfortaa",
-                              ),
-                              decoration: InputDecoration(
-                                filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                  borderSide: BorderSide(
-                                    width: 0.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                  borderSide: BorderSide(
-                                    width: 0.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                disabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                  borderSide: BorderSide(
-                                    width: 0.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                hintText: 'Bведите имя',
-                                hintStyle: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: fsize,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                fillColor: Colors.grey.shade300
+              ///----------------------------------////СТРОКА ВВОДА \\\///ИМЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
+
+              Row(children: [
+                Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: width * 0.141,
+                      width: width * 0.738,
+                      child: TextField(
+                        controller: controllerName,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: fsize,
+                          height: height * 0.0013,
+                          color: Colors.black,
+                          fontFamily: "Comfortaa",
+                        ),
+                        decoration: InputDecoration(
+                            filled: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                              borderSide: BorderSide(
+                                width: 0.0,
+                                color: Colors.white,
                               ),
                             ),
-                          )
-                        ),
-                        Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
-                      ]
-                    ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                              borderSide: BorderSide(
+                                width: 0.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                              borderSide: BorderSide(
+                                width: 0.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                            hintText: 'Bведите имя',
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontSize: fsize,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            fillColor: Colors.grey.shade300),
+                      ),
+                    )),
+                Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
+              ]),
 
                     Padding(padding: EdgeInsets.only(top: width * 0.0656)),
 
@@ -461,63 +459,61 @@ class _ProfileFilling extends State<ProfileFilling> {
 
                   Padding(padding: EdgeInsets.only(top: width * 0.033)),
 
-                  Row(
-                    children: [
-                      Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: width * 0.141,
-                          width: width * 0.738,
-                          child: TextField(
-                            controller: controllerSoName,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
+              ///----------------------------------////СТРОКА ВВОДА \\\///ФАМИЛИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
+
+              Row(children: [
+                Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: width * 0.141,
+                      width: width * 0.738,
+                      child: TextField(
+                        controller: controllerSoName,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: fsize,
+                          height: height * 0.0013,
+                          color: Colors.black,
+                          fontFamily: "Comfortaa",
+                        ),
+                        decoration: InputDecoration(
+                            filled: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                              borderSide: BorderSide(
+                                width: 0.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                              borderSide: BorderSide(
+                                width: 0.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(width * 0.039),
+                              borderSide: BorderSide(
+                                width: 0.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                            hintText: 'Bведите фамилию',
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
                               fontSize: fsize,
-                              height: height * 0.0013,
-                              color: Colors.black,
-                              fontFamily: "Comfortaa",
+                              fontWeight: FontWeight.w500,
                             ),
-                            decoration: InputDecoration(
-                              filled: true,
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(width * 0.039),
-                                borderSide: BorderSide(
-                                  width: 0.0,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(width * 0.039),
-                                borderSide: BorderSide(
-                                  width: 0.0,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              disabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(width * 0.039),
-                                borderSide: BorderSide(
-                                  width: 0.0,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              hintText: 'Bведите фамилию',
-                              hintStyle: TextStyle(
-                                color: Colors.grey,
-                                fontSize: fsize,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              fillColor: Colors.grey.shade300
-                            ),
-                          ),
-                        )
+                            fillColor: Colors.grey.shade300),
                       ),
-                      Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
-                    ]
-                  ),
+                    )),
+                Padding(padding: EdgeInsets.fromLTRB(0, 0, width * 0.106, 0)),
+              ]),
 
                   Padding(padding: EdgeInsets.only(top: width * 0.0656)),
 
@@ -832,30 +828,33 @@ class _ProfileFilling extends State<ProfileFilling> {
                           (_formKey.currentState!.validate()) &&
                           isDateSelected
                             ? () async {
-                          var prefs = await SharedPreferences.getInstance();
-                          var user_id = prefs.getString('user_id');
-                          var username = prefs.getString('username');
-                          var first_name = nameOfUser;
-                          var city = this.controllerCity.text;
-                          var d_birth = "$dateTime";
+                                var prefs = await SharedPreferences.getInstance();
+                                var user_id = prefs.getString('user_id');
+                                var username = prefs.getString('username');
+                                var city = this.controllerCity.text;
+                                var d_birth = "$dateTime";
+                                d_birth = d_birth[0] + d_birth[1] + d_birth[2] + d_birth[3] + d_birth[4] + d_birth[5] + d_birth[6] + d_birth[7] + d_birth[8] + d_birth[9];
 
-                              AccountDataApi.save_filling_profile(
-                                  context,
-                                  user_id,
-                                  username,
-                                  first_name,
-                                  city,
-                                  d_birth);
-                            }
-                          : null,
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(width * 0.039),
-                                ),
+                                AccountDataApi.save_filling_profile(
+                                    context,
+                                    user_id,
+                                    username,
+                                    name,
+                                    surName,
+                                    d_birth,
+                                    city,
+                                    );
+                              }
+                            : null,
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.039),
                               ),
-                              backgroundColor: isNameChoosen &&
+                            ),
+                            backgroundColor: isNameChoosen &&
                                     isSoNameChoosen &&
                                     (_formKey.currentState!.validate()) &&
                                     isDateSelected
