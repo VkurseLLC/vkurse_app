@@ -1,25 +1,24 @@
 // //?_________________________________________НАЧАЛО ИМПОРТОВ________________________________________________?\\
-// //_____________________________________________СИСТЕМНЫЕ________________________________________________\\
+//_____________________________________________СИСТЕМНЫЕ________________________________________________\\
 
-// //_____________________________________________БИБЛИОТЕКИ________________________________________________\\
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+//_____________________________________________БИБЛИОТЕКИ________________________________________________\\
 
+import 'package:intl/intl.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// //_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
+//_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
 
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:intl/intl.dart';
-import 'package:validators/sanitizers.dart';
-import 'package:vkurse_app/data/api_account_data.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'dart:io';
-
-import 'package:image_picker/image_picker.dart';
 import 'package:vkurse_app/pages/style/canvas.dart';
+import 'package:vkurse_app/data/api_account_data.dart';
+
 //!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
 
 // Класс для отображения страницы ввода username
@@ -30,11 +29,6 @@ class ProfileFilling extends StatefulWidget {
   @override
   State<ProfileFilling> createState() => _ProfileFilling();
 }
-
-double fontSizeButton = 16.0;
-double fontSizeText = 20.0;
-double fontSizeMiniText = 15.0;
-double fontSizeErrorText = 20.0;
 
 class _ProfileFilling extends State<ProfileFilling> {
   final _formKey = GlobalKey<FormState>();
@@ -57,6 +51,10 @@ class _ProfileFilling extends State<ProfileFilling> {
 
   var choosenCity = "";
 
+  DateTime dateTime = DateTime(DateTime.now().year - 20); // ЗДЕСЬ ХРАНИТСЯ ДАТА (dateTime)
+  double fontSizeText = 20.0;
+  double fontSizeErrorText = 20.0;
+
   static const countriesList = [
     "Ростов-на-Дону",
     "Азов",
@@ -66,21 +64,36 @@ class _ProfileFilling extends State<ProfileFilling> {
     "Сочи"
   ];
 
+  File? image;
+  final ImagePicker picker = ImagePicker();
+
+  Future pickImage(sourse) async {
+    try {
+      final image = await picker.pickImage(source: sourse);
+      if (image == null) return;
+
+      final imageTemporary = File(image.path);
+      setState(() => this.image = imageTemporary);
+
+    } on PlatformException catch (e) {
+      print("Failed to pick image: $e");
+    }
+    Navigator.pop(context);
+  }
+
+
   @override
   void initState() {
     super.initState();
-
     controllerName = TextEditingController();
     controllerName.addListener(() {
       isNameChoosen = controllerName.text.isNotEmpty;
-
       setState(() => this.controllerName = controllerName);
     });
 
     controllerSoName = TextEditingController();
     controllerSoName.addListener(() {
       isSoNameChoosen = controllerSoName.text.isNotEmpty;
-
       setState(() => this.controllerSoName = controllerSoName);
     });
   }
@@ -92,68 +105,17 @@ class _ProfileFilling extends State<ProfileFilling> {
     super.dispose();
   }
 
-  DateTime dateTime =
-      DateTime(DateTime.now().year - 20); // ЗДЕСЬ ХРАНИТСЯ ДАТА (dateTime)
-
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     var width = mediaQuery.size.width;
-    var textheight = mediaQuery.size.height;
-    if (width > 700) {
-      textheight = textheight * 3;
-    }
     var height = mediaQuery.size.height;
-    var dialogheight = mediaQuery.size.height;
-    var proporcia = width / height;
 
     double fsize = 18;
-    if (width > 700) {
-      fsize = fsize * 2.5;
-    }
-    if (width > 500 && width < 700) {
-      fsize = fsize * 1.5;
-    }
-
-    if (proporcia < 0.4) {
-      height = height * 0.8;
-    }
-    if (proporcia > 0.46 && proporcia < 0.5) {
-      height = height * 1.05;
-    }
-    if (proporcia > 0.5 && proporcia < 0.65) {
-      height = height * 1.2;
-    }
-    if (proporcia > 0.65 && proporcia < 0.72) {
-      height = height * 1.3;
-    }
-    if (proporcia > 0.72 && proporcia < 0.75) {
-      height = height * 1.4;
-    }
-    if (proporcia >= 0.75) {
-      height = height * 1.5;
-    }
 
     final day = DateFormat('dd').format(dateTime);
     final month = DateFormat('MMMM', 'ru_RU').format(dateTime);
     final year = DateFormat('yyyy').format(dateTime);
-
-    var borderStyle = OutlineInputBorder(
-      borderSide: BorderSide(color: Color(0x0F000000), width: 2),
-      borderRadius: BorderRadius.all(Radius.circular(width * 0.039)),
-    );
-
-    var buttonStyle = ButtonStyle(
-        backgroundColor:
-            MaterialStateProperty.all<Color>(const Color(0xFFE0E3E7)),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(width * 0.039),
-          ),
-        ),
-        side: MaterialStateProperty.all(
-          const BorderSide(color: Color(0x0F000000), width: 2),
-        ));
 
     var borderErrorStyle = OutlineInputBorder(
       borderSide: BorderSide(color: Colors.redAccent, width: 2),
@@ -164,8 +126,6 @@ class _ProfileFilling extends State<ProfileFilling> {
         color: Colors.redAccent,
         fontSize: fontSizeErrorText,
         fontWeight: FontWeight.bold);
-
-    XFile? image;
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -181,7 +141,7 @@ class _ProfileFilling extends State<ProfileFilling> {
                         Positioned(
                           child: SizedBox(
                             width: width,
-                            height: height * 0.15,
+                            height: height * 0.2,
                             child: CustomPaint(
                               foregroundPainter: HeaderPainter(),
                             ),
@@ -206,159 +166,36 @@ class _ProfileFilling extends State<ProfileFilling> {
                 ),
               ),
 
-          ///----------------------------------////КНОПКА\\\///НАЗАД\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\
-
+          ///----------------------------------////КНОПКА\\\///НАЗАД\\\\\///КОНЕЦ\\\\-------------------------------------------------------------\\\\         
               Column(
                 children: [
                 Padding(padding: EdgeInsets.only(top: height * 0.064)),
-                SizedBox(
-                  width: width * 0.348,
-                  height: width * 0.348,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            backgroundColor: Color(0x00FFFFFF),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                            contentPadding: EdgeInsets.all(0),
-                            insetPadding: EdgeInsets.fromLTRB(
-                              width * 0.1558,
-                              dialogheight * 0.2838,
-                              width * 0.1564,
-                              dialogheight * 0.5038),
-                            content: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(90),
-                                color: Color(0x00FFFFFF),
-                              ),
-                              width: width * 0.7077,
-                              height: width * 0.79,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  /////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///ИЗМЕНИТЬ ФОТО\\\\////НАЧАЛО\\\\
-                              /// 
-                                  Container(
-                                    height: width * 0.146,
-                                    width: width * 0.7077,
-                                    child: ElevatedButton(
-                                      onPressed: () async {},
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                            side: BorderSide(color: Colors.white),
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(20),
-                                                topRight: Radius.circular(20))),
-                                        backgroundColor:
-                                            Color.fromRGBO(255, 255, 255, 1),
-                                        foregroundColor: Colors.black54,
-                                        shadowColor: Colors.white,
-                                        elevation: 0.0,
-                                      ),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            'assets/icons/gallery.png',
-                                            height: width * 0.064,
-                                            width: width * 0.064,
-                                          ),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: width * 0.031)),
-                                          Container(
-                                            width: width * 0.3532,
-                                            height: width * 0.0564,
-                                            child: AutoSizeText(
-                                              "Изменить фото",
-                                              style: TextStyle(
-                                                  fontSize: 100,
-                                                  fontFamily:
-                                                      "assets/fonts/Inter-Regular.ttf",
-                                                  color: Color(0xff626262)),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  /////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НАСТРОЙКИ\\\\////КОНЕЦ\\\\
-                              /// 
-                                  //////////ВСПЛЫВАЮЩЕЕ ОКНО\\\\////КНОПКА\\\\\///НЕВИДИМКА\\\\////НАЧАЛО\\\\
-                              /// 
-                                  Container(
-                                    height: width * 0.146,
-                                    width: width * 0.7077,
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                            side: BorderSide(color: Colors.white),
-                                            borderRadius: BorderRadius.only(
-                                                bottomLeft: Radius.circular(20),
-                                                bottomRight:
-                                                    Radius.circular(20))),
-                                        backgroundColor:
-                                            Color.fromRGBO(255, 255, 255, 1),
-                                        foregroundColor: Colors.black54,
-                                        shadowColor: Colors.white,
-                                        elevation: 0.0,
-                                      ),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            'assets/icons/delete.png',
-                                            height: width * 0.064,
-                                            width: width * 0.064,
-                                          ),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: width * 0.031)),
-                                          Container(
-                                            width: width * 0.308,
-                                            height: width * 0.0564,
-                                            child: AutoSizeText(
-                                              "Удалить фото",
-                                              style: TextStyle(
-                                                  fontFamily:
-                                                      "assets/fonts/Inter-Regular.ttf",
-                                                  fontSize: 100,
-                                                  color: Color(0xff626262)),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        }
-                      );
-                    },
-
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey.shade400,
-                      shape: CircleBorder(
-                          side: BorderSide(width: 5, color: Colors.grey.shade200)),
+              
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      width: width * 0.3893,
+                      height: width * 0.3893,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF9A68C2),
+                        borderRadius: BorderRadius.all(Radius.circular(90))  
+                      ),
                     ),
 
-                    child: Image.asset(
-                      'assets/images/camera-to-take-photos.png',
-                      height: width * 0.203,
-                      width: width * 0.203,
+                    Container(
+                      width: width * 0.3606,
+                      height: width * 0.3606,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade400,
+                        borderRadius: const BorderRadius.all(Radius.circular(90))  
+                      ),
                     ),
-                  ),
+
+                    buildImage(),
+                  ]
                 ),
-                
+
                 Padding(padding: EdgeInsets.only(top: height * 0.007)),
                 
                 Column(
@@ -366,17 +203,7 @@ class _ProfileFilling extends State<ProfileFilling> {
                     Row(
                       children: [
                         Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                        Container(
-                          width: width * 0.252,
-                          height: width * 0.062,
-                          child: AutoSizeText(
-                            'Ваше имя',
-                            style: TextStyle(
-                                fontSize: 50,
-                                fontFamily: "Comfortaa",
-                                color: Color(0xff898989)),
-                          ),
-                        ),
+                        buildLabel('Ваше имя', width * 0.252, width * 0.062),
                       ],
                     ),
 
@@ -440,24 +267,31 @@ class _ProfileFilling extends State<ProfileFilling> {
 
                     Padding(padding: EdgeInsets.only(top: width * 0.0656)),
 
+                    // Row(
+                    //   children: [
+                    //     Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                    //     SizedBox(
+                    //       width: width * 0.388,
+                    //       height: width * 0.062,
+                    //       child: const AutoSizeText(
+                    //         'Ваша Фамилия',
+                    //         style: TextStyle(
+                    //           fontSize: 50,
+                    //           fontFamily: "Comfortaa",
+                    //           color: Color(0xFF9A68C2)),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+
                     Row(
                       children: [
                         Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                        Container(
-                          width: width * 0.388,
-                          height: width * 0.062,
-                          child: AutoSizeText(
-                            'Ваша Фамилия',
-                            style: TextStyle(
-                              fontSize: 50,
-                              fontFamily: "Comfortaa",
-                              color: Color(0xff898989)),
-                          ),
-                        ),
+                        buildLabel('Ваша Фамилия', width * 0.388, width * 0.062),
                       ],
                     ),
 
-                  Padding(padding: EdgeInsets.only(top: width * 0.033)),
+                    Padding(padding: EdgeInsets.only(top: width * 0.033)),
 
               ///----------------------------------////СТРОКА ВВОДА \\\///ФАМИЛИЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
 
@@ -519,17 +353,11 @@ class _ProfileFilling extends State<ProfileFilling> {
 
                   Row(
                     children: [
-                      Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                      Container(
-                        width: width * 0.49,
-                        height: width * 0.062,
-                        child: AutoSizeText(
-                          'Город проживания',
-                          style: TextStyle(
-                              fontSize: 50,
-                              fontFamily: "Comfortaa",
-                              color: Color(0xff898989)),
-                        ),
+                      Row(
+                        children: [
+                          Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                          buildLabel('Город проживания', width * 0.49, width * 0.062),
+                        ],
                       ),
                     ],
                   ),
@@ -629,17 +457,11 @@ class _ProfileFilling extends State<ProfileFilling> {
 
                   Row(
                     children: [
-                      Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                      Container(
-                        width: width * 0.402,
-                        height: width * 0.062,
-                        child: AutoSizeText(
-                          'Дата рождения',
-                          style: TextStyle(
-                              fontSize: 50,
-                              fontFamily: "Comfortaa",
-                              color: Color(0xff898989)),
-                        ),
+                      Row(
+                        children: [
+                          Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
+                          buildLabel('Дата рождения', width * 0.402, width * 0.062),
+                        ],
                       ),
                     ],
                   ),
@@ -733,7 +555,7 @@ class _ProfileFilling extends State<ProfileFilling> {
                             );
                           },
                           child: Container(
-                            width: width * 0.315,
+                            width: width * 0.31,
                             height: width * 0.073,
                             child: Row(
                               children: [
@@ -900,18 +722,330 @@ class _ProfileFilling extends State<ProfileFilling> {
   }
 
   Widget buildDatePicker(width) => SizedBox(
-        height: width * 0.46,
-        child: CupertinoDatePicker(
-            minimumYear: 1970,
-            maximumYear: DateTime.now().year - 14,
-            initialDateTime: dateTime,
-            mode: CupertinoDatePickerMode.date,
-            onDateTimeChanged: (dateTime) {
-              setState(() => this.dateTime = dateTime);
-              setState(() => isDateSelected = true);
-              print(isDateSelected);
-            }),
+    height: width * 0.46,
+    child: CupertinoDatePicker(
+      minimumYear: 1970,
+      maximumYear: DateTime.now().year - 14,
+      initialDateTime: dateTime,
+      mode: CupertinoDatePickerMode.date,
+      onDateTimeChanged: (dateTime) {
+        setState(() => this.dateTime = dateTime);
+        setState(() => isDateSelected = true);
+        print(isDateSelected);
+      }
+    ),
+  );
+
+  void _showChangeDialog(BuildContext context) {
+
+  final mediaQuery = MediaQuery.of(context);
+  var width = mediaQuery.size.width;
+  var height = mediaQuery.size.height;
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: Color(0x00FFFFFF),
+
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0))
+        ),
+        
+        contentPadding: const EdgeInsets.all(0),
+
+        insetPadding: EdgeInsets.fromLTRB(
+          width * 0.1558, height * 0.2838,
+          width * 0.1564, height * 0.5038
+        ),
+
+        content: Container(
+          width: width * 0.7077,
+          height: width * 0.79,
+
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(90),
+            color: Color(0x00FFFFFF),
+          ),
+          
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: width * 0.146,
+                width: width * 0.7077,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    _showPickOptionDialog(context);
+                  },
+
+                  style: ElevatedButton.styleFrom(
+                    shape: const RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))
+                    ),
+                    
+                    backgroundColor:Colors.white,
+                    foregroundColor:Colors.black54,
+                    shadowColor: Colors.white,
+                    elevation: 0.0,
+                  ),
+
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/gallery.png',
+                        height: width * 0.064,
+                        width: width * 0.064,
+                      ),
+
+                      Padding(padding: EdgeInsets.only(left: width * 0.031)),
+
+                      SizedBox(
+                        width: width * 0.3532,
+                        height: width * 0.0564,
+                        child: const AutoSizeText(
+                          "Изменить фото",
+                          style: TextStyle(
+                            fontSize: 100,
+                            fontFamily: "Comfortaa",
+                            color: Color(0xff626262)),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              
+              SizedBox(
+                height: width * 0.146,
+                width: width * 0.7077,
+                child: ElevatedButton(
+
+                  onPressed: () {},
+
+                  style: ElevatedButton.styleFrom(
+                    shape: const RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))
+                    ),
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black54,
+                    shadowColor: Colors.white,
+                    elevation: 0.0,
+                  ),
+
+                  child: Row(
+                    crossAxisAlignment:CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/delete.png',
+                        height: width * 0.064,
+                        width: width * 0.064,
+                      ),
+
+                      Padding(padding: EdgeInsets.only(left: width * 0.031)),
+
+                      SizedBox(
+                        width: width * 0.308,
+                        height: width * 0.0564,
+                        child: const AutoSizeText(
+                          "Удалить фото",
+                          style: TextStyle(
+                            fontFamily: "Comfortaa",
+                            fontSize: 100,
+                            color: Color(0xff626262)),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       );
+    }
+  );
+}
+
+void _showPickOptionDialog(BuildContext context) {
+
+  final mediaQuery = MediaQuery.of(context);
+  var width = mediaQuery.size.width;
+  var dialogheight = mediaQuery.size.height;
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: Color(0x00FFFFFF),
+
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0))
+        ),
+
+        contentPadding: const EdgeInsets.all(0),
+
+        insetPadding: EdgeInsets.fromLTRB(
+          width * 0.1558, dialogheight * 0.2838,
+          width * 0.1564, dialogheight * 0.5038
+        ),
+
+        content: Container(
+          width: width * 0.7077,
+          height: width * 0.79,
+
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(90),
+          color: Color(0x00FFFFFF),
+        ),
+
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: width * 0.7077,
+                height: width * 0.146,
+                child: ElevatedButton(
+                  onPressed: () => pickImage(ImageSource.gallery),
+
+                  style: ElevatedButton.styleFrom(
+                    shape: const RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))
+                    ),
+
+                    backgroundColor:Colors.white,
+                    foregroundColor:Colors.black54,
+                    shadowColor: Colors.white,
+                    elevation: 0.0,
+                  ),
+
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/icons/gallery.png',
+                        height: width * 0.064,
+                        width: width * 0.064,
+                      ),
+
+                      Padding(padding: EdgeInsets.only(left: width * 0.031)),
+
+                      Container(
+                        width: width * 0.4532,
+                        height: width * 0.0534,
+                        // color: Colors.amber,
+                        child: const AutoSizeText(
+                          "Bыбрать из галлереи",
+                          style: TextStyle(
+                            fontSize: 100,
+                            fontFamily: "Comfortaa",
+                            color: Color(0xff626262)),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+
+              SizedBox(
+                width: width * 0.7077,
+                height: width * 0.146,
+                child: ElevatedButton(
+
+                  onPressed: () => pickImage(ImageSource.camera),
+
+                  style: ElevatedButton.styleFrom(
+                    shape: const RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))
+                    ),
+                    backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+                    foregroundColor: Colors.black54,
+                    shadowColor: Colors.white,
+                    elevation: 0.0,
+                  ),
+
+                  child: Row(
+                    crossAxisAlignment:CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/camera-to-take-photos.png',
+                        height: width * 0.064,
+                        width: width * 0.064,
+                      ),
+
+                      Padding(padding: EdgeInsets.only(left: width * 0.031)),
+
+                      SizedBox(
+                        width: width * 0.4532,
+                        height: width * 0.0534,
+                        child: const AutoSizeText(
+                          "Сделайте фото",
+                          style: TextStyle(
+                            fontFamily: "Comfortaa",
+                            fontSize: 100,
+                            color: Color(0xff626262)),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+  );
+}
+
+  Widget buildImage(){
+
+    final mediaQuery = MediaQuery.of(context);
+    var width = mediaQuery.size.width;
+
+    var photo;
+    image != null ? photo = FileImage(image!) 
+          : photo = AssetImage("assets/images/cameraProfile.png");
+
+    return ClipOval(
+      child: Material(
+        color: Colors.transparent,
+        child: Ink.image(
+
+          image: photo,
+          fit: BoxFit.cover,
+          width: width * 0.3606,
+          height: width * 0.3606,
+          child: InkWell(
+            onTap: (){
+            _showChangeDialog(context);
+            }
+          ),
+        ) ,
+      )
+    );
+  }
+
+  Widget buildLabel(String text, width, height){
+
+    return SizedBox(
+      width: width,
+      height: height,
+      child: AutoSizeText(
+        text,
+        style: const TextStyle(
+          fontSize: 50,
+          fontFamily: "Comfortaa",
+          color: Color(0xFF9A68C2)),
+      ),
+    );
+  }
 }
 
 class Utils {

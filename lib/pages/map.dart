@@ -1,9 +1,9 @@
-//?_________________________________________НАЧАЛО ИМПОРТОВ________________________________________________?\\
-//_____________________________________________СИСТЕМНЫЕ________________________________________________\\
+//?_________________________________________START OF IMPORTS________________________________________________?\\
+//_____________________________________________SYSTEM________________________________________________\\
 
 import 'package:flutter/material.dart';
 
-//_____________________________________________БИБЛИОТЕКИ________________________________________________\\
+//_____________________________________________LIBRARYIES________________________________________________\\
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:geolocator/geolocator.dart';
@@ -13,11 +13,11 @@ import 'package:cron/cron.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 
-//_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
+//_____________________________________________OTHER FILES________________________________________________\\
 
 import 'package:vkurse_app/data/api_location.dart';
 import 'package:vkurse_app/pages/additionally/app_location.dart';
-//!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
+//!___________________________________________END OF IMPORTS________________________________________________!\\
 
 void locationHandler () async {
   var prefs = await SharedPreferences.getInstance();
@@ -48,17 +48,11 @@ class _Map extends State<Map> {
   
   final mapController = MapController();
 
-  // double myLatitude = 47.283020;
-  // double myLongitude = 39.702150;
-
   List<Marker> markers = [];
   List<Marker> mapObject = [];
 
   var user_id = null;
 
-  // List userInfo = [["Kratos0506", "assets/images/nikitaLogo.jpg", 47.237339, 39.712246], ["Semyown", "assets/images/semenLogo.jpg", 47.239339, 39.712246], ["olardaniil", null, 47.637339, 39.715246], ["THKssssssssssss", null, 47.639339, 39.715246]];
-  
-  // user_id ЭТО user_name !!!
   void createMarker(_user_id, _username, _photo, _latitude, _longitude) {
 
       if (_photo != null) {
@@ -134,7 +128,7 @@ class _Map extends State<Map> {
                             width: 50,
                             alignment: Alignment.center,
                             child: AutoSizeText(
-                              _username, // user_name !!!
+                              _username,
                               maxLines: 1,
                               minFontSize: 10,
                               overflow: TextOverflow.ellipsis,
@@ -165,11 +159,9 @@ class _Map extends State<Map> {
     final cron = Cron();
     cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
       mapObject.clear();
-    // var userLocation = [{"type": "user_location", "user_id": "2", "latitude": 47.289020, "longitude": 39.702150}, {"type": "user_location", "user_id": "3", "latitude": 47.289020, "longitude": 39.701150} ];
       var userLocation = await LocationApi.users_location_stream(user_id.toString());
       var data_item = null;
 
-      // createMarker("2", "username", "assets/images/nikitaLogo.jpg", 47.289020, 39.702150);
       if (userLocation != null) {
         for (data_item in userLocation) {
         if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
@@ -237,6 +229,7 @@ class _Map extends State<Map> {
 
                   urlTemplate:
                       'https://api.mapbox.com/styles/v1/olardaniil/clf5o14q2000s01mrhe1byyg8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
+                  // ignore: prefer_const_literals_to_create_immutables
                   additionalOptions: {
                     'accessToken': 'pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
                     'id': 'mapbox.mapbox-streets-v8',
@@ -298,7 +291,6 @@ class _Map extends State<Map> {
             ),
 
             Positioned(
-              // bottom: width * 0.2683, //110.0
               bottom: height * 0.3, //200.0
               right: width * 0.0488, //30.0
               child: Container(

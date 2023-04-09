@@ -2,7 +2,6 @@
 //_____________________________________________СИСТЕМНЫЕ________________________________________________\\
 
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
 
 //_____________________________________________БИБЛИОТЕКИ________________________________________________\\
 import 'package:intl/intl.dart';
@@ -22,15 +21,8 @@ class NoFriendProfile extends StatefulWidget {
   State<NoFriendProfile> createState() => _NoFriendProfile();
 }
 
-double fontSizeButton = 16.0;
-double fontSizeText = 20.0;
-double fontSizeMiniText = 15.0;
-double fontSizeErrorText = 20.0;
-
 class _NoFriendProfile extends State<NoFriendProfile> {
-  final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController controller = TextEditingController();
   static const textfield = [
     "Nikita",
     "Fomichev",
@@ -40,43 +32,6 @@ class _NoFriendProfile extends State<NoFriendProfile> {
     "@kratos0506",
     "Меня зовут Никита))) и я пользвуюсь VKURSE"
   ];
-  var borderStyle = const OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.black, width: 2),
-    borderRadius: BorderRadius.all(Radius.circular(20)),
-  );
-
-  var borderErrorStyle = const OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.redAccent, width: 2),
-    borderRadius: BorderRadius.all(Radius.circular(20)),
-  );
-
-  var textErrorStyle = TextStyle(
-    color: Colors.redAccent,
-    fontSize: fontSizeErrorText,
-    fontWeight: FontWeight.bold,
-    fontFamily: "assets/fonts/Inter-Regular.ttf",
-  );
-
-  var textRegStyle = const TextStyle(
-    color: Color(0xFF6F2EAE),
-    fontSize: 50,
-    fontWeight: FontWeight.bold,
-    fontFamily: "assets/fonts/Inter-Regular.ttf",
-  );
-
-  var textProfileStyle = const TextStyle(
-    color: Color(0xff4D4D4D),
-    fontSize: 40,
-    fontWeight: FontWeight.bold,
-    fontFamily: "assets/fonts/Inter-Regular.ttf",
-  );
-
-  var textMarkStyle = TextStyle(
-    color: Color.fromARGB(100, 0, 0, 0),
-    fontSize: fontSizeErrorText,
-    fontWeight: FontWeight.bold,
-    fontFamily: "assets/fonts/Inter-Regular.ttf",
-  );
 
   bool isDateSelected = false;
 
@@ -89,40 +44,7 @@ class _NoFriendProfile extends State<NoFriendProfile> {
     var height = mediaQuery.size.height -
         mediaQuery.padding.top -
         mediaQuery.padding.bottom;
-
-    double fontSizeOP = 18;
-    if (width > 700 && width < 900) {
-      fontSizeOP = 32;
-    } else if (width < 300) {
-      fontSizeOP = 16;
-    } else if (width > 900) {
-      fontSizeOP = 28;
-    } else if (width > 300 && width < 500) {
-      fontSizeOP = 18;
-    } else if (width > 700 && width < 700) {
-      fontSizeOP = 22;
-    }
-
-    final day = DateFormat('dd').format(dateTime);
-    final month = DateFormat('MMMM', 'ru_RU').format(dateTime);
-    final year = DateFormat('yyyy').format(dateTime);
-
-    var borderStyle = const OutlineInputBorder(
-      borderSide: BorderSide(color: Color(0x0F000000), width: 2),
-      borderRadius: BorderRadius.all(Radius.circular(16)),
-    );
-
-    var buttonStyle = ButtonStyle(
-      side: MaterialStateProperty.all(
-        BorderSide(color: Color(0x0F000000), width: 2),
-      ),
-      backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFE0E3E7)),
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-      ),
-    );
+        
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -140,7 +62,7 @@ class _NoFriendProfile extends State<NoFriendProfile> {
                     decoration: BoxDecoration(
                         image: const DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/profilephoto.jpg"),
+                      image: AssetImage("assets/images/user_photo_default.png"),
                     )),
                     child: Column(children: [
                       Padding(padding: EdgeInsets.only(top: height * 0.045)),
@@ -482,18 +404,17 @@ class _NoFriendProfile extends State<NoFriendProfile> {
                                                   Color(0xFF9A68C2))),
                                       child: Container(
                                           width: width * 0.65,
-                                          height: width * 0.0564,
+                                          height: width * 0.0684,
                                           child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: const [
                                                 AutoSizeText(
                                                   'Добавить в друзья',
                                                   style: TextStyle(
-                                                      fontSize: 50,
-                                                      fontFamily: "Comfortaa",
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                    fontSize: 50,
+                                                    fontFamily: "Comfortaa",
+                                                    fontWeight:
+                                                      FontWeight.bold),
                                                 )
                                               ]))),
                                 )

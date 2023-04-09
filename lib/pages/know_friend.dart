@@ -33,7 +33,7 @@ class _KnowFriend extends State<KnowFriend> {
   static const textfield = [
     "Nikita",
     "Fomichev",
-    "18лет",
+    "18 лет",
     "Ростов-на-Дону",
     "+7-999-999-99-99",
     "@kratos0506",
@@ -139,7 +139,7 @@ class _KnowFriend extends State<KnowFriend> {
                     decoration: BoxDecoration(
                         image: const DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/profilephoto.jpg"),
+                      image: AssetImage("assets/images/user_photo_default.png"),
                     )),
                     child: Column(children: [
                       Padding(padding: EdgeInsets.only(top: height * 0.045)),
@@ -274,9 +274,7 @@ class _KnowFriend extends State<KnowFriend> {
                                                     elevation: 0.0,
                                                   ),
                                                   child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
+                                                    crossAxisAlignment:CrossAxisAlignment.center,
                                                     children: [
                                                       Image.asset(
                                                         'assets/icons/delete_friend.png',
@@ -684,7 +682,6 @@ class _KnowFriend extends State<KnowFriend> {
                                     height: height * 0.1884,
                                     margin: EdgeInsets.fromLTRB(
                                         width * 0.074, height * 0.0172, 0, 0),
-                                    child: Flexible(
                                       child: Text(
                                         "Test", //------------------------берет данные из массива------------\\
                                         maxLines: 10,
@@ -697,7 +694,6 @@ class _KnowFriend extends State<KnowFriend> {
                                         ),
                                       ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ],
