@@ -16,7 +16,6 @@ class NoFriendProfile extends StatefulWidget {
   State<NoFriendProfile> createState() => _NoFriendProfile();
 }
 class _NoFriendProfile extends State<NoFriendProfile> {
-  final _formKey = GlobalKey<FormState>();
 
   final TextEditingController controller = TextEditingController();
 
@@ -66,7 +65,7 @@ class _NoFriendProfile extends State<NoFriendProfile> {
                     decoration: BoxDecoration(
                       image: const DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage("assets/images/profilephoto.jpg"),
+                        image: AssetImage("assets/images/user_photo_default.png"),
                       )
                     ),
                     child: Column(

@@ -20,23 +20,28 @@ import 'package:vkurse_app/ui/main_navigation.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  final model = CheckAuth();
+  await model.checkAuth();
+  
 
   // runApp(const MyApp());
   runApp(
+    
     EasyLocalization(
         supportedLocales: [Locale('en'), Locale('ru')],
         path:
             'assets/translations', // <-- change the path of the translation files
         fallbackLocale: Locale('ru'),
         assetLoader: CodegenLoader(),
-        child: MyApp()),
+        child: MyApp(model: model)),
   );
 }
 
 
 class MyApp extends StatelessWidget {
+  final CheckAuth model;
   static final mainNavigation = MainNavigation();
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +63,7 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       theme: ThemeData(),
       routes: mainNavigation.routes,
-      initialRoute: mainNavigation.initialRoute(false),
+      initialRoute: mainNavigation.initialRoute(model.isAuth),
       builder: EasyLoading.init(),
     );
   }

@@ -28,7 +28,7 @@ class _KnowFriend extends State<KnowFriend> {
   static const textfield = [
     "Nikita",
     "Fomichev",
-    "18лет",
+    "18 лет",
     "Ростов-на-Дону",
     "+7-999-999-99-99",
     "@kratos0506",

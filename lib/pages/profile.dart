@@ -2,11 +2,14 @@
 //_____________________________________________СИСТЕМНЫЕ________________________________________________\\
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //_____________________________________________БИБЛИОТЕКИ________________________________________________\\
 import 'package:intl/intl.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '../data/api_account_data.dart';
 
 //_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
 
@@ -29,7 +32,19 @@ double fontSizeMiniText = 15.0;
 double fontSizeErrorText = 20.0;
 
 class _Profile extends State<Profile> {
+
+  void downloand_user_data_profile () async {
+    var prefs = await SharedPreferences.getInstance();
+    var user_id = prefs.getString('user_id');
+    var user_data_profile = await AccountDataApi.view_user_data_profile(user_id);
+    return user_data_profile;
+  }
+
   final _formKey = GlobalKey<FormState>();
+
+  var user_data_profile = {};
+
+  // user_data_profile = downloand_user_data_profile();
 
   final TextEditingController controller = TextEditingController();
   static const textfield = [
@@ -41,6 +56,17 @@ class _Profile extends State<Profile> {
     "@kratos0506",
     "Меня зовут Никита))) и я пользвуюсь VKURSE"
   ];
+
+  @override
+  void initState() {
+    print("initState");
+    
+    setState(() {
+      downloand_user_data_profile();
+    });
+  }
+
+
   var borderStyle = const OutlineInputBorder(
     borderSide: BorderSide(color: Colors.black, width: 2),
     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -103,6 +129,8 @@ class _Profile extends State<Profile> {
     } else if (width > 700 && width < 700) {
       fontSizeOP = 22;
     }
+    
+    var user_photo = AssetImage("assets/images/user_photo_default.png");
 
     final day = DateFormat('dd').format(dateTime);
     final month = DateFormat('MMMM', 'ru_RU').format(dateTime);
@@ -124,6 +152,7 @@ class _Profile extends State<Profile> {
         ),
       ),
     );
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -139,9 +168,9 @@ class _Profile extends State<Profile> {
                     width: width,
                     height: height * 0.5189,
                     decoration: BoxDecoration(
-                        image: const DecorationImage(
+                        image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/profilephoto.jpg"),
+                      image: user_photo,
                     )),
                     child: Column(children: [
                       Padding(padding: EdgeInsets.only(top: height * 0.045)),
@@ -436,7 +465,11 @@ class _Profile extends State<Profile> {
                                                 height: width * 0.146,
                                                 width: width * 0.7077,
                                                 child: ElevatedButton(
-                                                  onPressed: () {},
+                                                  onPressed: () async {
+                                                    var prefs = await SharedPreferences.getInstance();
+                                                    await prefs.remove('user_id');
+                                                    Navigator.pushNamed(context, '/auth');
+                                                  },
                                                   style:
                                                       ElevatedButton.styleFrom(
                                                     shape: RoundedRectangleBorder(
@@ -465,7 +498,7 @@ class _Profile extends State<Profile> {
                                                             .center,
                                                     children: [
                                                       Image.asset(
-                                                        'assets/icons/incognito.png',
+                                                        'assets/icons/exit.png',
                                                         height: width * 0.064,
                                                         width: width * 0.064,
                                                       ),
@@ -478,13 +511,13 @@ class _Profile extends State<Profile> {
                                                         width: width * 0.2462,
                                                         height: width * 0.0564,
                                                         child: AutoSizeText(
-                                                          "Невидимка",
+                                                          "Выход",
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   "assets/fonts/Inter-Regular.ttf",
                                                               fontSize: 100,
                                                               color:
-                                                                  Colors.black),
+                                                                  Colors.red),
                                                         ),
                                                       )
                                                     ],
@@ -539,10 +572,7 @@ class _Profile extends State<Profile> {
                                     margin: EdgeInsets.fromLTRB(
                                         width * 0.074, height * 0.031, 0, 0),
                                     child: AutoSizeText(
-                                      textfield[0] +
-                                          "\n" +
-                                          textfield[
-                                              1], //------------------------берет данные из массива------------\\
+                                      user_data_profile["name"].toString() + "\n" + user_data_profile["surname"].toString(), //------------------------берет данные из массива------------\\
                                       style: TextStyle(
                                         color: Color(0xff4D4D4D),
                                         fontSize: 40,
@@ -620,8 +650,7 @@ class _Profile extends State<Profile> {
                                     margin: EdgeInsets.fromLTRB(
                                         width * 0.074, height * 0.0086, 0, 0),
                                     child: AutoSizeText(
-                                      textfield[
-                                          2], //------------------------берет данные из массива------------\\
+                                      user_data_profile["age"].toString(), //------------------------берет данные из массива------------\\
                                       style: TextStyle(
                                         color: Color(0xff4D4D4D),
                                         fontSize: 40,
@@ -637,7 +666,7 @@ class _Profile extends State<Profile> {
                                     margin: EdgeInsets.fromLTRB(
                                         width * 0.2641, height * 0.0086, 0, 0),
                                     child: AutoSizeText(
-                                      textfield[3],
+                                      user_data_profile["city"].toString(),
                                       style: TextStyle(
                                         color: Color(0xff4D4D4D),
                                         fontSize: 40,
@@ -681,8 +710,7 @@ class _Profile extends State<Profile> {
                                     margin: EdgeInsets.fromLTRB(
                                         width * 0.074, height * 0.0086, 0, 0),
                                     child: AutoSizeText(
-                                      textfield[
-                                          4], //------------------------берет данные из массива------------\\
+                                      user_data_profile["phone_number"].toString(), //------------------------берет данные из массива------------\\
                                       style: TextStyle(
                                         color: Color(0x80000000),
                                         fontSize: 40,
@@ -703,8 +731,7 @@ class _Profile extends State<Profile> {
                                     margin: EdgeInsets.fromLTRB(
                                         width * 0.074, height * 0.0086, 0, 0),
                                     child: AutoSizeText(
-                                      textfield[
-                                          5], //------------------------берет данные из массива------------\\
+                                      user_data_profile["username"].toString(), //------------------------берет данные из массива------------\\
                                       style: TextStyle(
                                         color: Color(0x80000000),
                                         fontSize: 40,
@@ -747,7 +774,7 @@ class _Profile extends State<Profile> {
                                         width * 0.074, height * 0.0172, 0, 0),
                                     child: Flexible(
                                       child: Text(
-                                        "Test", //------------------------берет данные из массива------------\\
+                                        user_data_profile["about"].toString(), //------------------------берет данные из массива------------\\
                                         maxLines: 10,
                                         style: TextStyle(
                                           color: Color(0x90000000),

@@ -1,28 +1,27 @@
-//?_________________________________________НАЧАЛО ИМПОРТОВ________________________________________________?\\
-//_____________________________________________СИСТЕМНЫЕ________________________________________________\\
+//?_________________________________________START OF IMPORTS________________________________________________?\\
+//_____________________________________________SYSTEM________________________________________________\\
 
 import 'package:flutter/material.dart';
 
-//_____________________________________________БИБЛИОТЕКИ________________________________________________\\
+//_____________________________________________LIBRARYIES________________________________________________\\
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart' as latLng;
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cron/cron.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 
-//_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
+//_____________________________________________OTHER FILES________________________________________________\\
 
 import 'package:vkurse_app/data/api_location.dart';
 import 'package:vkurse_app/pages/additionally/app_location.dart';
-//!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
+//!___________________________________________END OF IMPORTS________________________________________________!\\
 
-
-int user_id = 2;
-
-void locationHandler (_user_id) {
+void locationHandler () async {
+  var prefs = await SharedPreferences.getInstance();
+  var _user_id = prefs.getString('user_id');
   final cron = Cron();
   cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
     if (await LocationService().checkPermission() == true) {
@@ -31,6 +30,11 @@ void locationHandler (_user_id) {
       });
     }
   });
+}
+
+void get_user_id() async {
+  var prefs = await SharedPreferences.getInstance();
+  var user_id = prefs.getString('user_id');
 }
 
 class Map extends StatefulWidget {
@@ -44,15 +48,11 @@ class _Map extends State<Map> {
   
   final mapController = MapController();
 
-  // double myLatitude = 47.283020;
-  // double myLongitude = 39.702150;
-
   List<Marker> markers = [];
   List<Marker> mapObject = [];
 
-  // List userInfo = [["Kratos0506", "assets/images/nikitaLogo.jpg", 47.237339, 39.712246], ["Semyown", "assets/images/semenLogo.jpg", 47.239339, 39.712246], ["olardaniil", null, 47.637339, 39.715246], ["THKssssssssssss", null, 47.639339, 39.715246]];
-  
-  // user_id ЭТО user_name !!!
+  var user_id = null;
+
   void createMarker(_user_id, _username, _photo, _latitude, _longitude) {
 
       if (_photo != null) {
@@ -128,7 +128,7 @@ class _Map extends State<Map> {
                             width: 50,
                             alignment: Alignment.center,
                             child: AutoSizeText(
-                              _username, // user_name !!!
+                              _username,
                               maxLines: 1,
                               minFontSize: 10,
                               overflow: TextOverflow.ellipsis,
@@ -152,20 +152,24 @@ class _Map extends State<Map> {
   }
 
   // Метод для размещения маркеров
-  void placeMarker(_user_id) {
+  void placeMarker() async {
+    var prefs = await SharedPreferences.getInstance();
+    var user_id = prefs.getString('user_id');
+
     final cron = Cron();
     cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
       mapObject.clear();
-    // var userLocation = [{"type": "user_location", "user_id": "2", "latitude": 47.289020, "longitude": 39.702150}, {"type": "user_location", "user_id": "3", "latitude": 47.289020, "longitude": 39.701150} ];
-      var userLocation = await LocationApi.users_location_stream(_user_id.toString());
+      var userLocation = await LocationApi.users_location_stream(user_id.toString());
       var data_item = null;
 
-      // createMarker("2", "username", "assets/images/nikitaLogo.jpg", 47.289020, 39.702150);
-      for (data_item in userLocation) {
+      if (userLocation != null) {
+        for (data_item in userLocation) {
         if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
-          createMarker(data_item["user_id"], "username", "assets/images/danilLogo.jpg", data_item["latitude"], data_item["longitude"]);
+          createMarker(data_item["user_id"], data_item["username"], null, data_item["latitude"], data_item["longitude"]);
         }
       }
+      }
+      
       
       setState(() {
         markers = mapObject;
@@ -188,8 +192,8 @@ class _Map extends State<Map> {
   void initState() {
     _initPermission();
     myCurrentLocation();
-    locationHandler(user_id);
-    placeMarker(user_id);
+    locationHandler();
+    placeMarker();
   }
 
   @override
@@ -223,48 +227,50 @@ class _Map extends State<Map> {
                   // subdomains: 
                   //   ['a', 'b', 'c'],
 
-                    
                   urlTemplate:
                       'https://api.mapbox.com/styles/v1/olardaniil/clf5o14q2000s01mrhe1byyg8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
+                  // ignore: prefer_const_literals_to_create_immutables
                   additionalOptions: {
                     'accessToken': 'pk.eyJ1Ijoib2xhcmRhbmlpbCIsImEiOiJjbGZpbW9nM2MxczdtM3RuejV5OGxkeHMxIn0.vj2t-Rt79XjS6N225mhoRw',
                     'id': 'mapbox.mapbox-streets-v8',
                   },
                 ),
-
-                MarkerClusterLayerWidget(
-                  options: MarkerClusterLayerOptions(
-                    maxClusterRadius: 40,
-                    disableClusteringAtZoom: 10,
-                    size: Size(50, 50),
-                    // anchor: AnchorPos.align(AnchorAlign.center),
-                    rotate: true,
-                    rotateAlignment: Alignment.center,
-                    markers: markers,
-                    builder: (context, markers) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Color(0xFF894EB8),
-                              width: 4,
-                            ),
-                            color: Colors.white
-                        ),
-                        child: Center(
-                          child: Text(
-                            markers.length.toString(),
-                            style: const TextStyle(
-                              color: Color(0xFF894EB8),
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                MarkerLayer(
+                  markers: markers
                 ),
+                // MarkerClusterLayerWidget(
+                //   options: MarkerClusterLayerOptions(
+                //     maxClusterRadius: 40,
+                //     disableClusteringAtZoom: 10,
+                //     size: Size(50, 50),
+                //     // anchor: AnchorPos.align(AnchorAlign.center),
+                //     rotate: true,
+                //     rotateAlignment: Alignment.center,
+                //     markers: markers,
+                //     builder: (context, markers) {
+                //       return Container(
+                //         decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(15),
+                //             border: Border.all(
+                //               color: Color(0xFF894EB8),
+                //               width: 4,
+                //             ),
+                //             color: Colors.white
+                //         ),
+                //         child: Center(
+                //           child: Text(
+                //             markers.length.toString(),
+                //             style: const TextStyle(
+                //               color: Color(0xFF894EB8),
+                //               fontSize: 20,
+                //               fontWeight: FontWeight.bold,
+                //             ),
+                //           ),
+                //         ),
+                //       );
+                //     },
+                //   ),
+                // ),
               ],
             ),
 
@@ -285,7 +291,6 @@ class _Map extends State<Map> {
             ),
 
             Positioned(
-              // bottom: width * 0.2683, //110.0
               bottom: height * 0.3, //200.0
               right: width * 0.0488, //30.0
               child: Container(
