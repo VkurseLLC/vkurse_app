@@ -267,23 +267,6 @@ class _ProfileFilling extends State<ProfileFilling> {
 
                     Padding(padding: EdgeInsets.only(top: width * 0.0656)),
 
-                    // Row(
-                    //   children: [
-                    //     Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
-                    //     SizedBox(
-                    //       width: width * 0.388,
-                    //       height: width * 0.062,
-                    //       child: const AutoSizeText(
-                    //         'Ваша Фамилия',
-                    //         style: TextStyle(
-                    //           fontSize: 50,
-                    //           fontFamily: "Comfortaa",
-                    //           color: Color(0xFF9A68C2)),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-
                     Row(
                       children: [
                         Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
