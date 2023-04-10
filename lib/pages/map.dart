@@ -17,6 +17,8 @@ import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 
 import 'package:vkurse_app/data/api_location.dart';
 import 'package:vkurse_app/pages/additionally/app_location.dart';
+
+import 'friends.dart';
 //!___________________________________________END OF IMPORTS________________________________________________!\\
 
 void locationHandler () async {
@@ -50,6 +52,9 @@ class _Map extends State<Map> {
 
   List<Marker> markers = [];
   List<Marker> mapObject = [];
+  List<Widget> listFriends = [];
+  List listFriendsData = [];
+  // List download_listFriendsData = [];
 
   var user_id = null;
 
@@ -159,21 +164,34 @@ class _Map extends State<Map> {
     final cron = Cron();
     cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
       mapObject.clear();
+      List download_listFriendsData = [];
       var userLocation = await LocationApi.users_location_stream(user_id.toString());
       var data_item = null;
 
       if (userLocation != null) {
         for (data_item in userLocation) {
-        if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
-          createMarker(data_item["user_id"], data_item["username"], null, data_item["latitude"], data_item["longitude"]);
+          if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
+            createMarker(data_item["user_id"], data_item["username"], null, data_item["latitude"], data_item["longitude"]);
+          }
+          if (data_item["type"] == "friend_location") {
+              download_listFriendsData.add({"user_id": data_item["user_id"], "user_photo": null, "user_name": data_item["username"]});
+              print(download_listFriendsData);
+              
+            listFriendsData.add({"user_id": data_item["user_id"], "user_photo": null, "user_name": data_item["username"]});
+          }
         }
       }
-      }
-      
-      
+
       setState(() {
         markers = mapObject;
+        listFriendsData = download_listFriendsData;
       });
+
+      new Future.delayed(Duration.zero,() {
+        listFriends.clear();
+        createFriendCard(context);
+      });
+
     });
   }
 
@@ -187,6 +205,94 @@ class _Map extends State<Map> {
     });
   }
 
+  void createFriendCard(BuildContext context) {
+
+    final mediaQuery = MediaQuery.of(context);
+      var width = mediaQuery.size.width;   
+
+    for (var data_item in listFriendsData){
+      print("data_item: $data_item");
+      var friend = Container(
+          height: width * 0.244,
+          width: width * 0.869,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xffF7F7F7),
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(width * 0.05),
+              )
+            ),
+
+            onPressed: () async {
+              var prefs = await SharedPreferences.getInstance();
+              prefs.setString('select_user_id', data_item['user_id'].toString());
+
+              Navigator.pushNamed(context, '/my_friend');
+            },
+
+            child: Row(
+              children: [
+                Padding(padding: EdgeInsets.only(left: width * 0.007)),
+                Container(
+                  width: width * 0.192,
+                  height: width * 0.192,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade400,
+                      borderRadius: BorderRadius.circular(90)),
+
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: width * 0.205,
+                        height: width * 0.108,
+                        child: Image.asset(
+                          "assets/images/camera-to-take-photos.png",
+                        )
+                      )
+                    ]
+                  ),
+                ),
+
+                Padding(padding: EdgeInsets.only(left: width * 0.0615)),
+                SizedBox(
+                  width: width * 0.410,
+                  height: width * 0.0615,
+                  child: AutoSizeText(
+                    data_item["user_name"].toString(),
+                    style: TextStyle(fontSize: 70, color: Colors.black),
+                  ),
+                ),
+
+                Padding(padding: EdgeInsets.only(left: width * 0.016)),
+                SizedBox(
+                  width: width * 0.086,
+                  height: width * 0.086,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0x00ffffff),
+                      elevation: 0.0,
+                      padding: EdgeInsets.all(0.0)),
+                    onPressed: () {},
+                    child: Container(
+                      width: width * 0.086,
+                      height: width * 0.86,
+                      child: Image.asset("assets/icons/chat-balloon_c_2.png",)
+                    )
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+
+        setState(() {
+          listFriends.add(friend);
+        });
+
+      }
+  }
 
   @override
   void initState() {
@@ -194,6 +300,9 @@ class _Map extends State<Map> {
     myCurrentLocation();
     locationHandler();
     placeMarker();
+    new Future.delayed(Duration.zero,() {
+      createFriendCard(context);
+    });
   }
 
   @override
@@ -238,6 +347,7 @@ class _Map extends State<Map> {
                 MarkerLayer(
                   markers: markers
                 ),
+                
                 // MarkerClusterLayerWidget(
                 //   options: MarkerClusterLayerOptions(
                 //     maxClusterRadius: 40,
@@ -324,9 +434,11 @@ class _Map extends State<Map> {
                 height: width * 0.1703, //70
                 child: ElevatedButton(
                   onPressed: (){
-                    Navigator.pushNamed(context, '/profile');
-                  }, 
-                  child: Image.asset("assets/icons/user_icon.png"),
+                    // SEARCH
+                    // Navigator.pushNamed(context, '/my_friends');
+                    viewMyFriends(context, width, height, listFriends);
+                  },
+                  child: Image.asset("assets/icons/search.png"),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -369,10 +481,9 @@ class _Map extends State<Map> {
                 height: width * 0.1703, //70
                 child: ElevatedButton(
                   onPressed: () async {
-                    LocationService();
-                    print(await LocationApi.users_location_stream("2"));
+                    Navigator.pushNamed(context, '/profile');
                   }, 
-                  child: Image.asset("assets/icons/chat_icon.png"),
+                  child: Image.asset("assets/icons/user_icon.png"),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(

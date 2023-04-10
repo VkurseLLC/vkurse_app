@@ -33,39 +33,31 @@ double fontSizeErrorText = 20.0;
 
 class _Profile extends State<Profile> {
 
-  void downloand_user_data_profile () async {
-    var prefs = await SharedPreferences.getInstance();
-    var user_id = prefs.getString('user_id');
-    var user_data_profile = await AccountDataApi.view_user_data_profile(user_id);
-    return user_data_profile;
-  }
-
   final _formKey = GlobalKey<FormState>();
 
   var user_data_profile = {};
 
+  void downloand_user_data_profile() async {
+
+    var prefs = await SharedPreferences.getInstance();
+    var user_id = prefs.getString('user_id');
+    var user_data_profile_api  = await AccountDataApi.view_user_data_profile(user_id);
+    
+    setState(() {
+      user_data_profile = user_data_profile_api;
+    });
+    
+    print("user_data_profile: $user_data_profile");
+  }
+
   // user_data_profile = downloand_user_data_profile();
 
   final TextEditingController controller = TextEditingController();
-  static const textfield = [
-    "Nikita",
-    "Fomichev",
-    "18лет",
-    "Ростов-на-Дону",
-    "+7-999-999-99-99",
-    "@kratos0506",
-    "Меня зовут Никита))) и я пользвуюсь VKURSE"
-  ];
 
   @override
   void initState() {
-    print("initState");
-    
-    setState(() {
-      downloand_user_data_profile();
-    });
+    downloand_user_data_profile();
   }
-
 
   var borderStyle = const OutlineInputBorder(
     borderSide: BorderSide(color: Colors.black, width: 2),
@@ -180,7 +172,9 @@ class _Profile extends State<Profile> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/map');
+                              },
                               icon: const Icon(Icons.arrow_back_ios_new),
                               color: Color(0xFFffffff),
                               iconSize: width * 0.115,
@@ -588,7 +582,9 @@ class _Profile extends State<Profile> {
                                   //----------------------------/КНОПКА РЕДАКТИРОВАНИЯ\\\///НАЧАЛО\----------------------------\\
 
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/profile_edit');
+                                    },
                                     icon: Icon(
                                       Icons.edit,
                                       color: Color(0x954D4D4D),
@@ -770,8 +766,7 @@ class _Profile extends State<Profile> {
                                   Container(
                                     width: width * 0.848,
                                     height: height * 0.1884,
-                                    margin: EdgeInsets.fromLTRB(
-                                        width * 0.074, height * 0.0172, 0, 0),
+                                    margin: EdgeInsets.fromLTRB(width * 0.074, height * 0.0172, 0, 0),
                                     child: Flexible(
                                       child: Text(
                                         user_data_profile["about"].toString(), //------------------------берет данные из массива------------\\
@@ -781,7 +776,7 @@ class _Profile extends State<Profile> {
                                           fontSize: fontSizeOP,
                                           fontWeight: FontWeight.bold,
                                           fontFamily:
-                                              "assets/fonts/Inter-Medium.ttf",
+                                            "assets/fonts/Inter-Medium.ttf",
                                         ),
                                       ),
                                     ),
@@ -791,7 +786,8 @@ class _Profile extends State<Profile> {
                             ],
                           ),
                         ),
-                      ))
+                      )
+                    )
                 ],
               ),
             ),

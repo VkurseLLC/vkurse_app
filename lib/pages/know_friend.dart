@@ -2,12 +2,15 @@
 //_____________________________________________СИСТЕМНЫЕ________________________________________________\\
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //_____________________________________________БИБЛИОТЕКИ________________________________________________\\
 
 import 'package:intl/intl.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '../data/api_account_data.dart';
 
 //!___________________________________________КОНЕЦ ИМПОРТОВ________________________________________________!\\
 
@@ -25,15 +28,37 @@ class _KnowFriend extends State<KnowFriend> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController controller = TextEditingController();
-  static const textfield = [
-    "Nikita",
-    "Fomichev",
-    "18 лет",
-    "Ростов-на-Дону",
-    "+7-999-999-99-99",
-    "@kratos0506",
-    "Меня зовут Никита))) и я пользвуюсь VKURSE"
-  ];
+  var user_data_profile = {};
+
+  void downloand_user_data_profile() async {
+
+    var prefs = await SharedPreferences.getInstance();
+    var user_id = prefs.getString('select_user_id');
+    var user_data_profile_api  = await AccountDataApi.view_user_data_profile(user_id);
+    
+    setState(() {
+      user_data_profile = user_data_profile_api;
+    });
+    
+    print("user_data_profile: $user_data_profile");
+  }
+
+  @override
+  void initState() {
+    downloand_user_data_profile();
+  }
+
+
+
+  // static const textfield = [
+  //   "Nikita",
+  //   "Fomichev",
+  //   "18 лет",
+  //   "Ростов-на-Дону",
+  //   "+7-999-999-99-99",
+  //   "@kratos0506",
+  //   "Меня зовут Никита))) и я пользвуюсь VKURSE"
+  // ];
 
   bool isDateSelected = false;
 
@@ -80,7 +105,7 @@ class _KnowFriend extends State<KnowFriend> {
                     decoration: BoxDecoration(
                       image: const DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage("assets/images/profilephoto.jpg"),
+                        image: AssetImage("assets/images/user_photo_default.png"),
                       )
                     ),
                     child: Column(
@@ -342,8 +367,7 @@ class _KnowFriend extends State<KnowFriend> {
                                   height: height * 0.0995,
                                   margin: EdgeInsets.fromLTRB(width * 0.074, height * 0.031, 0, 0),
                                   child: AutoSizeText(
-                                    textfield[0] +
-                                      "\n" + textfield[1], //------------------------берет данные из массива------------\\
+                                    user_data_profile['name'].toString() + "\n" + user_data_profile["surname"].toString(), //------------------------берет данные из массива------------\\
                                     style: TextStyle(
                                       color: Color(0xff4D4D4D),
                                       fontSize: 40,
@@ -474,7 +498,7 @@ class _KnowFriend extends State<KnowFriend> {
                                   margin: EdgeInsets.fromLTRB(
                                       width * 0.074, height * 0.0086, 0, 0),
                                   child: AutoSizeText(
-                                    textfield[2], //------------------------берет данные из массива------------\\
+                                    user_data_profile["age"].toString(), //------------------------берет данные из массива------------\\
                                     style: TextStyle(
                                       color: Color(0xff4D4D4D),
                                       fontSize: 40,
@@ -489,7 +513,7 @@ class _KnowFriend extends State<KnowFriend> {
                                   margin: EdgeInsets.fromLTRB(
                                       width * 0.2641, height * 0.0086, 0, 0),
                                   child: AutoSizeText(
-                                    textfield[3],
+                                    user_data_profile["city"].toString(),
                                     style: TextStyle(
                                       color: Color(0xff4D4D4D),
                                       fontSize: 40,
@@ -530,7 +554,7 @@ class _KnowFriend extends State<KnowFriend> {
                                   margin: EdgeInsets.fromLTRB(
                                       width * 0.074, height * 0.0086, 0, 0),
                                   child: AutoSizeText(
-                                    textfield[4], //------------------------берет данные из массива------------\\
+                                    user_data_profile["phone_number"].toString(), //------------------------берет данные из массива------------\\
                                     style: TextStyle(
                                       color: Color(0x80000000),
                                       fontSize: 40,
@@ -550,7 +574,7 @@ class _KnowFriend extends State<KnowFriend> {
                                   margin: EdgeInsets.fromLTRB(
                                       width * 0.074, height * 0.0086, 0, 0),
                                   child: AutoSizeText(
-                                    textfield[5], //------------------------берет данные из массива------------\\
+                                    user_data_profile["username"].toString(), //------------------------берет данные из массива------------\\
                                     style: TextStyle(
                                       color: Color(0x80000000),
                                       fontSize: 40,
