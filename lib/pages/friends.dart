@@ -3,6 +3,9 @@
 
 //_____________________________________________БИБЛИОТЕКИ________________________________________________\\
 
+// import 'dart:js';
+
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //_____________________________________________ДРУГИЕ ФАЙЛЫ________________________________________________\\
@@ -25,6 +28,7 @@ import 'package:vkurse_app/pages/style/canvas.dart';
 
 // String searchQuery = "Search query";
 
+class _Friend extends State<Friend> {
 
 // class _Friends extends State<Friends> {
 
@@ -204,3 +208,4 @@ void viewMyFriends(context, width, height, listFriends) {
       );
     });
 }
+

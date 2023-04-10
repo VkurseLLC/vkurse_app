@@ -217,16 +217,6 @@ class _InputUsername extends State<InputUsername> {
                       ),
                     ),
                   ),
-
-                  // SizedBox(
-                  //   width: width,
-                  //   height: width * 0.18,
-                  //   child: AutoSizeText(
-                  //     "Регистрация успешно\nпройдена!",
-                  //     style: textRegStyle,
-                  //   textAlign: TextAlign.center,
-                  //   ),
-                  // )
                 ],
               ),
             ),
