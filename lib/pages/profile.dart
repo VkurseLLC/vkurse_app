@@ -44,12 +44,15 @@ class _Profile extends State<Profile> {
     var user_data_profile_api  = await AccountDataApi.view_user_data_profile(user_id);
     
     setState(() {
-      user_data_profile = user_data_profile_api;
+      if (user_data_profile_api != null) {
+        user_data_profile = user_data_profile_api;
+      }
     });
     
     print("user_data_profile: $user_data_profile");
   }
 
+  // 
   // user_data_profile = downloand_user_data_profile();
 
   final TextEditingController controller = TextEditingController();
