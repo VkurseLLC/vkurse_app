@@ -773,8 +773,7 @@ class _Profile extends State<Profile> {
                                   Container(
                                     width: width * 0.848,
                                     height: height * 0.1884,
-                                    margin: EdgeInsets.fromLTRB(
-                                        width * 0.074, height * 0.0172, 0, 0),
+                                    margin: EdgeInsets.fromLTRB(width * 0.074, height * 0.0172, 0, 0),
                                     child: Flexible(
                                       child: Text(
                                         user_data_profile["about"].toString(), //------------------------берет данные из массива------------\\
@@ -784,7 +783,7 @@ class _Profile extends State<Profile> {
                                           fontSize: fontSizeOP,
                                           fontWeight: FontWeight.bold,
                                           fontFamily:
-                                              "assets/fonts/Inter-Medium.ttf",
+                                            "assets/fonts/Inter-Medium.ttf",
                                         ),
                                       ),
                                     ),
@@ -794,7 +793,8 @@ class _Profile extends State<Profile> {
                             ],
                           ),
                         ),
-                      ))
+                      )
+                    )
                 ],
               ),
             ),

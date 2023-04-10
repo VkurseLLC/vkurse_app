@@ -460,11 +460,9 @@ class _ProfileFilling extends State<ProfileFilling> {
                             height: width * 0.141,
                             child: OutlinedButton(
                               style: ButtonStyle(
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
+                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(width * 0.039),
+                                    borderRadius: BorderRadius.circular(width * 0.039),
                                   ),
                                 ),
                                 side: MaterialStateProperty.all(
