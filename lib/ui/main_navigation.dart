@@ -75,10 +75,13 @@ class MainNavigation {
     '/initial_setting_accaunt_data': (context) => const ProfileFilling(),
     '/initial_setting_accaunt_completed': (context) => const EndProfileFilling(),
 
+    '/my_friend': (context) => const KnowFriend(),
+
     '/profile': (context) => const Profile(),
 
     '/profile_edit': (context) => const ProfileEdit(),
 
+    // '/map': (context) => KnowFriend(),
     '/map': (context) => Map(),
 
     // Если нужно затестить свой экран, то разкомитьте следующую строку и вместо > AuthProvider < вставьте нужный класс

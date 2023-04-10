@@ -53,9 +53,9 @@ class _ProfileEdit extends State<ProfileEdit> {
   var choosenCity = "";
 
   static const textfield = [
-    "Nikita",
-    "Fomichev",
-    "Есентуки",
+    "Имя",
+    "Фамилия",
+    "Город",
     "01",
     "Январь",
     "1999",
@@ -185,7 +185,9 @@ class _ProfileEdit extends State<ProfileEdit> {
             top: height * 0.045,
             left: width * 0.0745,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/profile');
+              },
               icon: const Icon(Icons.arrow_back_ios_new),
               color: Color(0xFFffffff),
               iconSize: width * 0.115,

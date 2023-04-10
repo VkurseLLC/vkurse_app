@@ -53,22 +53,11 @@ class _Profile extends State<Profile> {
   // user_data_profile = downloand_user_data_profile();
 
   final TextEditingController controller = TextEditingController();
-  static const textfield = [
-    "Nikita",
-    "Fomichev",
-    "18лет",
-    "Ростов-на-Дону",
-    "+7-999-999-99-99",
-    "@kratos0506",
-    "Меня зовут Никита))) и я пользвуюсь VKURSE"
-  ];
 
   @override
   void initState() {
-    print("initState");
     downloand_user_data_profile();
   }
-
 
   var borderStyle = const OutlineInputBorder(
     borderSide: BorderSide(color: Colors.black, width: 2),
@@ -183,7 +172,9 @@ class _Profile extends State<Profile> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/map');
+                              },
                               icon: const Icon(Icons.arrow_back_ios_new),
                               color: Color(0xFFffffff),
                               iconSize: width * 0.115,
@@ -591,7 +582,9 @@ class _Profile extends State<Profile> {
                                   //----------------------------/КНОПКА РЕДАКТИРОВАНИЯ\\\///НАЧАЛО\----------------------------\\
 
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/profile_edit');
+                                    },
                                     icon: Icon(
                                       Icons.edit,
                                       color: Color(0x954D4D4D),

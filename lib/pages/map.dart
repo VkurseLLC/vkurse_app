@@ -53,7 +53,8 @@ class _Map extends State<Map> {
   List<Marker> markers = [];
   List<Marker> mapObject = [];
   List<Widget> listFriends = [];
-  List listFriendsData = ["Ваня", "Петя", "Геша", "Гоша", "Кеша", "Гена", "Саня", "Маня", "Таня", "Даня", "Тамирлан", "Геша", "Гоша", "Кеша", "Гена", "Саня", "Маня", "Таня", "Даня", "Тамирлан"];
+  List listFriendsData = [];
+  // List download_listFriendsData = [];
 
   var user_id = null;
 
@@ -163,21 +164,34 @@ class _Map extends State<Map> {
     final cron = Cron();
     cron.schedule(Schedule.parse('*/5 * * * * *'), () async {
       mapObject.clear();
+      List download_listFriendsData = [];
       var userLocation = await LocationApi.users_location_stream(user_id.toString());
       var data_item = null;
 
       if (userLocation != null) {
         for (data_item in userLocation) {
-        if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
-          createMarker(data_item["user_id"], data_item["username"], null, data_item["latitude"], data_item["longitude"]);
+          if (data_item["type"] == "user_location" || data_item["type"] == "friend_location") {
+            createMarker(data_item["user_id"], data_item["username"], null, data_item["latitude"], data_item["longitude"]);
+          }
+          if (data_item["type"] == "friend_location") {
+              download_listFriendsData.add({"user_id": data_item["user_id"], "user_photo": null, "user_name": data_item["username"]});
+              print(download_listFriendsData);
+              
+            listFriendsData.add({"user_id": data_item["user_id"], "user_photo": null, "user_name": data_item["username"]});
+          }
         }
       }
-      }
-      
-      
+
       setState(() {
         markers = mapObject;
+        listFriendsData = download_listFriendsData;
       });
+
+      new Future.delayed(Duration.zero,() {
+        listFriends.clear();
+        createFriendCard(context);
+      });
+
     });
   }
 
@@ -196,7 +210,8 @@ class _Map extends State<Map> {
     final mediaQuery = MediaQuery.of(context);
       var width = mediaQuery.size.width;   
 
-    for(String name in listFriendsData){
+    for (var data_item in listFriendsData){
+      print("data_item: $data_item");
       var friend = Container(
           height: width * 0.244,
           width: width * 0.869,
@@ -209,7 +224,12 @@ class _Map extends State<Map> {
               )
             ),
 
-            onPressed: () {},
+            onPressed: () async {
+              var prefs = await SharedPreferences.getInstance();
+              prefs.setString('select_user_id', data_item['user_id'].toString());
+
+              Navigator.pushNamed(context, '/my_friend');
+            },
 
             child: Row(
               children: [
@@ -240,7 +260,7 @@ class _Map extends State<Map> {
                   width: width * 0.410,
                   height: width * 0.0615,
                   child: AutoSizeText(
-                    name,
+                    data_item["user_name"].toString(),
                     style: TextStyle(fontSize: 70, color: Colors.black),
                   ),
                 ),
