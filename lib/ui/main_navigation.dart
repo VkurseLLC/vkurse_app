@@ -73,8 +73,7 @@ class MainNavigation {
 
     '/initial_setting_username': (context) => const InputUsername(),
     '/initial_setting_accaunt_data': (context) => const ProfileFilling(),
-    '/initial_setting_accaunt_completed': (context) =>
-        const EndProfileFilling(),
+    '/initial_setting_accaunt_completed': (context) => const EndProfileFilling(),
 
     '/profile': (context) => const Profile(),
 
