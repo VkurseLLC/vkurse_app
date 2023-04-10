@@ -169,6 +169,7 @@ class _Map extends State<Map> {
       mapObject.clear();
       List download_listFriendsData = [];
       var userLocation = await LocationApi.users_location_stream(user_id.toString());
+      print("userLocation: $userLocation");
       var data_item = null;
 
       if (userLocation != null) {
@@ -178,12 +179,12 @@ class _Map extends State<Map> {
           }
           if (data_item["type"] == "friend_location") {
               download_listFriendsData.add({"user_id": data_item["user_id"], "user_photo": null, "user_name": data_item["username"]});
-              print(download_listFriendsData);
               
             listFriendsData.add({"user_id": data_item["user_id"], "user_photo": null, "user_name": data_item["username"]});
           }
         }
       }
+      print("mapObject: $mapObject");
 
       setState(() {
         markers = mapObject;
@@ -214,7 +215,7 @@ class _Map extends State<Map> {
       var width = mediaQuery.size.width;   
 
     for (var data_item in listFriendsData){
-      print("data_item: $data_item");
+
       var friend = Container(
           height: width * 0.244,
           width: width * 0.869,
@@ -406,7 +407,7 @@ class _Map extends State<Map> {
             Visibility(
               visible: visable1,
               child: Positioned(
-                top: height * 0.4,
+                top: height * 0.7,
                 right: 0.852,
                 child: Container(
                   width: width * 0.148,
@@ -452,7 +453,7 @@ class _Map extends State<Map> {
             Visibility(
               visible: visable2,
               child: Positioned(
-                top: height * 0.288,
+                top: height * 0.584,
                 left: width * 0.751,
                 child:
                   Stack(
@@ -518,7 +519,9 @@ class _Map extends State<Map> {
                               height: width * 0.077,
                               child: IconButton(
                                 padding: EdgeInsets.all(0),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/profile');
+                                },
                                 icon: Image.asset(
                                   "assets/icons/user (1).png",
                                   width: width * 0.077,
@@ -656,9 +659,9 @@ class _Map extends State<Map> {
                 height: width * 0.1703, //70
                 child: ElevatedButton(
                   onPressed: () async {
-                    Navigator.pushNamed(context, '/profile');
+                    
                   }, 
-                  child: Image.asset("assets/icons/user_icon.png"),
+                  child: Image.asset("assets/icons/chat_icon.png"),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
