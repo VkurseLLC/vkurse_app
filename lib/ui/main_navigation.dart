@@ -1,6 +1,7 @@
 //?_________________________________________НАЧАЛО ИМПОРТОВ________________________________________________?\\
 //_____________________________________________СИСТЕМНЫЕ________________________________________________\\
 import 'package:flutter/material.dart';
+import 'package:vkurse_app/pages/friend_window_cart.dart';
 import 'package:vkurse_app/pages/friends.dart';
 import 'package:vkurse_app/pages/know_friend.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -82,6 +83,6 @@ class MainNavigation {
     '/map': (context) => Map(),
 
     // Если нужно затестить свой экран, то разкомитьте следующую строку и вместо > AuthProvider < вставьте нужный класс
-    // '/auth': (context) => const Friends(),
+    '/auth': (context) => const FriendWindowCard(),
   };
 }

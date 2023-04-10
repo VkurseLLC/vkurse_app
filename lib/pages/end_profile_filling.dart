@@ -121,8 +121,7 @@ class _EndProfileFilling extends State<EndProfileFilling> {
                                       Navigator.pushNamed(context, '/map');
                                     },
                                     style: ButtonStyle(
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
+                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                           RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(
                                                 width * 0.039),

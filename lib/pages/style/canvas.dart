@@ -6,7 +6,7 @@ class HeaderPainter extends CustomPainter{
   void paint(Canvas canvas, Size size) {
 
   Paint paint0 = Paint()
-      ..color = Color(0xF0894EB8)
+      ..color = Color(0xFF9A68C2)
       ..style = PaintingStyle.fill
       ..strokeWidth = 1;
      

@@ -357,11 +357,12 @@ class _InputUsername extends State<InputUsername> {
 
                             child:
                             AutoSizeText(
-                                'Продолжить',
-                                style: TextStyle(
-                                  fontSize: fontSizeButton,
-                                  fontFamily: "Comfortaa",
-                                  fontWeight: FontWeight.bold),
+                              'Продолжить',
+                              style: TextStyle(
+                                fontSize: fontSizeButton,
+                                fontFamily: "Comfortaa",
+                                fontWeight: FontWeight.bold
+                              ),
                             )
                           ),
                         ),
