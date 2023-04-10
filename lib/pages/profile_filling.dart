@@ -209,8 +209,6 @@ class _ProfileFilling extends State<ProfileFilling> {
 
               Padding(padding: EdgeInsets.only(top: width * 0.033)),
 
-              ///----------------------------------////СТРОКА ВВОДА \\\///ИМЯ\\\\\///НАЧАЛО\\\\-------------------------------------------------------------\\\\
-
               Row(children: [
                 Padding(padding: EdgeInsets.fromLTRB(width * 0.109, 0, 0, 0)),
                 Expanded(
