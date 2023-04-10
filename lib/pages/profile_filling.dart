@@ -642,13 +642,6 @@ class _ProfileFilling extends State<ProfileFilling> {
                                 var d_birth = "$dateTime";
                                 d_birth = d_birth[0] + d_birth[1] + d_birth[2] + d_birth[3] + d_birth[4] + d_birth[5] + d_birth[6] + d_birth[7] + d_birth[8] + d_birth[9];
 
-                                print("user_id: $user_id");
-                                print("username: $username");
-                                print("name: $name");
-                                print("surName: $surName");
-                                print("d_birth: $d_birth");
-                                print("city: $city");
-
                                 AccountDataApi.save_filling_profile(
                                     context,
                                     user_id,
