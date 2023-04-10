@@ -19,6 +19,7 @@ import 'package:vkurse_app/data/api_location.dart';
 import 'package:vkurse_app/pages/additionally/app_location.dart';
 
 import 'circle_menu.dart';
+import 'friend_window_cart.dart';
 import 'friends.dart';
 //!___________________________________________END OF IMPORTS________________________________________________!\\
 
@@ -114,7 +115,13 @@ class _Map extends State<Map> {
             height: 90.0,
             point: latLng.LatLng(_latitude, _longitude),
             builder: (ctx) => IconButton(
-              onPressed: (){},
+              onPressed: (){
+                print('tap');
+                final mediaQuery = MediaQuery.of(context);
+                var width = mediaQuery.size.width;
+                var height = mediaQuery.size.height;
+                open_short_friend_cart(context, width, height, _username, _username, _username);
+              },
               icon: Container(
                 child: Stack(
                   children: [
@@ -169,7 +176,7 @@ class _Map extends State<Map> {
       mapObject.clear();
       List download_listFriendsData = [];
       var userLocation = await LocationApi.users_location_stream(user_id.toString());
-      print("userLocation: $userLocation");
+      // print("userLocation: $userLocation");
       var data_item = null;
 
       if (userLocation != null) {
@@ -184,7 +191,7 @@ class _Map extends State<Map> {
           }
         }
       }
-      print("mapObject: $mapObject");
+      // print("mapObject: $mapObject");
 
       setState(() {
         markers = mapObject;
