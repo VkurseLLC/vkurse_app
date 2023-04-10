@@ -1,6 +1,7 @@
 //?_________________________________________НАЧАЛО ИМПОРТОВ________________________________________________?\\
 //_____________________________________________СИСТЕМНЫЕ________________________________________________\\
 import 'package:flutter/material.dart';
+import 'package:vkurse_app/pages/friend_window_cart.dart';
 import 'package:vkurse_app/pages/friends.dart';
 import 'package:vkurse_app/pages/know_friend.dart';
 import 'package:shared_preferences/shared_preferences.dart';
