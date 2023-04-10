@@ -245,6 +245,7 @@ class _Map extends State<Map> {
                 MarkerLayer(
                   markers: markers
                 ),
+                
                 // MarkerClusterLayerWidget(
                 //   options: MarkerClusterLayerOptions(
                 //     maxClusterRadius: 40,

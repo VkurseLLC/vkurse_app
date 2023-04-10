@@ -33,16 +33,22 @@ double fontSizeErrorText = 20.0;
 
 class _Profile extends State<Profile> {
 
-  void downloand_user_data_profile () async {
-    var prefs = await SharedPreferences.getInstance();
-    var user_id = prefs.getString('user_id');
-    var user_data_profile = await AccountDataApi.view_user_data_profile(user_id);
-    return user_data_profile;
-  }
-
   final _formKey = GlobalKey<FormState>();
 
   var user_data_profile = {};
+
+  void downloand_user_data_profile() async {
+
+    var prefs = await SharedPreferences.getInstance();
+    var user_id = prefs.getString('user_id');
+    var user_data_profile_api  = await AccountDataApi.view_user_data_profile(user_id);
+    
+    setState(() {
+      user_data_profile = user_data_profile_api;
+    });
+    
+    print("user_data_profile: $user_data_profile");
+  }
 
   // user_data_profile = downloand_user_data_profile();
 
@@ -60,10 +66,7 @@ class _Profile extends State<Profile> {
   @override
   void initState() {
     print("initState");
-    
-    setState(() {
-      downloand_user_data_profile();
-    });
+    downloand_user_data_profile();
   }
 
 
