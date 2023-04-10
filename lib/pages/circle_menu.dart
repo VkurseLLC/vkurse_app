@@ -21,24 +21,29 @@ class CircleMenu extends StatefulWidget {
   State<CircleMenu> createState() => _CircleMenu();
 }
 
-bool visable1 = true;
-bool visable2 = false;
+
 
 class _CircleMenu extends State<CircleMenu> {
+
+  bool visable1 = true;
+  bool visable2 = false;
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     var width = mediaQuery.size.width;
     var height = mediaQuery.size.height;
 
-    return Scaffold(
+    return 
+    Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0x00ffffff),
       body: Container(
         height: height,
         width: width,
         color: Color.fromARGB(90, 185, 180, 180),
-        child: Stack(
+        child: 
+        Stack(
           children: <Widget>[
             Visibility(
               visible: visable1,
@@ -85,6 +90,7 @@ class _CircleMenu extends State<CircleMenu> {
                 ),
               )
             ),
+            
             Visibility(
               visible: visable2,
               child: Positioned(
@@ -207,11 +213,9 @@ class _CircleMenu extends State<CircleMenu> {
             ) 
           )
         )                   
-      ],
-    )
-  )
-);
-  
-
-}
+          ],
+        )
+      )
+    );
+  }
 }

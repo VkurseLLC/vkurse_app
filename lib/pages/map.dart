@@ -18,6 +18,7 @@ import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:vkurse_app/data/api_location.dart';
 import 'package:vkurse_app/pages/additionally/app_location.dart';
 
+import 'circle_menu.dart';
 import 'friends.dart';
 //!___________________________________________END OF IMPORTS________________________________________________!\\
 
@@ -54,6 +55,8 @@ class _Map extends State<Map> {
   List<Marker> mapObject = [];
   List<Widget> listFriends = [];
   List listFriendsData = [];
+  bool visable1 = true;
+  bool visable2 = false;
   // List download_listFriendsData = [];
 
   var user_id = null;
@@ -400,32 +403,204 @@ class _Map extends State<Map> {
               ),
             ),
 
-            Positioned(
-              bottom: height * 0.3, //200.0
-              right: width * 0.0488, //30.0
-              child: Container(
-                width: width * 0.1216, //50
-                height: width * 0.1216, //50
-                child: ElevatedButton(
-                  onPressed: () {
-                    myCurrentLocation();
-                  }, 
-                  child: Image.asset("assets/icons/currentPosition.png"),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(width * 0.034),
-                        side: BorderSide(
-                          color: Color(0xFF0a0a0a),
-                          width: 1,
+            Visibility(
+              visible: visable1,
+              child: Positioned(
+                top: height * 0.4,
+                right: 0.852,
+                child: Container(
+                  width: width * 0.148,
+                  height: width * 0.125,
+                  decoration: BoxDecoration(
+                    borderRadius:BorderRadius.circular(width * 0.064),
+                    color: Color(0xff63358F)
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        visable1 = false;
+                        visable2 = true;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xff63358F),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft:Radius.circular(width * 0.064),
+                          bottomLeft:Radius.circular(width * 0.064)
                         )
                       ),
-                    ),
-                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(150, 255, 255, 255)),
+                          padding: EdgeInsets.all(0)),
+                    child: Row(
+                      children: [
+                        Padding(padding:EdgeInsets.only(left: width * 0.028)
+                        ),
+                        Container(
+                          width: width * 0.075,
+                          height: width * 0.075,
+                          child: Image.asset(
+                            'assets/icons/logo_menu.png',
+                          ),
+                        ),
+                      ],
+                    )
                   )
-                )
-              ),
+                ),
+              )
             ),
+            
+            Visibility(
+              visible: visable2,
+              child: Positioned(
+                top: height * 0.288,
+                left: width * 0.751,
+                child:
+                  Stack(
+                    children:<Widget> [
+                      Container(
+                        width: width * 0.249,
+                        height: width * 0.602,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(width * 0.5),
+                            bottomLeft: Radius.circular(width * 0.5)),
+                          color: Color(0x70535353)),
+                        child: Row(
+                          children: [
+                            Padding(padding:EdgeInsets.only(left: width * 0.045)),
+                            Column(
+                              children: [
+                                Padding(padding:EdgeInsets.only(top: width * 0.198)
+                                ),
+                                SizedBox(
+                                  width: width * 0.077,
+                                  height: width * 0.077,
+                                  child: IconButton(
+                                    padding: EdgeInsets.all(0),
+                                    onPressed: () {},
+                                    icon: Image.asset(
+                                      "assets/icons/qr-code_white.png",
+                                      width: width * 0.075,
+                                      height: width * 0.075,
+                                    )
+                                  ),
+                                ),
+
+                                Padding(padding:EdgeInsets.only(top: width * 0.052)
+                                ),
+
+                                SizedBox(
+                                  width: width * 0.077,
+                                  height: width * 0.077,
+                                  child: IconButton(
+                                    padding: EdgeInsets.all(0),
+                                    onPressed: () {},
+                                    icon: Image.asset(
+                                      "assets/icons/add-user.png",
+                                      width: width * 0.077,
+                                      height: width * 0.077,
+                                      color: Colors.white,
+                                    )
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(left: width * 0.02)),
+                            Column(
+                              children: [
+
+                                Padding(padding:EdgeInsets.only(top: width * 0.092)
+                                ),
+
+                            SizedBox(
+                              width: width * 0.077,
+                              height: width * 0.077,
+                              child: IconButton(
+                                padding: EdgeInsets.all(0),
+                                onPressed: () {},
+                                icon: Image.asset(
+                                  "assets/icons/user (1).png",
+                                  width: width * 0.077,
+                                  height: width * 0.077,
+                                )
+                              ),
+                            ),
+
+                            Padding(padding:EdgeInsets.only(top: width * 0.254)
+                          ),
+
+                          SizedBox(
+                            width: width * 0.077,
+                            height: width * 0.077,
+                            child: IconButton(
+                              padding: EdgeInsets.all(0),
+                              onPressed: () {},
+                              icon: Image.asset(
+                                "assets/icons/settings_white.png",
+                                width: width * 0.077,
+                                height: width * 0.077,
+                              )
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: width*0.263,
+                  left: width*0.16,
+                  child:SizedBox(
+                    width: width * 0.054,
+                    height: width * 0.054,
+                    child: IconButton(
+                      padding: EdgeInsets.all(0),
+                      onPressed: () {
+                        setState(() {
+                          visable1 = true;
+                          visable2 = false;
+                        });
+                      },
+                      icon: Icon(Icons.close, size: width*0.09,),
+                      color: Colors.white,
+                    ),
+                  ),
+                ),                
+              ],
+            ) 
+          )
+        ),  
+
+            // CircleMenu(),
+
+            // Positioned(
+            //   bottom: height * 0.3, //200.0
+            //   right: width * 0.0488, //30.0
+            //   child: Container(
+            //     width: width * 0.1216, //50
+            //     height: width * 0.1216, //50
+            //     child: ElevatedButton(
+            //       onPressed: () {
+            //         myCurrentLocation();
+            //       }, 
+            //       child: Image.asset("assets/icons/currentPosition.png"),
+            //       style: ButtonStyle(
+            //         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            //           RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(width * 0.034),
+            //             side: BorderSide(
+            //               color: Color(0xFF0a0a0a),
+            //               width: 1,
+            //             )
+            //           ),
+            //         ),
+            //       backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(150, 255, 255, 255)),
+            //       )
+            //     )
+            //   ),
+            // ),
+
             Positioned(
               bottom: width * 0.0488, //20.0
               left: width * 0.0732, //30.0
